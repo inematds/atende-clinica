@@ -1,0 +1,34 @@
+{
+  "nome": "Clínica Sorriso Teste",
+  "conselho": "cfo",
+  "token": "segredo-teste",
+  "passo_min": 30,
+  "antecedencia_min_horas": 2,
+  "janela_dias": 14,
+  "confirmacao_horas": 48,
+  "retorno_aviso_dias": 7,
+  "feriados": ["2026-10-12"],
+  "horarios": {
+    "seg": [["08:00", "12:00"], ["14:00", "18:00"]],
+    "ter": [["08:00", "12:00"], ["14:00", "18:00"]],
+    "qua": [["08:00", "12:00"], ["14:00", "18:00"]],
+    "qui": [["08:00", "12:00"], ["14:00", "18:00"]],
+    "sex": [["08:00", "12:00"], ["14:00", "18:00"]],
+    "sab": [["08:00", "12:00"]],
+    "dom": []
+  },
+  "profissionais": [
+    {"id": "ana", "nome": "Dra. Ana", "servicos": ["avaliacao", "limpeza"]},
+    {"id": "bruno", "nome": "Dr. Bruno", "servicos": ["avaliacao", "canal"]}
+  ],
+  "servicos": [
+    {"id": "avaliacao", "nome": "Avaliação", "duracao_min": 30, "retorno_dias": null},
+    {"id": "limpeza", "nome": "Limpeza", "duracao_min": 60, "retorno_dias": 180},
+    {"id": "canal", "nome": "Tratamento de canal", "duracao_min": 90, "retorno_dias": null}
+  ],
+  "faq": [
+    {"id": "convenios", "perguntas": ["vocês aceitam convênio", "quais convênios atendem"], "resposta": "Atendemos Unimed Odonto, Amil Dental e particular."},
+    {"id": "endereco", "perguntas": ["qual o endereço da clínica", "onde fica a clínica"], "resposta": "Rua das Flores, 100, sala 5, Batel, Curitiba."},
+    {"id": "estacionamento", "perguntas": ["tem estacionamento"], "resposta": "Temos convênio com o estacionamento ao lado (1 hora grátis)."}
+  ]
+}

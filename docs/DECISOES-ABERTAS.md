@@ -1,0 +1,24 @@
+# Decisões abertas — responder antes de rodar o /goal
+
+Cada item tem uma **proposta padrão**. Responder "ok em tudo" já destrava a execução. Se mudar algo que afete o contrato (marcado ⚠), eu ajusto `docs/ESPECIFICACAO.md` e os testes **antes** de congelar o hash.
+
+| # | Decisão | Proposta padrão | Por quê |
+|---|---|---|---|
+| 1 | Nome do projeto / repo | `atende-clinica` (pasta e futuro repo `inematds/atende-clinica`) | regra: repo = nome da pasta |
+| 2 | Linguagem | **Python 3, só biblioteca padrão** (`http.server` + `sqlite3`) | zero dependência, roda em qualquer máquina, igual ao piloto do `recall`. Os testes são caixa-preta (HTTP/CLI), então trocar para Node/FastAPI não invalida nada |
+| 3 | Canal v1 | **chat web + canal simulado** (caixa de saída) | WhatsApp real = Meta Cloud API (paga, exige conta e número verificado) → portão humano, fase 2 |
+| 4 ⚠ | "Tirar dúvidas" | **FAQ da clínica por palavras-chave**, sem IA | determinístico = testável; bot de saúde não pode inventar resposta. LLM (Ollama local ou Claude/Codex pela assinatura) entra na fase 2 atrás de uma opção desligada |
+| 5 | Uma clínica ou várias | **uma clínica por instalação** (`--dados DIR`) | multi-clínica (SaaS) é outra ordem de complexidade; dá para rodar várias instâncias |
+| 6 ⚠ | Conselho do piloto | exemplo/fixture = **odonto (CFO)**; os 4 perfis (CFM, CFO, COFFITO, estética) já estão no contrato | o Raio-X mostra que odonto tem as regras mais duras de publicidade |
+| 7 | Idioma | **só PT no v1** | EN/ES depois, pelo processo trilíngue já testado (relatórios do WiFi) |
+| 8 | Quem executa | **headless: `loop-longrun.sh` com Codex `gpt-6-astra`** (rota testada no piloto). Alternativa: colar o `/goal` no Codex TUI ou no Claude Code | o loop confere hash dos testes e para por estagnação sozinho |
+| 9 | Tetos | 15 ciclos × 30 min, 8 GB por ciclo, parar após 3 ciclos sem avanço | ~7,5 h no pior caso; o piloto fechou em 1 ciclo com spec deste nível |
+| 10 | GitHub | **não criar agora**; repo local. Criar `inematds/atende-clinica` + guia só depois do v1 aprovado | criar repo é ação externa → você confirma |
+| 11 ⚠ | Regras do bot | emergência → SAMU 192 + fila humana alta; "PARAR" bloqueia todo contato; 2 "não entendi" seguidos → humano | conferir se a lista de palavras de emergência (seção 6) está boa para a clínica-alvo |
+| 12 ⚠ | Sinal por Pix / plano | **fora do v1** (só a política escrita) | precisa de PSP/API de pagamento = portão humano |
+
+## Perguntas que só você responde
+
+- Isto é **produto para vender/implantar em clínicas** (via kit do Raio-X) ou **projeto aberto/curso**? Muda o que vem depois do v1 (guia, licença, deploy), não o v1.
+- Tem uma **clínica real** para o piloto (horários, serviços, FAQ verdadeiros)? Se sim, eu troco o `exemplos/clinica.json`.
+- Quer que o **painel da recepção** seja só funcional (padrão) ou já com o visual INEMA?
