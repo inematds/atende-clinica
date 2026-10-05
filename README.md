@@ -26,7 +26,8 @@ bash $L/congelar.sh
 # 2a. headless (recomendado; Codex pela assinatura, 15 ciclos × 30 min, para sozinho)
 ~/projetos/execucao-longa/tools/loop-longrun.sh $L          # acompanhar: tail -f $L/loop.log
 
-# 2b. ou interativo: colar $L/prompt-goal-codex.md no Codex TUI,
+# 2b. ou interativo: colar $L/prompt-goal-codex.md no Codex TUI aberto com
+#     codex -c sandbox_workspace_write.network_access=true   (sem isso o sandbox bloqueia o servidor local dos testes),
 #     ou seguir $L/prompt-goal-claude.md numa sessão nova do Claude Code
 
 # 3. quando state.md disser "concluído": verificação independente
