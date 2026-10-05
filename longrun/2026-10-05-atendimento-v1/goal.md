@@ -1,6 +1,6 @@
 # Goal — atendimento-v1
 
-- **Início:** (preencher ao iniciar) · **Agente:** `codex exec` (gpt-6-astra, assinatura) em loop headless — `tools/loop-longrun.sh` · alternativa: `/goal` no Codex TUI ou no Claude Code
+- **Início:** 2026-10-05 00:27 · **Agente:** `codex exec` (gpt-6-astra, assinatura) em loop headless — `tools/loop-longrun.sh` · alternativa: `/goal` no Codex TUI ou no Claude Code
 - **Tetos:** 20 ciclos × 30 min (≤ 10 h) · memória 8G por ciclo · estagnação 3 ciclos
 
 ## Resultado
