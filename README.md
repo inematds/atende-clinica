@@ -1,5 +1,13 @@
 # atende-clinica
 
+**🇧🇷 [Português](README.md) · 🇺🇸 [English](README.en.md) · 🇪🇸 [Español](README.es.md)**
+
+[![Atende Clínica](guia/assets/banner.jpg)](https://inematds.github.io/atende-clinica/guia/)
+
+## 📖 Guia de uso
+
+Guia completo (landing + passo a passo): **https://inematds.github.io/atende-clinica/guia/**
+
 Atendimento de uma clínica com Python 3 e biblioteca padrão: agenda, conversa por regras, FAQ, fila humana, lembretes, espera, retornos, campanhas, LGPD e exportação para o Raio-X. Estado persistente em SQLite. Evolution e Telegram são opcionais, configurados exclusivamente pelo ambiente.
 
 O contrato está em `docs/ESPECIFICACAO.md`. O chat do paciente está em `/` e a recepção em `/recepcao`. Na recepção, informe o token de `clinica.json`: ele fica apenas na memória da aba. Use Sair ao finalizar. Cadastros, agenda, bloqueios, fila humana, caixa de saída, campanhas e indicadores estão disponíveis na página. Use Atualizar dados para buscar novas mensagens. O retorno humano ao chat é enviado ao telefone pela integração configurada; sem Evolution, consulte a caixa de saída simulada.
@@ -21,7 +29,7 @@ Profissionais, serviços e FAQ do JSON apenas semeiam o banco inicial; depois s�
 
 ## Deploy na VPS
 
-Os comandos desta seção são para o operador executar na VPS. Requer Docker com Compose e um proxy reverso com HTTPS. Não foi realizado deploy nem build com download de imagem nesta execução local.
+Os comandos desta seção são para o operador executar na VPS. Requer Docker com Compose e um proxy reverso com HTTPS.
 
 1. Copie o projeto para a VPS. Crie `dados/clinica.json` conforme o exemplo e configure um token próprio antes do primeiro início.
 2. Copie `.env.exemplo` para `.env`. Deixe os valores vazios para operar sem integrações; proteja o arquivo com `chmod 600 .env`. Nenhuma credencial deve entrar no Git.
@@ -82,7 +90,8 @@ Confira a saúde e os registros restaurados antes de retomar o atendimento. Defi
 ```sh
 ./atende raiox --dados dados --mes 2026-10 --acompanhamento acompanhamento.json
 python3 -m pytest -q tests/
-bash longrun/2026-10-05-atendimento-v1/verificar-limites.sh
 ```
+
+A v1 foi construída por execução longa de agente (`longrun/2026-10-05-atendimento-v1/`): `verificar-limites.sh` foi a trava daquela execução (escopo de arquivos do agente) e `verificar-independente.py` testa uma clínica nunca vista e o `docker build`.
 
 A exportação mescla o mês sobre os indicadores anteriores do arquivo de acompanhamento, preservando o que o sistema não mede. Pytest é ferramenta do ambiente de desenvolvimento, não dependência da aplicação. Os testes usam somente servidores falsos locais para Evolution e Telegram.

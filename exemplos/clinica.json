@@ -1,7 +1,7 @@
 {
   "nome": "Clínica Sorriso Teste",
   "conselho": "cfo",
-  "token": "segredo-teste",
+  "token": "TROQUE-ESTE-TOKEN",
   "passo_min": 30,
   "antecedencia_min_horas": 2,
   "janela_dias": 14,
