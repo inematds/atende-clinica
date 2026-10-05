@@ -76,16 +76,18 @@ class Cliente:
 
 
 class Servidor:
-    def __init__(self, dados, agora=AGORA):
+    def __init__(self, dados, agora=AGORA, env=None):
         self.dados = dados
         self.agora = agora
+        self.env = env or {}
         self.proc = None
 
     def subir(self):
         exe = RAIZ / "atende"
         if not exe.exists():
             pytest.fail("./atende não existe (ponto de entrada da seção 1 da especificação)")
-        env = dict(os.environ, ATENDE_AGORA=self.agora)
+        env = {k: v for k, v in os.environ.items() if not k.startswith(("EVOLUTION_", "TELEGRAM_", "WEBHOOK_"))}
+        env.update(ATENDE_AGORA=self.agora, **self.env)
         self.proc = subprocess.Popen(
             [str(exe), "serve", "--porta", "0", "--dados", str(self.dados)],
             cwd=RAIZ, env=env, stdout=subprocess.PIPE, stderr=subprocess.DEVNULL, text=True,
@@ -140,3 +142,99 @@ def com_conselho(dados, conselho):
     cfg = json.loads((dados / "clinica.json").read_text())
     cfg["conselho"] = conselho
     (dados / "clinica.json").write_text(json.dumps(cfg, ensure_ascii=False))
+
+
+class Externo:
+    """Servidor falso local que faz o papel da Evolution API e da API do Telegram. Grava cada pedido."""
+
+    def __init__(self):
+        import http.server
+        self.pedidos = []
+        self.falhas = 0          # quantos próximos pedidos devolvem 500
+        self.prox_msg = 1000
+        self.trava = threading.Lock()
+        externo = self
+
+        class H(http.server.BaseHTTPRequestHandler):
+            def do_POST(self):
+                corpo = self.rfile.read(int(self.headers.get("Content-Length") or 0))
+                try:
+                    dados = json.loads(corpo or b"{}")
+                except ValueError:
+                    dados = {}
+                pedido = {"rota": self.path, "headers": {k.lower(): v for k, v in self.headers.items()}, "json": dados}
+                with externo.trava:
+                    if externo.falhas > 0:
+                        externo.falhas -= 1
+                        pedido["status"] = 500
+                        externo.pedidos.append(pedido)
+                        self.send_response(500)
+                        self.send_header("Content-Length", "0")
+                        self.end_headers()
+                        return
+                    externo.prox_msg += 1
+                    pedido["status"], pedido["message_id"] = 200, externo.prox_msg
+                    externo.pedidos.append(pedido)
+                resp = {"ok": True, "result": {"message_id": pedido["message_id"]}, "key": {"id": f"X{pedido['message_id']}"}}
+                b = json.dumps(resp).encode()
+                self.send_response(201 if "/message/" in self.path else 200)
+                self.send_header("Content-Type", "application/json")
+                self.send_header("Content-Length", str(len(b)))
+                self.end_headers()
+                self.wfile.write(b)
+
+            def log_message(self, *a):
+                pass
+
+        self.srv = http.server.ThreadingHTTPServer(("127.0.0.1", 0), H)
+        self.url = f"http://127.0.0.1:{self.srv.server_address[1]}"
+        threading.Thread(target=self.srv.serve_forever, daemon=True).start()
+
+    def whats(self, ok=True):
+        return [p for p in self.pedidos if p["rota"] == "/message/sendText/clinica" and (not ok or p["status"] == 200)]
+
+    def telegram(self):
+        return [p for p in self.pedidos if p["rota"] == "/botTOKEN123/sendMessage" and p["status"] == 200]
+
+    def fechar(self):
+        self.srv.shutdown()
+        self.srv.server_close()
+
+
+SEGREDO_WH = "wh-segredo"
+CHAT_EQUIPE = -100777
+SEGREDO_TG = "tg-segredo"
+
+
+def env_integracoes(externo):
+    return {
+        "EVOLUTION_URL": externo.url, "EVOLUTION_API_KEY": "chave-evo", "EVOLUTION_INSTANCIA": "clinica",
+        "WEBHOOK_SEGREDO": SEGREDO_WH,
+        "TELEGRAM_API_URL": externo.url, "TELEGRAM_TOKEN": "TOKEN123", "TELEGRAM_CHAT_ID": str(CHAT_EQUIPE),
+        "TELEGRAM_SEGREDO": SEGREDO_TG,
+    }
+
+
+@pytest.fixture
+def externo():
+    e = Externo()
+    yield e
+    e.fechar()
+
+
+@pytest.fixture
+def api_int(dados, externo):
+    """Servidor com Evolution e Telegram apontando para o falso local."""
+    s = Servidor(dados, env=env_integracoes(externo))
+    yield s.subir()
+    s.parar()
+
+
+def esperar(cond, segundos=5):
+    import time
+    fim = time.time() + segundos
+    while time.time() < fim:
+        if cond():
+            return True
+        time.sleep(0.05)
+    return cond()

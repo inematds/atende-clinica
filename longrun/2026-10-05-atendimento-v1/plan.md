@@ -1,7 +1,7 @@
 # Plano (reescrever, não acumular)
 
 ## Estratégia atual
-Python 3 só stdlib: `atende` (CLI) → `src/` (servidor ThreadingHTTPServer, SQLite com lock para a concorrência, motor de agenda, motor de conversa, tarefas, trava de conselho, raiox) → `web/` (chat e recepção, HTML+JS sem CDN). Implementar na ordem dos arquivos de teste, rodando a suíte a cada passo.
+Python 3 só stdlib: `atende` (CLI) → `src/` (servidor ThreadingHTTPServer, SQLite com lock para a concorrência, motor de agenda, motor de conversa, tarefas, trava de conselho, raiox) → `web/` (chat e recepção, HTML+JS sem CDN). Integrações (Evolution, Telegram) atrás de um módulo `canais` com fila de envio; Docker só arquivos. Implementar na ordem dos arquivos de teste, rodando a suíte a cada passo.
 
 ## Próximos passos
 1. `./atende serve --porta 0 --dados DIR` com PORTA=, clinica.json padrão, /api/saude, /api/servicos, auth X-Token, páginas mínimas → test_basico.

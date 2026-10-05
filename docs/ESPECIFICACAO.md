@@ -7,19 +7,20 @@
 
 Sistema de atendimento ao paciente para **uma clínica** (consultório, odonto, fisio, estética): agenda, confirmação automática, lista de espera, retorno programado, tirar dúvidas (FAQ), passagem para humano, emergência, campanhas com trava de conselho/LGPD e exportação de números para o **Painel de Recuperação do Raio-X de Margem**.
 
-Canal v1 = **simulado** (mensagens de saída vão para uma caixa de saída consultável) + **chat web**. WhatsApp real é portão humano (seção 12).
+Canais: **chat web**, **WhatsApp pela Evolution API** (seção 17) e caixa de saída **simulada** quando a Evolution não está configurada. Equipe interna atende pelo **Telegram** (seção 18) e pela página da recepção. Cadastros de pacientes, profissionais, serviços e FAQ (seção 14), gestão de agenda (seção 15), backup do banco (seção 16) e entrega em **Docker** para VPS (seção 19).
 
 ## 1. Execução
 
 - Ponto de entrada: arquivo executável `./atende` na raiz do repo.
-- `./atende serve --porta N --dados DIR`
+- `./atende serve --porta N --dados DIR [--host H]`
   - `--porta 0` = porta livre escolhida pelo sistema. A **primeira linha** do stdout é `PORTA=<n>` (com flush), impressa quando o servidor já aceita conexões.
-  - Escuta só em `127.0.0.1`.
+  - Escuta em `--host` (padrão `127.0.0.1`; no Docker, `0.0.0.0` passado pelo comando do container — nunca escrito no código).
   - `DIR/clinica.json` = configuração (seção 2). Se não existir, copiar `exemplos/clinica.json`.
   - Todo o estado persiste em `DIR/` (ex.: SQLite). Reiniciar com o mesmo `DIR` mantém tudo.
 - **Relógio:** variável de ambiente `ATENDE_AGORA` (`AAAA-MM-DDTHH:MM`, hora local da clínica, sem fuso) fixa o "agora" do processo. Sem ela, usa o relógio real. Datas/horas no contrato são sempre `AAAA-MM-DDTHH:MM` local.
 - `./atende raiox --dados DIR --mes AAAA-MM --acompanhamento ARQ` (seção 10).
-- Sem rede externa. Sem API paga. Sem chave de API.
+- `./atende backup` / `./atende restaurar` (seção 16).
+- Integrações externas **só** por variáveis de ambiente (seção 17–18). Sem elas, nenhuma chamada de rede sai do processo. Nenhuma URL externa, chave ou token escrito no código.
 
 ## 2. `clinica.json`
 
@@ -54,7 +55,7 @@ Canal v1 = **simulado** (mensagens de saída vão para uma caixa de saída consu
 
 ## 4. Autenticação
 
-Rotas marcadas **[R]** (recepção) exigem header `X-Token` igual a `clinica.json.token`; sem ele ou errado → **401**. Rotas públicas: `/`, `/recepcao` (página; os dados vêm de rotas [R]), `/api/saude`, `/api/servicos`, `/api/horarios`, `/api/mensagens`.
+Rotas marcadas **[R]** (recepção) exigem header `X-Token` igual a `clinica.json.token`; sem ele ou errado → **401**. Rotas públicas: `/`, `/recepcao` (página; os dados vêm de rotas [R]), `/api/saude`, `GET /api/servicos`, `/api/horarios`, `/api/mensagens`. Webhooks têm segredo próprio (seções 17 e 18).
 
 ## 5. API HTTP (JSON, UTF-8)
 
@@ -149,9 +150,77 @@ Bases: CFM 2.336/2023 arts. 9º e 11; CFO 118/2012 art. 44 + 196/2019 + 271/2025
 
 ## 12. Fora do v1 (não implementar; portão humano ou próxima versão)
 
-WhatsApp real (Meta Cloud API — pago e exige conta; bibliotecas não oficiais violam os termos), SMS/e-mail, cobrança de sinal por Pix e planos/assinatura (PSP), prontuário, convênio/glosa/TISS, várias clínicas no mesmo servidor, login por usuário, LLM nas respostas (pode entrar depois atrás de uma opção desligada por padrão; os testes nunca a usam), interface EN/ES, deploy público.
+WhatsApp Cloud API oficial da Meta (v1 usa a Evolution), SMS/e-mail, deploy na VPS (é do humano: README explica), cobrança de sinal por Pix e planos/assinatura (PSP), prontuário, convênio/glosa/TISS, várias clínicas no mesmo servidor, login por usuário, LLM nas respostas (pode entrar depois atrás de uma opção desligada por padrão; os testes nunca a usam), interface EN/ES.
 
 ## 13. Páginas
 
 - `GET /` → HTML do chat do paciente, com elemento `id="chat"`, que usa `/api/mensagens`.
-- `GET /recepcao` → HTML da recepção com elementos `id="agenda"`, `id="fila-humano"` e `id="saida"`; pede o token e usa as rotas [R].
+- `GET /recepcao` → HTML da recepção com elementos `id="agenda"`, `id="fila-humano"`, `id="saida"`, `id="pacientes"` e `id="profissionais"`; pede o token e usa as rotas [R] (cadastros, agenda, fila humana com responder/encerrar).
+
+## 14. Cadastros [R]
+
+`clinica.json` é lido a cada início para `nome, conselho, token, passo_min, antecedencia_min_horas, janela_dias, confirmacao_horas, retorno_aviso_dias, feriados, horarios`. Já `profissionais`, `servicos` e `faq` só **semeiam** o banco na primeira vez (banco vazio); depois o banco é a fonte e se edita pela API.
+
+| Método e rota | Corpo | Resposta |
+|---|---|---|
+| `GET /api/profissionais` | — | 200 `{"profissionais": [{id, nome, servicos, registro, horarios, ativo}]}` (`registro` = CRM/CRO/CREFITO, pode ser `null`; `horarios` = `null` quando usa o da clínica) |
+| `POST /api/profissionais` | `{id, nome, servicos, registro?, horarios?}` | 201; `id` repetido → 409; serviço inexistente → 422 |
+| `PUT /api/profissionais/{id}` | campos parciais | 200 com o registro atualizado; inexistente → 404 |
+| `DELETE /api/profissionais/{id}` | — | 200 `{"ativo": false}`. Inativo some de `/api/horarios`, do chat e não aceita agendamento novo (422); os agendamentos já feitos continuam |
+| `GET /api/servicos` (público) | — | só os ativos |
+| `POST /api/servicos` | `{id, nome, duracao_min, retorno_dias?}` | 201; `id` repetido → 409 |
+| `PUT /api/servicos/{id}` / `DELETE /api/servicos/{id}` | parcial / — | 200 / 200 `{"ativo": false}` (some da lista pública e do chat) |
+| `GET /api/pacientes?busca=T` | — | 200 `{"pacientes": [{id, nome, telefone, email, nascimento, consentimento_marketing, nao_contatar}]}`; `busca` casa parte do nome (sem acento, sem caixa) ou dígitos do telefone; sem `busca` = todos |
+| `POST /api/pacientes` | aceita também `email`, `nascimento` (`AAAA-MM-DD`) | igual à seção 5 |
+| `PUT /api/pacientes/{id}` | `{nome?, telefone?, email?, nascimento?, consentimento_marketing?, nao_contatar?}` | 200 com o paciente; telefone inválido → 400; telefone de outro paciente → 409 |
+| `GET /api/faq` | — | 200 `{"faq": [{id, perguntas, resposta}]}` |
+| `POST /api/faq` | `{perguntas: [..], resposta}` | 201 `{id}`; o bot passa a usar na hora |
+| `DELETE /api/faq/{id}` | — | 204; o bot para de usar na hora |
+
+## 15. Gestão de agenda [R]
+
+- **Horário por profissional:** `horarios` do profissional (mesmo formato da clínica) substitui o da clínica só para ele. `null` = o da clínica.
+- **Bloqueios** (férias, folga, congresso): `POST /api/bloqueios {profissional, inicio, fim, motivo}` → 201 `{id, conflitos: [ids de agendamentos ativos que caem no bloqueio]}` (não cancela nada sozinho). Horários que sobrepõem `[inicio, fim)` somem de `/api/horarios` e o agendamento neles dá 422. `GET /api/bloqueios?profissional=P` → 200 `{"bloqueios": [{id, profissional, inicio, fim, motivo}]}`. `DELETE /api/bloqueios/{id}` → 204 e libera.
+- **Listagem por período:** `GET /api/agendamentos?de=AAAA-MM-DD&ate=AAAA-MM-DD[&profissional=P]` (inclusivo nas duas pontas), ordenado por `inicio`; continua valendo `?data=`.
+
+## 16. Banco de dados
+
+- `./atende backup --dados DIR --saida ARQ` → grava em `ARQ` uma cópia consistente de todo o estado (pode rodar com o servidor ligado). Código 0.
+- `./atende restaurar --dados DIR --entrada ARQ` → com o servidor parado, substitui o estado de `DIR` pelo do backup. Código 0. Ao subir de novo, tudo volta como estava no momento do backup.
+
+## 17. WhatsApp pela Evolution API
+
+Variáveis: `EVOLUTION_URL` (ex.: `http://evolution:8080`), `EVOLUTION_API_KEY`, `EVOLUTION_INSTANCIA`, `WEBHOOK_SEGREDO`. Sem `EVOLUTION_URL` → canal simulado (só caixa de saída, `status: "simulado"`).
+
+**Entrada** — `POST /webhook/evolution/{WEBHOOK_SEGREDO}` (segredo errado → 404). Formato da Evolution v2:
+```json
+{"event": "messages.upsert", "instance": "clinica",
+ "data": {"key": {"remoteJid": "5541999990001@s.whatsapp.net", "fromMe": false, "id": "ABC123"},
+          "pushName": "Maria", "message": {"conversation": "oi"}, "messageType": "conversation"}}
+```
+- Sempre responde 200. Ignora: `event` diferente de `messages.upsert`, `fromMe: true`, `remoteJid` de grupo (`@g.us`), `key.id` já processado (a Evolution reenvia).
+- Texto = `message.conversation` ou `message.extendedTextMessage.text`. Sem texto (áudio, imagem...) → responde `Por enquanto só consigo ler mensagens de texto.`
+- Telefone = dígitos do `remoteJid` antes do `@`, normalizado como na seção 5. Passa pela mesma conversa da seção 6 (o mesmo paciente, o mesmo estado).
+- Cada resposta da conversa vai por `POST {EVOLUTION_URL}/message/sendText/{EVOLUTION_INSTANCIA}` com header `apikey: {EVOLUTION_API_KEY}` e corpo `{"number": "<dígitos com 55>", "text": "<texto>"}`, na ordem.
+
+**Saída** (confirmação, espera, retorno, campanha, humano): com a Evolution configurada, cada mensagem da caixa de saída é enviada do mesmo jeito. Em `/api/saida` cada mensagem tem `status`: `enviado` (2xx), `pendente` (erro HTTP ou de conexão) ou `simulado`. `POST /api/tarefas/rodar` reenvia as `pendente` e devolve também `"reenviadas": n` (as que viraram `enviado`). `tarefas/rodar`, `responder` e `campanhas` só devolvem a resposta HTTP depois de tentar os envios (o `status` já está definido). Respostas ao webhook e avisos ao Telegram podem ser assíncronos.
+
+## 18. Atendimento interno pelo Telegram
+
+Variáveis: `TELEGRAM_API_URL` (ex.: `https://api.telegram.org`), `TELEGRAM_TOKEN`, `TELEGRAM_CHAT_ID` (grupo da equipe), `TELEGRAM_SEGREDO`. Sem elas, nada vai ao Telegram (o resto funciona igual). Envio: `POST {TELEGRAM_API_URL}/bot{TELEGRAM_TOKEN}/sendMessage` com `{"chat_id", "text"[, "reply_to_message_id"]}`; a resposta do Telegram traz `result.message_id`.
+
+**Atendimento humano** (`/api/atendimento-humano` passa a ser `{"fila": [{id, telefone, nome, motivo, prioridade, status}]}` só com os `aberto`):
+- Ao abrir (pedido de atendente, emergência, 2º "não entendi"): manda ao grupo um texto com `#<id>`, telefone, nome (se houver), motivo, a última mensagem do paciente e, se `prioridade` for `alta`, a palavra `ALTA`. Guarda o `message_id`.
+- Enquanto o atendimento do telefone estiver `aberto`, o bot **não responde** sozinho (`respostas: []`), exceto emergência (regra 1); cada mensagem do paciente vai ao grupo como `#<id> <nome ou telefone>: <texto>`, em resposta (`reply_to_message_id`) à mensagem de abertura.
+- `POST /webhook/telegram` exige header `X-Telegram-Bot-Api-Secret-Token: {TELEGRAM_SEGREDO}` (senão 401). Só aceita updates de `message.chat.id == TELEGRAM_CHAT_ID`; os outros são ignorados (200, sem efeito).
+- Mensagem da equipe que é resposta (`reply_to_message.message_id`) a uma mensagem do atendimento `#id` → o texto vai ao paciente (caixa de saída `tipo: "humano"`, e pela Evolution se configurada).
+- Comandos: `/responder <id> <texto>` (o mesmo, sem precisar responder em cima); `/encerrar <id>` → status `encerrado`, o bot volta a responder aquele telefone; `/fila` → o bot manda a lista dos abertos (cada um com `#id`); `/agenda [AAAA-MM-DD]` (padrão: hoje pelo relógio) → manda os agendamentos ativos do dia, uma linha `HH:MM <nome do paciente> — <nome do serviço> (<nome do profissional>)` cada.
+- Pela recepção [R]: `POST /api/atendimento-humano/{id}/responder {texto}` e `POST /api/atendimento-humano/{id}/encerrar` fazem o mesmo.
+- **Avisos à equipe:** agendamento feito pelo chat → `Novo agendamento: DD/MM HH:MM <nome> — <serviço> com <profissional>`; cancelamento pelo chat → texto começando com `Cancelado:` e com `DD/MM HH:MM`.
+
+## 19. Docker / VPS
+
+- `Dockerfile` (imagem oficial `python:3-slim` ou similar, **sem `pip install`**) que roda `./atende serve --host 0.0.0.0 --porta 8080 --dados /dados`, com `HEALTHCHECK` em `/api/saude`.
+- `docker-compose.yml` com o serviço `atende`: `build: .`, `restart: unless-stopped`, `env_file: .env`, volume para `/dados`, porta publicada só em `127.0.0.1:8080` (na VPS fica atrás de proxy reverso com HTTPS).
+- `.env.exemplo` com todas as variáveis das seções 17 e 18 (valores de exemplo, nenhum segredo real).
+- `README.md` com a seção **Deploy na VPS**: subir o compose, proxy HTTPS, configurar o webhook da Evolution para `/webhook/evolution/<segredo>` (evento `MESSAGES_UPSERT`), registrar o webhook do Telegram com `setWebhook` + `secret_token`, e o backup diário (`./atende backup` no cron).

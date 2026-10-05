@@ -1,7 +1,7 @@
 # Estado — atualizado 2026-10-05
 
 ## Funciona
-- (nada implementado ainda) — contrato e 62 testes de aceitação escritos; harness conferido com stub
+- (nada implementado ainda) — contrato e 93 testes de aceitação escritos; harness conferido com stub
 
 ## Falta
 - responder docs/DECISOES-ABERTAS.md → rodar congelar.sh → iniciar o loop/goal

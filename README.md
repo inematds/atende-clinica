@@ -2,7 +2,7 @@
 
 Atendimento ao paciente para clínicas (consultório, odonto, fisio, estética): **agenda online, confirmação automática, lista de espera, retorno programado, tirar dúvidas (FAQ), passagem para humano, alerta de emergência, campanhas com trava de conselho e LGPD**, e exportação mensal para o **Painel de Recuperação do [Raio-X de Margem](../raio-x-margem)**.
 
-> Estado: **planejado, não implementado.** Contrato em [`docs/ESPECIFICACAO.md`](docs/ESPECIFICACAO.md) + 62 testes de aceitação em `tests/`. A implementação sai de uma execução longa (`/goal`) — ver abaixo.
+> Estado: **planejado, não implementado.** Contrato em [`docs/ESPECIFICACAO.md`](docs/ESPECIFICACAO.md) + 93 testes de aceitação em `tests/`. A implementação sai de uma execução longa (`/goal`) — ver abaixo.
 
 ## Documentos
 

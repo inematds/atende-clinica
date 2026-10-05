@@ -72,6 +72,29 @@ with tempfile.TemporaryDirectory() as tmp:
     finally:
         s.parar()
 
+# 3. container de verdade (precisa de docker; baixa a imagem python na 1ª vez)
+import time
+import urllib.request
+
+b = subprocess.run(["docker", "build", "-q", "-t", "atende-clinica-verif", "."], cwd=RAIZ, capture_output=True, text=True)
+confere(b.returncode == 0, f"docker build falhou: {b.stderr[-300:]}")
+if b.returncode == 0:
+    c = subprocess.run(["docker", "run", "-d", "--rm", "-p", "127.0.0.1::8080", "atende-clinica-verif"],
+                       capture_output=True, text=True)
+    cid = c.stdout.strip()
+    try:
+        porta = subprocess.run(["docker", "port", cid, "8080"], capture_output=True, text=True).stdout.split(":")[-1].strip()
+        ok = False
+        for _ in range(40):
+            try:
+                ok = urllib.request.urlopen(f"http://127.0.0.1:{porta}/api/saude", timeout=2).status == 200
+                break
+            except Exception:
+                time.sleep(0.5)
+        confere(ok, "container não respondeu /api/saude")
+    finally:
+        subprocess.run(["docker", "stop", cid], capture_output=True)
+
 if falhas:
     print("INDEPENDENTE FALHOU:")
     for f in falhas:
