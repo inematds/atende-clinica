@@ -13,3 +13,5 @@
 2026-10-05 00:41:00 ciclo 3: agente saiu rc=0 em 299s
 2026-10-05 00:42:05 ciclo 3: rápido=63
 0 passed (melhor antes: 0)
+2026-10-05 00:42:05 ciclo 3: checkpoint commitado
+2026-10-05 00:43:09 PARADO: 3 ciclos sem avanço mensurável — ver failures.md
