@@ -3,6 +3,7 @@ WORKDIR /app
 ENV PYTHONDONTWRITEBYTECODE=1 PYTHONUNBUFFERED=1
 COPY atende VERSION ./
 COPY src/ ./src/
+COPY web/ ./web/
 COPY exemplos/ ./exemplos/
 RUN chmod +x atende
 EXPOSE 8080

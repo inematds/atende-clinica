@@ -1,9 +1,9 @@
 # Plano
 
 ## Estratégia atual
-Python 3 stdlib, HTTP e SQLite com lock/transação por requisição. Domínio e integrações implementados. Docker/documentação entregues; falta interface web.
+Implementação v1 encerrada pelos critérios automáticos: 93 passed e LIMITES OK. Páginas e fluxos básicos também verificados em navegador local.
 
 ## Próximos 3 passos
-1. Criar web/ com chat paciente e recepção: token em memória, cadastros, agenda, fila humana responder/encerrar e saída; servir HTML nas rotas públicas sem expor arquivos arbitrários.
-2. Integrar web/ ao Dockerfile, atualizar README e verificar páginas/fluxos com servidor exclusivamente local; revisar bordas pendentes da conversa se houver espaço no ciclo.
-3. Rodar suíte inteira e verificar-limites.sh, registrar evidências e atualizar estado; marcar concluído somente com ambos aprovados. Build/container e inspeção humana posterior conforme goal; nenhuma rede externa ou commit.
+1. Loop externo registrar o checkpoint final; não repetir implementação nem fazer commit dentro deste ciclo.
+2. Humano executar a validação independente prevista no goal, inclusive build/healthcheck Docker no ambiente autorizado.
+3. Humano validar uso de `/` e `/recepcao`; eventuais novas correções entram em ciclo próprio com suíte completa e limites preservados. Integrações reais e deploy continuam dependentes de autorização específica.

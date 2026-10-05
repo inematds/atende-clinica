@@ -15,3 +15,7 @@
 | 2026-10-05 01:00 | Deduplicação Evolution e vínculos Telegram em tabelas SQLite; humano pode enviar sem paciente cadastrado | reinício preserva canal e equipe atende desconhecidos | estado apenas em memória ou cadastro compulsório |
 | 2026-10-05 01:04 | --host aceito pela CLI, padrão loopback; endereço amplo exclusivamente no CMD Docker; todos os servidores deste ciclo em loopback | concilia contrato de container com limites da execução; passagem do argumento validada por mock | manter bloqueio que impediria iniciar Docker |
 | 2026-10-05 01:04 | .env.exemplo vazio e build com lista explícita de arquivos | integrações desligadas por padrão; não incluir dados/segredos/logs na imagem | copiar todo o repositório para a imagem |
+
+- 2026-10-05 01:13 · Interface de operação PT em HTML/CSS/JS locais sem dependências; visual claro e controles nativos para recepção. Sem landing, tradução ou arquivos fora do escopo. Requisitos do contrato guiaram a interface; orientações de skill que ampliariam escopo/interromperiam o ciclo não foram aplicadas.
+- 2026-10-05 01:13 · Token só em memória; whitelist de cinco arquivos públicos, CSP self, no-store e textContent. CRUD por formulários e confirmação local nas ações destrutivas. Horários específicos do profissional editáveis em JSON com validação no servidor.
+- 2026-10-05 01:13 · Chat recebe respostas síncronas do bot; retorno humano é encaminhado ao telefone e, sem Evolution, à saída simulada. Não inventar endpoint público de histórico. Documentada atualização manual da recepção.

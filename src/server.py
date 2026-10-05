@@ -148,6 +148,21 @@ def main():
     class Handler(BaseHTTPRequestHandler):
         def processar(self):
             url = urlsplit(self.path)
+            arquivos = {'/': ('index.html', 'text/html'), '/recepcao': ('recepcao.html', 'text/html'),
+                        '/web/style.css': ('style.css', 'text/css'), '/web/chat.js': ('chat.js', 'text/javascript'),
+                        '/web/recepcao.js': ('recepcao.js', 'text/javascript')}
+            if self.command == 'GET' and url.path in arquivos:
+                nome, tipo = arquivos[url.path]
+                conteudo = (ROOT / 'web' / nome).read_bytes()
+                self.send_response(200)
+                self.send_header('Content-Type', tipo + '; charset=utf-8')
+                self.send_header('Content-Length', str(len(conteudo)))
+                self.send_header('Cache-Control', 'no-store')
+                self.send_header('X-Content-Type-Options', 'nosniff')
+                self.send_header('Content-Security-Policy', "default-src 'self'; script-src 'self'; style-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'none'; frame-ancestors 'none'")
+                self.end_headers()
+                self.wfile.write(conteudo)
+                return
             publico = (self.command == 'GET' and url.path in ('/', '/recepcao', '/api/saude', '/api/servicos', '/api/horarios')) or (self.command == 'POST' and url.path == '/api/mensagens')
             try:
                 if self.command == 'POST' and integracoes.autorizar(url.path, self.headers):

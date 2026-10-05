@@ -2,7 +2,7 @@
 
 Atendimento de uma clínica com Python 3 e biblioteca padrão: agenda, conversa por regras, FAQ, fila humana, lembretes, espera, retornos, campanhas, LGPD e exportação para o Raio-X. Estado persistente em SQLite. Evolution e Telegram são opcionais, configurados exclusivamente pelo ambiente.
 
-O contrato está em `docs/ESPECIFICACAO.md`. Neste checkpoint, as APIs e integrações estão implementadas; as páginas de chat e recepção ainda estão pendentes.
+O contrato está em `docs/ESPECIFICACAO.md`. O chat do paciente está em `/` e a recepção em `/recepcao`. Na recepção, informe o token de `clinica.json`: ele fica apenas na memória da aba. Use Sair ao finalizar. Cadastros, agenda, bloqueios, fila humana, caixa de saída, campanhas e indicadores estão disponíveis na página. Use Atualizar dados para buscar novas mensagens. O retorno humano ao chat é enviado ao telefone pela integração configurada; sem Evolution, consulte a caixa de saída simulada.
 
 ## Executar localmente
 

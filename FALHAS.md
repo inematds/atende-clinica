@@ -2,6 +2,7 @@
 
 | data | o que quebrou | menor correção | prompt \| infra |
 |---|---|---|---|
+| 2026-10-05 | páginas retornavam 404 e formulário enviava nascimento vazio inválido | servir páginas locais e converter campo opcional vazio para null; 93 testes e cadastro em navegador aprovados | infra |
 | 2026-10-05 | entrega Docker ausente e CLI rejeitava host exigido pelo container | adicionar arquivos de entrega e aceitar --host; 4 testes adicionais aprovados e healthcheck local passou | infra |
 | 2026-10-05 | integrações ausentes impediam WhatsApp e atendimento pelo Telegram | implementar transportes opcionais, deduplicação persistente e vínculos de atendimento; 88 passed / 5 failed | infra |
 | 2026-10-05 | cadastros, bloqueios e backup ausentes causavam 10 falhas de aceitação | adicionar rotas CRUD, filtro de bloqueios e snapshot SQLite; suíte passou de 63 para 73 testes aprovados | infra |
