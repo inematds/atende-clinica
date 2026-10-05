@@ -8,10 +8,19 @@ import sys
 from urllib.parse import parse_qs, urlsplit
 
 from .core import Clinica, Erro, ROOT
-from . import conversa, gestao, cadastros, backup
+from . import conversa, gestao, cadastros, backup, integracoes
 
 
 def rotear(c, metodo, rota, q, b):
+    if metodo == 'POST' and rota.startswith('/webhook/evolution/'):
+        integracoes.evolution(c, b)
+        return 200, {'ok': True}
+    if metodo == 'POST' and rota == '/webhook/telegram':
+        integracoes.receber_telegram(c, b)
+        return 200, {'ok': True}
+    m = re.fullmatch(r'/api/atendimento-humano/(\d+)/(responder|encerrar)', rota)
+    if metodo == 'POST' and m:
+        return 200, integracoes.humano(c, int(m[1]), m[2], b.get('texto'))
     if metodo == 'GET' and rota == '/api/pacientes':
         return 200, {'pacientes': cadastros.pacientes(c, q.get('busca', ''))}
     m = re.fullmatch(r'/api/pacientes/(\d+)', rota)
@@ -143,6 +152,8 @@ def main():
             url = urlsplit(self.path)
             publico = (self.command == 'GET' and url.path in ('/', '/recepcao', '/api/saude', '/api/servicos', '/api/horarios')) or (self.command == 'POST' and url.path == '/api/mensagens')
             try:
+                if self.command == 'POST' and integracoes.autorizar(url.path, self.headers):
+                    publico = True
                 if not publico and not hmac.compare_digest(self.headers.get('X-Token', '').encode(), str(clinica.cfg['token']).encode()):
                     raise Erro(401, 'Token inválido')
                 tamanho = int(self.headers.get('Content-Length', '0'))

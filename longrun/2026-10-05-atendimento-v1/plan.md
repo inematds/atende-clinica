@@ -1,9 +1,9 @@
 # Plano
 
 ## Estratégia atual
-Python 3 stdlib, HTTP local, SQLite com lock/transação por requisição. Catálogo/agenda em core.py, CRUD/bloqueios em cadastros.py, backup em backup.py, conversa/notificações em conversa.py, campanhas/LGPD/Raio-X em gestao.py. Contrato e testes intactos.
+Python 3 stdlib, HTTP local e SQLite com lock/transação por requisição. core.py: agenda; cadastros.py: CRUD/bloqueios; backup.py: snapshot; conversa.py: fluxo/notificações; gestao.py: campanhas/LGPD/Raio-X; integracoes.py: Evolution/Telegram e atendimento humano. Contrato e testes intactos.
 
 ## Próximos 3 passos
-1. Evolution: webhook com segredo e deduplicação persistente, conversa compartilhada, saída com status e reenvio de pendentes. Somente variáveis contratadas e servidor falso local. Revisar bordas de conversa anotadas no state.
-2. Telegram: abertura/repasse, respostas vinculadas ao atendimento, comandos, notificações e responder/encerrar pela recepção. Testar exclusivamente no falso local; garantir silêncio do bot com atendimento aberto.
-3. Docker/compose/.env.exemplo/README e páginas web completas. Rodar suíte e limites; atualizar registros sem commit e sem marcar concluído antes dos dois portões passarem.
+1. Entrega Docker/compose/.env.exemplo/README: ler testes, conciliar bind do container com limites da execução, documentar configuração, webhooks e backup diário sem realizar chamadas reais.
+2. Páginas em web/: chat paciente e recepção com token, cadastros, agenda, fila humana responder/encerrar, saída e operações disponíveis; servir HTML corretamente em server.py.
+3. Revisar bordas de conversa anotadas no state; rodar suíte completa e limites, registrar evidências e só marcar concluído se ambos passarem. Não alterar testes/spec/verificadores nem fazer commit.

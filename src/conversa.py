@@ -5,6 +5,7 @@ import unicodedata
 from datetime import datetime, timedelta
 
 from .core import Erro, agora, telefone
+from . import integracoes
 
 
 def normalizar(texto):
@@ -13,6 +14,7 @@ def normalizar(texto):
 
 
 def iniciar(c):
+    integracoes.iniciar(c)
     c.db.executescript('''
         CREATE TABLE IF NOT EXISTS sessoes (telefone TEXT PRIMARY KEY, dados TEXT NOT NULL);
         CREATE TABLE IF NOT EXISTS historico (id INTEGER PRIMARY KEY, paciente_id INTEGER,
@@ -44,9 +46,10 @@ def enviar(c, pid, tipo, texto, agendamento_id=None, oferta=None):
     p = c.paciente(pid)
     if p['nao_contatar'] or not p['telefone']:
         return 0
-    c.db.execute('''INSERT INTO saida(tipo,telefone,paciente_id,texto,agendamento_id,quando,oferta)
+    ident = c.db.execute('''INSERT INTO saida(tipo,telefone,paciente_id,texto,agendamento_id,quando,oferta)
         VALUES (?,?,?,?,?,?,?)''', (tipo, p['telefone'], pid, texto, agendamento_id,
-        agora().isoformat(timespec='minutes'), json.dumps(oferta) if oferta else None))
+        agora().isoformat(timespec='minutes'), json.dumps(oferta) if oferta else None)).lastrowid
+    integracoes.entregar(c, ident)
     registrar(c, p['telefone'], 'saida', texto)
     return 1
 
@@ -81,6 +84,7 @@ def presenca(c, ident, compareceu):
 
 def rodar(c, instante=None):
     t = datetime.fromisoformat(instante) if instante else agora()
+    reenviadas = integracoes.reenviar(c)
     enviadas = 0
     for a in c.db.execute("SELECT * FROM agendamentos WHERE status='agendado' ORDER BY id").fetchall():
         if t < datetime.fromisoformat(a['inicio']) <= t + timedelta(hours=c.cfg['confirmacao_horas']):
@@ -94,7 +98,7 @@ def rodar(c, instante=None):
             if n:
                 c.db.execute('UPDATE retornos SET avisado=1 WHERE id=?', (r['id'],))
             enviadas += n
-    return {'enviadas': enviadas, 'reenviadas': 0}
+    return {'enviadas': enviadas, 'reenviadas': reenviadas}
 
 
 def abrir_humano(c, tel, motivo, prioridade):
@@ -102,8 +106,11 @@ def abrir_humano(c, tel, motivo, prioridade):
     if r:
         if prioridade == 'alta':
             c.db.execute('UPDATE humanos SET prioridade=?,motivo=? WHERE id=?', (prioridade, motivo, r[0]))
+        integracoes.notificar_humano(c, r[0], motivo)
         return r[0]
-    return c.db.execute('INSERT INTO humanos(telefone,motivo,prioridade) VALUES (?,?,?)', (tel, motivo, prioridade)).lastrowid
+    ident = c.db.execute('INSERT INTO humanos(telefone,motivo,prioridade) VALUES (?,?,?)', (tel, motivo, prioridade)).lastrowid
+    integracoes.notificar_humano(c, ident, motivo, abertura=True)
+    return ident
 
 
 def fila(c):
@@ -147,7 +154,9 @@ def decidir(c, tel, texto, estado):
         resposta = ['Você não vai mais receber mensagens.']
     else:
         resposta = None
-    if c.db.execute("SELECT 1 FROM humanos WHERE telefone=? AND status='aberto'", (tel,)).fetchone():
+    humano = c.db.execute("SELECT id FROM humanos WHERE telefone=? AND status='aberto'", (tel,)).fetchone()
+    if humano:
+        integracoes.notificar_humano(c, humano[0], texto)
         return []
     if resposta is not None:
         return resposta
@@ -193,6 +202,7 @@ def decidir(c, tel, texto, estado):
                 raise
             return ['Horário ocupado ou indisponível. Digite cancelar para recomeçar.']
         estado.pop('etapa', None)
+        integracoes.avisar_agenda(c, a)
         return [f"Agendado para {datetime.fromisoformat(a['inicio']).strftime('%d/%m %H:%M')}."]
     pendente = c.db.execute('SELECT * FROM saida WHERE telefone=? ORDER BY id DESC LIMIT 1', (tel,)).fetchone()
     if pendente and not pendente['respondida']:
@@ -203,11 +213,13 @@ def decidir(c, tel, texto, estado):
                 acao = 'Agendamento confirmado.'
             elif t in ('2', 'cancelar', 'nao'):
                 cancelar(c, pendente['agendamento_id'])
+                integracoes.avisar_agenda(c, c.agendamento(pendente['agendamento_id']), cancelado=True)
                 acao = 'Agendamento cancelado.'
         elif pendente['tipo'] == 'espera' and t in ('1', 'sim'):
             oferta = json.loads(pendente['oferta'])
             try:
-                c.agendar(oferta)
+                a = c.agendar(oferta)
+                integracoes.avisar_agenda(c, a)
                 c.db.execute("UPDATE espera SET status='atendido' WHERE id=?", (oferta['espera_id'],))
                 acao = 'Horário agendado.'
             except Erro as e:

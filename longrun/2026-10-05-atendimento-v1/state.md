@@ -1,24 +1,23 @@
-# Estado — atualizado 2026-10-05 00:52
+# Estado — atualizado 2026-10-05 01:00
 
 ## Funciona
-- CLI serve com PORTA, bind 127.0.0.1, auth X-Token, SQLite persistente, configuração e catálogo semeado uma vez; agenda transacional e normalização de telefones.
-- Conversa persistente: emergência, opt-out, FAQ, fallback, fila humana, agendamento, confirmação, espera FIFO e retorno. Atendimento aberto silencia o bot, exceto emergência.
-- Campanhas com regras dos quatro conselhos, lista completa de violações, consentimento e opt-out. LGPD exporta histórico e anonimiza contato, histórico/saída/sessão/fila, preservando agregados.
-- Raio-X HTTP/CLI calcula indicadores do banco/calendário, mescla mês anterior/base, preserva campos não medidos e grava JSON atomicamente.
-- Cadastros completos em src/cadastros.py: profissionais (registro/horários próprios), serviços e desativação; pacientes com busca sem acento/caixa e edição validada; FAQ com efeito imediato. Edições persistem sem ressemear o catálogo.
-- Bloqueios persistentes: retiram horários sobrepostos, novas reservas recebem 422, informam conflitos ativos sem cancelar consultas existentes; exclusão libera a grade. Listagem por período/profissional passa.
-- CLI backup/restaurar em src/backup.py: snapshot SQLite consistente com servidor ligado, ZIP com banco e clinica.json; restauração validada com servidor parado. Verificação local adicional passou para configuração, paciente, FAQ, bloqueio e rejeição de arquivo inválido sem alteração do banco.
-- Versão 0.4.0. Suíte completa: **73 passed / 20 failed**, sem errors, em 65.80s; pytest-ciclo-4.log. Ganho de 10 testes, sem regressão observada; todos os testes de cadastros passam.
-- Verificador: **LIMITES OK**, 93 testes e contrato intacto. Nenhuma rede externa, API real ou commit neste ciclo.
+- CLI serve imprime PORTA, bind 127.0.0.1, autenticação X-Token, SQLite persistente e catálogo semeado uma vez. Agenda transacional, cadastros completos, horários próprios, bloqueios e backup/restauração consistentes.
+- Conversa persistente: emergência, opt-out, FAQ, fallback, agendamento, confirmação, lista de espera FIFO e retorno; fila humana silencia o bot exceto emergência.
+- Campanhas com regras dos quatro conselhos, consentimento/opt-out; LGPD exporta e anonimiza preservando agregados; Raio-X HTTP/CLI calcula e mescla indicadores.
+- Evolution em src/integracoes.py: webhook com segredo, filtros, deduplicação SQLite, conversation/extendedTextMessage, resposta para mídia e conversa compartilhada. Saída síncrona com status enviado/pendente/simulado; tarefas reenvia pendentes anteriores sem furar opt-out.
+- Telegram: abertura com nome/telefone/motivo/ALTA, repasse vinculado, resposta à mensagem original ou repassada, comandos responder/encerrar/fila/agenda, avisos de agendamento/cancelamento pelo chat. Recepção responde/encerra pela API inclusive sem Telegram. Vínculos message_id persistidos.
+- Versão 0.5.0. Suíte completa: **88 passed / 5 failed**, sem errors, em 32.00s; pytest-ciclo-5.log. Ganho de 15 testes, nenhuma regressão observada. Todos os testes de integração passam.
+- **LIMITES OK**, 93 testes e contrato intacto. Verificação local adicional passou: extendedTextMessage, deduplicação após reinício e opt-out impedindo reenvio persistente. Só servidores falsos locais; nenhuma integração real ou commit.
 
 ## Falta
-- Evolution e Telegram: webhooks, envio/reenvio, responder/encerrar pela recepção, notificações à equipe. Ainda nenhuma chamada de integração implementada.
-- Docker, compose, .env.exemplo, README e páginas web.
-- Revisar bordas da conversa: preferências de desconhecido ao limpar sessão por emergência; respostas a confirmações depois de alteração do agendamento; opções antigas de catálogo durante um fluxo.
-- Nenhum conflito teste/spec identificado neste ciclo. Restrição de bind local prevalece durante o loop; conciliar Docker ao implementar entrega.
+- Dockerfile, docker-compose.yml, .env.exemplo, README com Deploy na VPS e páginas web (5 falhas atuais).
+- Resolver entrega Docker respeitando restrição de bind durante a execução: server.py atualmente rejeita qualquer host diferente de 127.0.0.1; contrato descreve bind amplo no container. Não alterar contrato/verificadores.
+- Revisar bordas previamente anotadas: preferências de desconhecido ao limpar sessão por emergência; confirmação antiga após mudança da agenda; catálogo desativado durante um fluxo.
+- Risco de entrega: HTTP externo síncrono tem timeout de 5s e ocorre sob lock/transação. Falha de processo após envio remoto e antes do commit pode duplicar uma entrega no próximo reenvio; não há garantia exactly-once do provedor.
+- Nenhum conflito teste/spec identificado neste ciclo. Ainda não concluído.
 
 ## Como retomar
-1. Ler goal → state → plan → canal e fins de progress/failures. Especificação inteira e conftest foram lidos neste ciclo.
-2. Ler src/server.py, src/conversa.py e tests/test_integracoes.py. HTTP envolve operações em lock/transação; conversa.iniciar cria tabelas adicionais e é chamado em serve e raiox.
-3. Implementar Evolution e Telegram exclusivamente com variáveis da spec e servidores falsos locais dos testes; sem URLs externas no código nem credenciais reais.
-4. Rodar suíte inteira para arquivo e ler só tail -n 30, executar verificar-limites.sh, atualizar registros. Não fazer commit. Só marcar concluído quando os dois portões passarem.
+1. Ler goal → state → plan → canal e fins de progress/failures. Especificação inteira e conftest lidos.
+2. Ler tests/test_docker.py, tests/test_basico.py e src/server.py; implementar próxima entrega Docker/README e depois páginas usando APIs já disponíveis.
+3. src/integracoes.py concentra transporte opcional e humano; conversa.iniciar inicializa também tabelas das integrações. Webhooks usam segredos próprios, antes do X-Token.
+4. Rodar pytest inteiro para arquivo, ler tail -n 30, verificar-limites.sh e atualizar registros. Não fazer commit nem marcar concluído antes de ambos os portões passarem.

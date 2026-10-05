@@ -1,0 +1,88 @@
+...................F........................................FFFF........ [ 77%]
+.....................                                                    [100%]
+=================================== FAILURES ===================================
+_________________________________ test_paginas _________________________________
+
+api = <conftest.Cliente object at 0xf0a4027ce480>
+
+    def test_paginas(api):
+        st, html = api.get("/", token=None)
+>       assert st == 200 and 'id="chat"' in html
+E       assert (404 == 200)
+
+tests/test_basico.py:35: AssertionError
+_______________________________ test_dockerfile ________________________________
+
+    def test_dockerfile():
+>       d = ler("Dockerfile")
+            ^^^^^^^^^^^^^^^^^
+
+tests/test_docker.py:14: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+nome = 'Dockerfile'
+
+    def ler(nome):
+        p = RAIZ / nome
+>       assert p.exists(), f"falta {nome}"
+E       AssertionError: falta Dockerfile
+E       assert False
+E        +  where False = exists()
+E        +    where exists = PosixPath('/home/nmaldaner/projetos/atende-clinica/Dockerfile').exists
+
+tests/test_docker.py:9: AssertionError
+_________________________________ test_compose _________________________________
+
+    def test_compose():
+>       c = ler("docker-compose.yml")
+            ^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_docker.py:22: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+nome = 'docker-compose.yml'
+
+    def ler(nome):
+        p = RAIZ / nome
+>       assert p.exists(), f"falta {nome}"
+E       AssertionError: falta docker-compose.yml
+E       assert False
+E        +  where False = exists()
+E        +    where exists = PosixPath('/home/nmaldaner/projetos/atende-clinica/docker-compose.yml').exists
+
+tests/test_docker.py:9: AssertionError
+___________ test_env_exemplo_tem_todas_as_variaveis_sem_segredo_real ___________
+
+    def test_env_exemplo_tem_todas_as_variaveis_sem_segredo_real():
+>       e = ler(".env.exemplo")
+            ^^^^^^^^^^^^^^^^^^^
+
+tests/test_docker.py:28: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+nome = '.env.exemplo'
+
+    def ler(nome):
+        p = RAIZ / nome
+>       assert p.exists(), f"falta {nome}"
+E       AssertionError: falta .env.exemplo
+E       assert False
+E        +  where False = exists()
+E        +    where exists = PosixPath('/home/nmaldaner/projetos/atende-clinica/.env.exemplo').exists
+
+tests/test_docker.py:9: AssertionError
+__________________________ test_readme_explica_deploy __________________________
+
+    def test_readme_explica_deploy():
+        r = ler("README.md")
+>       assert "Deploy na VPS" in r
+E       AssertionError: assert 'Deploy na VPS' in '# atende-clinica\n\nAtendimento ao paciente para clínicas (consultório, odonto, fisio, estética): **agenda online, co...sem API (WhatsApp/Meta, LLM pago, Pix/PSP) sem autorização explícita. Canal v1 = chat web + caixa de saída simulada.\n'
+
+tests/test_docker.py:37: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_basico.py::test_paginas - assert (404 == 200)
+FAILED tests/test_docker.py::test_dockerfile - AssertionError: falta Dockerfile
+FAILED tests/test_docker.py::test_compose - AssertionError: falta docker-comp...
+FAILED tests/test_docker.py::test_env_exemplo_tem_todas_as_variaveis_sem_segredo_real
+FAILED tests/test_docker.py::test_readme_explica_deploy - AssertionError: ass...
+5 failed, 88 passed in 32.00s

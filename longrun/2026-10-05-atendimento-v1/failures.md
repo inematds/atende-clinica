@@ -11,3 +11,5 @@
 | 2026-10-05 00:52 | tail abreviado repetido na leitura inicial → corrigido para tail -n → leitura concluída; lição existente em CLAUDE.md | sintaxe explícita | corrigido | prompt |
 | 2026-10-05 00:52 | 20 testes falham por integrações/páginas/Docker/README ausentes → implementados cadastros/bloqueios/backup → 73 passed / 20 failed, sem regressão ou conflito identificado | próximo escopo no plano | parcial | infra |
 | 2026-10-05 00:52 | git diff --check global sinalizou whitespace no ciclo-1.log gerado pelo loop → verificação restrita aos arquivos editados → sem problema no código; log preservado | não editar saída do loop | log externo preservado | infra |
+| 2026-10-05 01:00 | tail abreviado rejeitado na leitura inicial → corrigido para tail -n → leitura concluída; lição já registrada em CLAUDE.md | sintaxe explícita | corrigido | prompt |
+| 2026-10-05 01:00 | integrações ausentes e 20 falhas anteriores → implementados Evolution/Telegram → 88 passed / 5 failed; restantes páginas/Docker/README, sem conflito identificado | próximo escopo no plano | parcial | infra |
