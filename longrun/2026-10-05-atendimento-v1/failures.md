@@ -13,3 +13,5 @@
 | 2026-10-05 00:52 | git diff --check global sinalizou whitespace no ciclo-1.log gerado pelo loop → verificação restrita aos arquivos editados → sem problema no código; log preservado | não editar saída do loop | log externo preservado | infra |
 | 2026-10-05 01:00 | tail abreviado rejeitado na leitura inicial → corrigido para tail -n → leitura concluída; lição já registrada em CLAUDE.md | sintaxe explícita | corrigido | prompt |
 | 2026-10-05 01:00 | integrações ausentes e 20 falhas anteriores → implementados Evolution/Telegram → 88 passed / 5 failed; restantes páginas/Docker/README, sem conflito identificado | próximo escopo no plano | parcial | infra |
+| 2026-10-05 01:04 | tail abreviado novamente rejeitado → tail -n → leitura concluída; lição existente em CLAUDE.md | sintaxe explícita -n | corrigido | prompt |
+| 2026-10-05 01:04 | Docker/documentação ausentes → entrega e remoção da restrição indevida de --host → 92 passed / 1 failed; test_paginas segue 404 por interface ainda ausente, sem contradição de contrato | implementar páginas no próximo ciclo | parcial | infra |

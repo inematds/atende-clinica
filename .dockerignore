@@ -1,0 +1,10 @@
+*
+!Dockerfile
+!atende
+!VERSION
+!src/
+!src/*.py
+!exemplos/
+!exemplos/clinica.json
+!web/
+!web/**

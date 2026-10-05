@@ -2,6 +2,7 @@
 
 | data | o que quebrou | menor correção | prompt \| infra |
 |---|---|---|---|
+| 2026-10-05 | entrega Docker ausente e CLI rejeitava host exigido pelo container | adicionar arquivos de entrega e aceitar --host; 4 testes adicionais aprovados e healthcheck local passou | infra |
 | 2026-10-05 | integrações ausentes impediam WhatsApp e atendimento pelo Telegram | implementar transportes opcionais, deduplicação persistente e vínculos de atendimento; 88 passed / 5 failed | infra |
 | 2026-10-05 | cadastros, bloqueios e backup ausentes causavam 10 falhas de aceitação | adicionar rotas CRUD, filtro de bloqueios e snapshot SQLite; suíte passou de 63 para 73 testes aprovados | infra |
 | 2026-10-05 | opt-out e histórico de desconhecido não migravam ao cadastrar pela API | associar histórico e ler preferência da sessão em criar_paciente; verificação local passou | infra |

@@ -142,8 +142,6 @@ def main():
         finally:
             clinica.db.close()
         return
-    if args.host != '127.0.0.1':
-        parser.error('Neste ambiente o servidor só pode escutar em 127.0.0.1')
     clinica = Clinica(args.dados)
     conversa.iniciar(clinica)
 
