@@ -10,3 +10,4 @@
 | 2026-10-05 | leitura usou nomes de arquivos inexistentes e repetiu tail abreviado | conferir caminhos com rg --files e usar tail -n | prompt |
 | 2026-10-05 | tail com opção antiga e múltiplos arquivos recusou leitura | usar `tail -n 20` | prompt |
 | 2026-10-05 | `verificar-independente.py` acusou agendamento falho na clínica nova: o atalho `Cliente.agenda()` usa servico="avaliacao" por padrão e a clínica nova só tem "sessao" (bug do verificador, não do sistema) | passar `servico="sessao"` explícito | prompt |
+| 2026-10-05 | `atende serve` órfão por 14 h: no test_backup_e_restaurar o 1º Servidor subia fora de try/finally e asserção falhando antes do parar() deixava o processo vivo | registro SERVIDORES + fixture autouse que para todos no teardown | prompt |

@@ -75,8 +75,19 @@ class Cliente:
         return [m for m in r["mensagens"] if tipo is None or m["tipo"] == tipo]
 
 
+SERVIDORES = []
+
+
+@pytest.fixture(autouse=True)
+def _parar_servidores():
+    yield
+    while SERVIDORES:
+        SERVIDORES.pop().parar()
+
+
 class Servidor:
     def __init__(self, dados, agora=AGORA, env=None):
+        SERVIDORES.append(self)  # o teardown autouse para todos, mesmo se o teste falhar
         self.dados = dados
         self.agora = agora
         self.env = env or {}
