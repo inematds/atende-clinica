@@ -15,3 +15,7 @@
 0 passed (melhor antes: 0)
 2026-10-05 00:42:05 ciclo 3: checkpoint commitado
 2026-10-05 00:43:09 PARADO: 3 ciclos sem avanço mensurável — ver failures.md
+2026-10-05 00:46:27 início: rápido=63 passed · agente=codex · teto 20x30min · mem 8G
+2026-10-05 00:46:27 ciclo 1: começa
+2026-10-05 00:52:46 ciclo 1: agente saiu rc=0 em 379s
+2026-10-05 00:53:52 ciclo 1: rápido=73 passed (melhor antes: 63)

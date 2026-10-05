@@ -8,10 +8,42 @@ import sys
 from urllib.parse import parse_qs, urlsplit
 
 from .core import Clinica, Erro, ROOT
-from . import conversa, gestao
+from . import conversa, gestao, cadastros, backup
 
 
 def rotear(c, metodo, rota, q, b):
+    if metodo == 'GET' and rota == '/api/pacientes':
+        return 200, {'pacientes': cadastros.pacientes(c, q.get('busca', ''))}
+    m = re.fullmatch(r'/api/pacientes/(\d+)', rota)
+    if metodo == 'PUT' and m:
+        return 200, cadastros.editar_paciente(c, int(m[1]), b)
+    m = re.fullmatch(r'/api/(profissionais|servicos|faq)(?:/([^/]+))?', rota)
+    if m:
+        tipo, ident = m.groups()
+        if metodo == 'GET' and ident is None and tipo != 'servicos':
+            return 200, {tipo: c.catalogo(tipo)}
+        if metodo == 'POST' and ident is None:
+            item = cadastros.salvar_catalogo(c, tipo, b)
+            return 201, {'id': item['id']} if tipo == 'faq' else item
+        if metodo == 'PUT' and ident is not None and tipo != 'faq':
+            return 200, cadastros.salvar_catalogo(c, tipo, b, ident)
+        if metodo == 'DELETE' and ident is not None:
+            if tipo == 'faq':
+                c.db.execute('DELETE FROM catalogo WHERE tipo=? AND id=?', (tipo, ident))
+                return 204, None
+            cadastros.salvar_catalogo(c, tipo, {'ativo': False}, ident)
+            return 200, {'ativo': False}
+    if rota == '/api/bloqueios':
+        if metodo == 'POST':
+            return 201, cadastros.bloquear(c, b)
+        if metodo == 'GET':
+            return 200, {'bloqueios': [dict(r) for r in c.db.execute(
+                'SELECT * FROM bloqueios WHERE (? IS NULL OR profissional=?) ORDER BY inicio,id',
+                (q.get('profissional'), q.get('profissional')))]}
+    m = re.fullmatch(r'/api/bloqueios/(\d+)', rota)
+    if metodo == 'DELETE' and m:
+        c.db.execute('DELETE FROM bloqueios WHERE id=?', (int(m[1]),))
+        return 204, None
     if metodo == 'GET' and rota == '/api/saude':
         return 200, {'ok': True, 'versao': (ROOT / 'VERSION').read_text().strip()}
     if metodo == 'GET' and rota == '/api/servicos':
@@ -79,7 +111,20 @@ def main():
     raiox.add_argument('--dados', required=True)
     raiox.add_argument('--mes', required=True)
     raiox.add_argument('--acompanhamento', required=True)
+    for comando, arquivo in (('backup', '--saida'), ('restaurar', '--entrada')):
+        p = sub.add_parser(comando)
+        p.add_argument('--dados', required=True)
+        p.add_argument(arquivo, required=True)
     args = parser.parse_args()
+    if args.comando in ('backup', 'restaurar'):
+        try:
+            if args.comando == 'backup':
+                backup.copiar(args.dados, args.saida)
+            else:
+                backup.restaurar(args.dados, args.entrada)
+        except Exception as e:
+            parser.exit(1, f'Falha no {args.comando}: {e}\n')
+        return
     if args.comando == 'raiox':
         clinica = Clinica(args.dados)
         try:

@@ -55,6 +55,9 @@ class Clinica:
                 servico TEXT NOT NULL, profissional TEXT NOT NULL, inicio TEXT NOT NULL,
                 fim TEXT NOT NULL, status TEXT NOT NULL);
             CREATE INDEX IF NOT EXISTS agenda_profissional ON agendamentos(profissional,inicio,fim);
+            CREATE TABLE IF NOT EXISTS bloqueios (
+                id INTEGER PRIMARY KEY, profissional TEXT NOT NULL,
+                inicio TEXT NOT NULL, fim TEXT NOT NULL, motivo TEXT NOT NULL);
         ''')
         with self.db:
             if not self.db.execute("SELECT 1 FROM meta WHERE chave='semeado'").fetchone():
@@ -88,6 +91,8 @@ class Clinica:
         return p
 
     def criar_paciente(self, b):
+        from .cadastros import validar_paciente
+        validar_paciente(b)
         tel = telefone(b.get('telefone'))
         r = self.db.execute('SELECT id FROM pacientes WHERE telefone=?', (tel,)).fetchone()
         if r:
@@ -124,7 +129,9 @@ class Clinica:
                 t = datetime.fromisoformat(data + 'T' + ini)
                 final = datetime.fromisoformat(data + 'T' + fim)
                 while t + duracao <= final:
-                    if t >= limite:
+                    bloqueado = self.db.execute('SELECT 1 FROM bloqueios WHERE profissional=? AND inicio < ? AND fim > ?',
+                        (p['id'], (t + duracao).isoformat(timespec='minutes'), t.isoformat(timespec='minutes'))).fetchone()
+                    if t >= limite and not bloqueado:
                         resultado.append({'inicio': t.isoformat(timespec='minutes'), 'profissional': p['id']})
                     t += passo
         return sorted(resultado, key=lambda h: (h['inicio'], h['profissional']))

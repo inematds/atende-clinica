@@ -7,7 +7,7 @@ approval: never
 sandbox: workspace-write [workdir, /tmp, $TMPDIR] (network access enabled)
 reasoning effort: medium
 reasoning summaries: none
-session id: 01a10a1a-7d28-7a52-b626-6f9ff835a431
+session id: 01a10a2b-87a6-75d2-99f6-a90bdd2f9fc7
 --------
 user
 Você está num ciclo de uma execução longa no repo /home/nmaldaner/projetos/atende-clinica.
@@ -31,40 +31,55 @@ INTEGRAÇÕES: Evolution e Telegram só pelas variáveis de ambiente da spec; te
 
 RESTRIÇÕES: não altere tests/, pytest.ini, docs/, goal.md, hash-congelado.txt, congelar.sh, verificar-*. Só biblioteca padrão do Python 3 (`python3`, não `python`). Nenhuma API, nenhuma rede externa, nenhuma chave. Servidor só em 127.0.0.1. Não use `pkill -f`; mate só o PID que você subiu. Não faça commit (o loop externo faz).
 
-2026-10-05T03:27:51.147927Z ERROR rmcp::transport::worker: worker quit with fatal: Transport channel closed, when AuthRequired(AuthRequiredError { www_authenticate_header: "Bearer error=\"invalid_token\", resource_metadata=\"https://mcp.magnific.com/.well-known/oauth-protected-resource\", scope=\"openid profile email mcp:custom-audience\"" })
-2026-10-05T03:27:51.718990Z ERROR rmcp::transport::worker: worker quit with fatal: Transport channel closed, when AuthRequired(AuthRequiredError { www_authenticate_header: "Bearer error=\"invalid_token\", resource_metadata=\"https://mcp.magnific.com/.well-known/oauth-protected-resource\", scope=\"openid profile email mcp:custom-audience\"" })
-2026-10-05T03:27:51.859043Z ERROR rmcp::transport::worker: worker quit with fatal: Transport channel closed, when AuthRequired(AuthRequiredError { www_authenticate_header: "Bearer resource_metadata=\"https://ai.metricool.com/.well-known/oauth-protected-resource\"" })
+2026-10-05T03:46:27.921730Z ERROR rmcp::transport::worker: worker quit with fatal: Transport channel closed, when AuthRequired(AuthRequiredError { www_authenticate_header: "Bearer error=\"invalid_token\", resource_metadata=\"https://mcp.magnific.com/.well-known/oauth-protected-resource\", scope=\"openid profile email mcp:custom-audience\"" })
+2026-10-05T03:46:28.683094Z ERROR rmcp::transport::worker: worker quit with fatal: Transport channel closed, when AuthRequired(AuthRequiredError { www_authenticate_header: "Bearer resource_metadata=\"https://ai.metricool.com/.well-known/oauth-protected-resource\"" })
+2026-10-05T03:46:28.938493Z ERROR rmcp::transport::worker: worker quit with fatal: Transport channel closed, when AuthRequired(AuthRequiredError { www_authenticate_header: "Bearer error=\"invalid_token\", resource_metadata=\"https://mcp.magnific.com/.well-known/oauth-protected-resource\", scope=\"openid profile email mcp:custom-audience\"" })
 codex
-Vou ler o estado da execução e a especificação, escolher a próxima implementação necessária e validar com os testes. Ao fechar o ciclo, atualizarei os registros com os resultados observados.
+Vou ler o estado da execução e a especificação, escolher a próxima implementação pendente e validar com a suíte completa. Ao fim, atualizarei os registros do ciclo com os resultados observados.
 
 exec
 /bin/bash -lc "pwd; rg --files -g AGENTS.md -g CLAUDE.md -g 'context/**' -g 'tasks/current.md' -g 'handoffs/latest.md' -g 'longrun/**' -g 'src/**' -g 'web/**' -g atende" in /home/nmaldaner/projetos/atende-clinica
  succeeded in 0ms:
 /home/nmaldaner/projetos/atende-clinica
+atende
+src/core.py
+src/__pycache__/server.cpython-312.pyc
+src/__pycache__/core.cpython-312.pyc
+src/__pycache__/gestao.cpython-312.pyc
+src/__pycache__/conversa.cpython-312.pyc
+src/server.py
+src/conversa.py
+src/gestao.py
 CLAUDE.md
-longrun/2026-10-05-atendimento-v1/goal.md
-longrun/2026-10-05-atendimento-v1/__pycache__/verificar-independente.cpython-312.pyc
-longrun/2026-10-05-atendimento-v1/prompt.md
-longrun/2026-10-05-atendimento-v1/decisions.md
-longrun/2026-10-05-atendimento-v1/plan.md
-longrun/2026-10-05-atendimento-v1/canal.md
-longrun/2026-10-05-atendimento-v1/state.md
-longrun/2026-10-05-atendimento-v1/prompt-goal-codex.md
-longrun/2026-10-05-atendimento-v1/progress.md
-longrun/2026-10-05-atendimento-v1/congelar.sh
-longrun/2026-10-05-atendimento-v1/hash-congelado.txt
+longrun/2026-10-05-atendimento-v1/pytest-ciclo-1.log
 longrun/2026-10-05-atendimento-v1/verificar-limites.sh
 longrun/2026-10-05-atendimento-v1/prompt-goal-claude.md
 longrun/2026-10-05-atendimento-v1/ciclo-1.log
+longrun/2026-10-05-atendimento-v1/ciclo-3.log
 longrun/2026-10-05-atendimento-v1/verificar-independente.py
 longrun/2026-10-05-atendimento-v1/failures.md
 longrun/2026-10-05-atendimento-v1/loop.env
 longrun/2026-10-05-atendimento-v1/loop.log
 longrun/2026-10-05-atendimento-v1/.loop.lock
+longrun/2026-10-05-atendimento-v1/goal.md
+longrun/2026-10-05-atendimento-v1/state.md
+longrun/2026-10-05-atendimento-v1/prompt-goal-codex.md
+longrun/2026-10-05-atendimento-v1/pytest-ciclo-3.log
+longrun/2026-10-05-atendimento-v1/pytest-ciclo-2.log
+longrun/2026-10-05-atendimento-v1/progress.md
+longrun/2026-10-05-atendimento-v1/congelar.sh
+longrun/2026-10-05-atendimento-v1/hash-congelado.txt
+longrun/2026-10-05-atendimento-v1/teste-final.log
+longrun/2026-10-05-atendimento-v1/ciclo-2.log
+longrun/2026-10-05-atendimento-v1/canal.md
+longrun/2026-10-05-atendimento-v1/decisions.md
+longrun/2026-10-05-atendimento-v1/plan.md
+longrun/2026-10-05-atendimento-v1/prompt.md
+longrun/2026-10-05-atendimento-v1/__pycache__/verificar-independente.cpython-312.pyc
 
 exec
-/bin/bash -lc 'cat AGENTS.md 2>/dev/null; cat CLAUDE.md 2>/dev/null; cat context/overview.md context/current-state.md tasks/current.md handoffs/latest.md 2>/dev/null; cat longrun/2026-10-05-atendimento-v1/goal.md longrun/2026-10-05-atendimento-v1/state.md longrun/2026-10-05-atendimento-v1/plan.md longrun/2026-10-05-atendimento-v1/canal.md; tail -20 longrun/2026-10-05-atendimento-v1/progress.md longrun/2026-10-05-atendimento-v1/failures.md' in /home/nmaldaner/projetos/atende-clinica
- exited 1 in 0ms:
+/bin/bash -lc 'for f in AGENTS.md CLAUDE.md context/overview.md context/current-state.md tasks/current.md handoffs/latest.md; do if [ -f "$f" ]; then cat "$f"; fi; done' in /home/nmaldaner/projetos/atende-clinica
+ succeeded in 0ms:
 # CLAUDE.md — atende-clinica
 
 Sistema de atendimento ao paciente para clínicas: agenda, confirmação, lista de espera, retorno, FAQ, fila humana, campanhas com trava de conselho/LGPD e exportação para o Painel do Raio-X de Margem.
@@ -83,6 +98,12 @@ Sistema de atendimento ao paciente para clínicas: agenda, confirmação, lista 
 When I correct you, or you catch yourself making a mistake: before continuing, add the lesson as a one-line rule under ## Lessons, so it never happens again.
 
 ## Lessons
+- Ao ler o fim de vários arquivos, usar `tail -n 20`, evitando a sintaxe antiga `tail -20`.
+- Confirmar nomes de arquivos com `rg --files` antes de tentar lê-los; para vários arquivos, usar sempre `tail -n N`.
+
+exec
+/bin/bash -lc 'cat longrun/2026-10-05-atendimento-v1/goal.md longrun/2026-10-05-atendimento-v1/state.md longrun/2026-10-05-atendimento-v1/plan.md longrun/2026-10-05-atendimento-v1/canal.md; tail -15 longrun/2026-10-05-atendimento-v1/progress.md longrun/2026-10-05-atendimento-v1/failures.md' in /home/nmaldaner/projetos/atende-clinica
+ exited 1 in 0ms:
 # Goal — atendimento-v1
 
 - **Início:** 2026-10-05 00:27 · **Agente:** `codex exec` (gpt-6-astra, assinatura) em loop headless — `tools/loop-longrun.sh` · alternativa: `/goal` no Codex TUI ou no Claude Code
@@ -122,32 +143,40 @@ When I correct you, or you catch yourself making a mistake: before continuing, a
 - qualquer chamada a API real (Evolution, Telegram, LLM, Pix) — durante a execução só os servidores falsos locais dos testes; dependência externa
 - deploy na VPS (é do humano, com as credenciais dele)
 - mudança de contrato, criar repo, push, publicar
-# Estado — atualizado 2026-10-05
+# Estado — atualizado 2026-10-05 00:39
 
 ## Funciona
-- (nada implementado ainda) — contrato e 93 testes de aceitação escritos; harness conferido com stub
+- CLI serve com PORTA, bind 127.0.0.1, auth X-Token, SQLite persistente, configuração e catálogo semeado uma vez; agenda transacional, normalização e cadastro de pacientes.
+- Conversa persistente: emergência, opt-out, FAQ, fallback, fila humana, fluxo de agendamento, confirmação, espera FIFO e retorno. Atendimento aberto silencia o bot, exceto emergência.
+- Campanhas em src/gestao.py: regras dos quatro conselhos, lista completa de violações antes de enviar, consentimento e opt-out. Os 17 testes de campanhas passaram.
+- LGPD: GET com histórico; DELETE anonimiza paciente/histórico/saída, limpa sessão e fila humana, desativa contato, cancela agendados/confirmados e conserva realizados/faltas e agregados. Telefone antigo volta a ser desconhecido.
+- Raio-X HTTP e CLI: indicadores mensais calculados do banco/calendário, mesclagem sobre mês anterior/base, preservação de campos não medidos, substituição idempotente e gravação atômica do JSON.
+- Cadastro pela API agora associa histórico anterior e respeita opt-out anterior ao cadastro. HTTP 204 sem corpo.
+- Versão 0.3.0. Suíte completa: **63 passed / 30 failed**, sem errors, em 66.26s; pytest-ciclo-3.log. Ganho de 20 testes; nenhuma regressão observada.
+- Verificação local adicional passou: opt-out antes de cadastro API; anonimização da saída, histórico, sessão e fila humana; Raio-X mescla mês anterior, ignora futuro, conserva campos e não duplica mês.
+- Verificador: **LIMITES OK**, 93 testes e contrato intacto.
 
 ## Falta
-- responder docs/DECISOES-ABERTAS.md → rodar congelar.sh → iniciar o loop/goal
-- toda a implementação (atende, src/, web/)
+- CRUD de pacientes/profissionais/serviços/FAQ, bloqueios, backup/restauração (listagem de agenda por período e horários próprios já têm base implementada).
+- Evolution e Telegram: webhooks, envio/reenvio, responder/encerrar pela recepção, notificações à equipe. Ainda nenhuma chamada de integração implementada.
+- Docker, compose, .env.exemplo, README e páginas web.
+- Revisar bordas da conversa: preferências de desconhecido ao limpar sessão por emergência; respostas a confirmações depois de alteração do agendamento; opções antigas de catálogo durante um fluxo.
+- Nenhum conflito teste/spec identificado neste ciclo. Restrição de bind local prevalece durante o loop; conciliar Docker ao implementar entrega.
 
-## Como retomar (comandos exatos)
-```
-cd ~/projetos/atende-clinica
-python3 -m pytest -q tests/ | tail -3
-bash longrun/2026-10-05-atendimento-v1/verificar-limites.sh
-```
-
-Ao retomar/após compactação: ler goal.md → state.md → plan.md → fim de progress.md e failures.md.
-# Plano (reescrever, não acumular)
+## Como retomar
+1. Ler goal → state → plan → canal e fins de progress/failures. Especificação inteira e conftest foram lidos neste ciclo.
+2. Ler src/core.py, src/server.py, src/conversa.py e src/gestao.py. HTTP envolve operações em lock/transação; conversa.iniciar cria tabelas adicionais e já é chamado em serve e raiox.
+3. Implementar cadastros, bloqueios e backup/restauração consultando tests/test_cadastros.py sem alterar testes. Depois integrações exclusivamente com falsos locais.
+4. Rodar suíte inteira para arquivo, ler só tail -n 30, executar verificar-limites.sh e atualizar registros. Não fazer commit. Só marcar concluído quando os dois portões passarem.
+# Plano
 
 ## Estratégia atual
-Python 3 só stdlib: `atende` (CLI) → `src/` (servidor ThreadingHTTPServer, SQLite com lock para a concorrência, motor de agenda, motor de conversa, tarefas, trava de conselho, raiox) → `web/` (chat e recepção, HTML+JS sem CDN). Integrações (Evolution, Telegram) atrás de um módulo `canais` com fila de envio; Docker só arquivos. Implementar na ordem dos arquivos de teste, rodando a suíte a cada passo.
+Python 3 stdlib, HTTP local, SQLite com lock/transação por requisição. Catálogo/agenda em core.py, conversa/notificações em conversa.py, campanhas/LGPD/Raio-X em gestao.py. Contrato e testes intactos; nenhuma rede externa.
 
-## Próximos passos
-1. `./atende serve --porta 0 --dados DIR` com PORTA=, clinica.json padrão, /api/saude, /api/servicos, auth X-Token, páginas mínimas → test_basico.
-2. Grade de horários, pacientes (telefone), agendar/cancelar/remarcar/presença com 409/422 e lock → test_agenda.
-3. Conversa (emergência, parar, humano, fluxo, pendências, FAQ, não entendi) → test_conversa; depois lembretes, campanhas, LGPD/raiox.
+## Próximos 3 passos
+1. Cadastros de pacientes/profissionais/serviços/FAQ, bloqueios e CLI backup/restaurar. Reutilizar catálogo SQLite e validar disponibilidade/bloqueios na mesma transação. Verificar regressão de campanhas e Raio-X.
+2. Evolution e Telegram somente pelas variáveis contratadas e testes com servidores falsos locais; responder/encerrar pela recepção, silêncio e repasse enquanto aberto, reenvio de pendentes. Revisar bordas da conversa anotadas no state.
+3. Docker/compose/.env.exemplo/README e páginas web completas. Rodar suíte e limites; atualizar registros, sem commit e sem marcar concluído antes dos dois portões passarem.
 # Canal — atendimento-v1 (só acrescentar; nunca reescrever)
 
 Conhecimento do projeto que a compactação perde: fatos descobertos, aprendizados, glossário, armadilhas, onde estão as coisas.
@@ -155,7 +184,19 @@ Não é estado da tarefa (isso vai em state/plan/progress). Preencha cedo — o 
 
 Formato: `- AAAA-MM-DD HH:MM · fato|aprendizado|glossário|armadilha · texto`
 
-tail: option used in invalid context -- 2
+- 2026-10-05 00:30 · fato · Primeira leitura integral de docs/ESPECIFICACAO.md e tests/conftest.py concluída. A fixture remove variáveis de integração herdadas; só api_int fornece servidores falsos locais.
+- 2026-10-05 00:30 · armadilha · test_telefone_normalizado_e_duplicado também exige GET /api/pacientes/{id}/dados (LGPD); sua falha atual não indica erro na normalização.
+- 2026-10-05 00:30 · fato · src/core.py contém domínio/SQLite; src/server.py concentra CLI/transporte/roteamento. Lock e transação externos envolvem todas as operações de cada requisição; Erro causa rollback.
+- 2026-10-05 00:30 · armadilha · HTTP localhost via servidor falso é permitido para integrações; não configurar variáveis reais. Estado de presença/cancelamento ainda precisa criar retornos/disparar espera.
+- 2026-10-05 00:33 · fato · src/conversa.py inicializa sessoes, historico, humanos, saida, espera, retornos. Inicialização chamada por server.main; futuros comandos CLI precisam inicializar essas tabelas quando criarem banco novo.
+- 2026-10-05 00:33 · armadilha · Seção 18 exige silêncio enquanto humano aberto mesmo sem Telegram configurado. Emergência continua respondendo; PARAR atualiza preferência silenciosamente nesse caso.
+- 2026-10-05 00:33 · fato · Confirmações verificam saída existente por agendamento; retorno UNIQUE por agendamento; oferta JSON em saida preserva horário e profissional; confirmação usa somente a última saída do telefone, sem resposta.
+- 2026-10-05 00:33 · fato · Suíte demora cerca de 65s agora porque testes Telegram chegam a esperar avisos ainda não implementados; 43 passed, 50 failed. Teste local adicional de retomada da sessão e histórico passou.
+- 2026-10-05 00:39 · fato · src/gestao.py centraliza campanhas, remover_paciente, raiox e exportar. A CLI raiox inicializa as tabelas de conversa antes de consultar indicadores.
+- 2026-10-05 00:39 · armadilha · Campanha normaliza acentos/caixa mas preserva pontuação; normalizar() da conversa remove r$ e 100%, portanto não serve para campanhas.
+- 2026-10-05 00:39 · fato · Raio-X calcula minutos disponíveis de todas as janelas de todos os profissionais menos feriados, conforme seção 10; não subtrai bloqueios nem aplica antecedência do relógio. Novos = primeiro realizado global; retorno usa faixa inclusiva de ±30 dias.
+- 2026-10-05 00:39 · fato · Suíte agora 63 passed / 30 failed (66.26s), +20 testes; somente cadastros/bloqueios/backup, integrações, Docker e páginas ainda falham. Verificação local adicional de anonimização e mesclagem passou; LIMITES OK.
+tail: option used in invalid context -- 1
 
 exec
 /bin/bash -lc 'cat docs/ESPECIFICACAO.md tests/conftest.py' in /home/nmaldaner/projetos/atende-clinica
@@ -628,326 +669,9 @@ def esperar(cond, segundos=5):
     return cond()
 
 exec
-/bin/bash -lc 'tail -n 20 longrun/2026-10-05-atendimento-v1/progress.md longrun/2026-10-05-atendimento-v1/failures.md; cat tests/test_basico.py; ls -la' in /home/nmaldaner/projetos/atende-clinica
+/bin/bash -lc 'cat src/core.py src/server.py' in /home/nmaldaner/projetos/atende-clinica
  succeeded in 0ms:
-==> longrun/2026-10-05-atendimento-v1/progress.md <==
-# Progresso (só acrescentar)
-
-| data/hora | checkpoint | commit | critério atingido? | tokens in/cached/out | compactações |
-|---|---|---|---|---|---|
-
-==> longrun/2026-10-05-atendimento-v1/failures.md <==
-# Falhas (só acrescentar; ao fim, a menor correção vira linha no FALHAS.md do projeto)
-
-| data | o que quebrou | tentativa | resultado | prompt \| infra |
-|---|---|---|---|---|
-"""Seções 1, 4, 5 (saúde/serviços), 13 e persistência."""
-from conftest import RAIZ, Servidor
-
-
-def test_saude_traz_versao_do_arquivo(api):
-    st, r = api.get("/api/saude", token=None)
-    assert st == 200
-    assert r["ok"] is True
-    assert r["versao"] == (RAIZ / "VERSION").read_text().strip()
-
-
-def test_servicos_na_ordem_da_config(api):
-    st, r = api.get("/api/servicos", token=None)
-    assert st == 200
-    assert [s["id"] for s in r["servicos"]] == ["avaliacao", "limpeza", "canal"]
-    assert r["servicos"][1]["duracao_min"] == 60
-
-
-def test_rotas_da_recepcao_exigem_token(api):
-    for metodo, rota in [("GET", "/api/saida"), ("GET", "/api/agendamentos?data=2026-10-07"),
-                         ("POST", "/api/pacientes"), ("GET", "/api/atendimento-humano"),
-                         ("GET", "/api/raiox?mes=2026-10"), ("POST", "/api/campanhas")]:
-        corpo = {} if metodo == "POST" else None
-        assert api.req(metodo, rota, corpo, token=None)[0] == 401, rota
-        assert api.req(metodo, rota, corpo, token="errado")[0] == 401, rota
-
-
-def test_rotas_publicas_sem_token(api):
-    assert api.get("/api/horarios?servico=avaliacao&data=2026-10-07", token=None)[0] == 200
-    assert api.post("/api/mensagens", {"telefone": "41911112222", "texto": "oi"}, token=None)[0] == 200
-
-
-def test_paginas(api):
-    st, html = api.get("/", token=None)
-    assert st == 200 and 'id="chat"' in html
-    st, html = api.get("/recepcao", token=None)
-    assert st == 200
-    for el in ('id="agenda"', 'id="fila-humano"', 'id="saida"'):
-        assert el in html
-
-
-def test_estado_persiste_ao_reiniciar(dados):
-    s = Servidor(dados)
-    api = s.subir()
-    pid = api.paciente()
-    st, ag = api.agenda(pid, "2026-10-07T09:00", profissional="ana")
-    assert st == 201
-    s.parar()
-    s2 = Servidor(dados)
-    try:
-        api2 = s2.subir()
-        st, r = api2.get("/api/agendamentos?data=2026-10-07")
-        assert st == 200
-        assert [a["id"] for a in r["agendamentos"]] == [ag["id"]]
-        assert api2.agenda(pid, "2026-10-07T09:00", profissional="ana")[0] == 409
-    finally:
-        s2.parar()
-
-
-def test_cria_clinica_json_do_exemplo_se_faltar(tmp_path):
-    d = tmp_path / "vazio"
-    d.mkdir()
-    s = Servidor(d)
-    try:
-        api = s.subir()
-        assert api.get("/api/saude", token=None)[0] == 200
-        assert (d / "clinica.json").exists()
-    finally:
-        s.parar()
-total 88
-drwxrwxr-x  10 nmaldaner nmaldaner  4096 Oct  5 00:28 .
-drwxrwxr-x 848 nmaldaner nmaldaner 36864 Oct  4 23:57 ..
-dr-xr-xr-x   2 nmaldaner nmaldaner    40 Oct  5 00:28 .agents
-dr-xr-xr-x   2 nmaldaner nmaldaner    40 Oct  5 00:28 .aws
-dr-xr-xr-x   2 nmaldaner nmaldaner    40 Oct  5 00:28 .codex
-drwxrwxr-x   8 nmaldaner nmaldaner  4096 Oct  5 00:27 .git
--rw-rw-r--   1 nmaldaner nmaldaner    53 Oct  5 00:03 .gitignore
--rw-rw-r--   1 nmaldaner nmaldaner  1313 Oct  5 00:03 CLAUDE.md
--rw-rw-r--   1 nmaldaner nmaldaner    90 Oct  5 00:05 FALHAS.md
--rw-rw-r--   1 nmaldaner nmaldaner  2472 Oct  5 00:24 README.md
--rw-rw-r--   1 nmaldaner nmaldaner     6 Oct  5 00:02 VERSION
-drwxrwxr-x   2 nmaldaner nmaldaner  4096 Oct  5 00:03 docs
-drwxrwxr-x   2 nmaldaner nmaldaner  4096 Oct  4 23:58 exemplos
-drwxrwxr-x   3 nmaldaner nmaldaner  4096 Oct  5 00:03 longrun
--rw-rw-r--   1 nmaldaner nmaldaner    57 Oct  5 00:02 pytest.ini
-drwxrwxr-x   4 nmaldaner nmaldaner  4096 Oct  5 00:24 tests
-
-exec
-/bin/bash -lc 'cat tests/test_agenda.py exemplos/clinica.json; cat longrun/2026-10-05-atendimento-v1/verificar-limites.sh' in /home/nmaldaner/projetos/atende-clinica
- succeeded in 0ms:
-"""Seções 3 e 5: horários, agendamento, conflito, cancelamento, remarcação, pacientes. Agora = ter 06/10/2026 09:00."""
-import threading
-
-
-def horarios(api, servico, data, profissional=None):
-    rota = f"/api/horarios?servico={servico}&data={data}"
-    if profissional:
-        rota += f"&profissional={profissional}"
-    st, r = api.get(rota, token=None)
-    assert st == 200, (st, r)
-    return [(h["inicio"], h["profissional"]) for h in r["horarios"]]
-
-
-def test_horarios_respeitam_antecedencia_e_ordem(api):
-    h = horarios(api, "avaliacao", "2026-10-06")
-    assert h[:3] == [("2026-10-06T11:00", "ana"), ("2026-10-06T11:00", "bruno"), ("2026-10-06T11:30", "ana")]
-    assert len(h) == 20  # manhã 11:00 e 11:30 + tarde 14:00..17:30, dois profissionais
-
-
-def test_horarios_cabem_na_janela(api):
-    h = horarios(api, "limpeza", "2026-10-06")
-    assert [i for i, _ in h] == ["2026-10-06T11:00"] + [f"2026-10-06T{x}" for x in
-                                                         ("14:00", "14:30", "15:00", "15:30", "16:00", "16:30", "17:00")]
-    assert {p for _, p in h} == {"ana"}
-
-
-def test_horarios_dia_inteiro_por_profissional(api):
-    h = horarios(api, "avaliacao", "2026-10-07", "ana")
-    assert len(h) == 16
-    assert h[0] == ("2026-10-07T08:00", "ana") and h[-1] == ("2026-10-07T17:30", "ana")
-    assert ("2026-10-07T12:00", "ana") not in h
-
-
-def test_sem_horario_em_feriado_domingo_e_sabado_reduzido(api):
-    assert horarios(api, "avaliacao", "2026-10-12") == []
-    assert horarios(api, "avaliacao", "2026-10-11") == []
-    assert len(horarios(api, "avaliacao", "2026-10-10")) == 16
-
-
-def test_servico_inexistente_404(api):
-    assert api.get("/api/horarios?servico=xyz&data=2026-10-07", token=None)[0] == 404
-
-
-def test_agendar_e_listar(api):
-    pid = api.paciente()
-    st, r = api.agenda(pid, "2026-10-07T09:00", servico="limpeza", profissional="ana")
-    assert st == 201
-    assert r["status"] == "agendado" and r["inicio"] == "2026-10-07T09:00" and r["fim"] == "2026-10-07T10:00"
-    st, lista = api.get("/api/agendamentos?data=2026-10-07")
-    a = lista["agendamentos"][0]
-    assert (a["paciente_id"], a["telefone"], a["servico"], a["profissional"]) == (pid, "+5541999990001", "limpeza", "ana")
-    assert ("2026-10-07T09:00", "ana") not in horarios(api, "avaliacao", "2026-10-07")
-    assert ("2026-10-07T09:30", "ana") not in horarios(api, "avaliacao", "2026-10-07")
-
-
-def test_invalidos_422(api):
-    pid = api.paciente()
-    for inicio, servico, prof in [
-        ("2026-10-07T12:00", "avaliacao", "ana"),   # almoço
-        ("2026-10-07T09:15", "avaliacao", "ana"),   # fora da grade
-        ("2026-10-07T11:30", "limpeza", "ana"),     # não cabe na janela
-        ("2026-10-06T10:00", "avaliacao", "ana"),   # antes da antecedência
-        ("2026-10-12T09:00", "avaliacao", "ana"),   # feriado
-        ("2026-10-07T09:00", "limpeza", "bruno"),   # profissional não faz
-    ]:
-        assert api.agenda(pid, inicio, servico, prof)[0] == 422, (inicio, servico, prof)
-
-
-def test_inexistentes_404(api):
-    pid = api.paciente()
-    assert api.agenda(9999, "2026-10-07T09:00")[0] == 404
-    assert api.agenda(pid, "2026-10-07T09:00", servico="xyz")[0] == 404
-
-
-def test_sobreposicao_409(api):
-    pid = api.paciente()
-    assert api.agenda(pid, "2026-10-07T09:00", "avaliacao", "ana")[0] == 201
-    assert api.agenda(pid, "2026-10-07T08:30", "limpeza", "ana")[0] == 409
-    assert api.agenda(pid, "2026-10-07T09:00", "avaliacao", "bruno")[0] == 201
-
-
-def test_sem_profissional_pega_o_primeiro_livre(api):
-    pid = api.paciente()
-    st1, a1 = api.agenda(pid, "2026-10-07T09:00")
-    st2, a2 = api.agenda(pid, "2026-10-07T09:00")
-    st3, _ = api.agenda(pid, "2026-10-07T09:00")
-    assert (st1, st2, st3) == (201, 201, 409)
-    assert (a1["profissional"], a2["profissional"]) == ("ana", "bruno")
-
-
-def test_concorrencia_um_so_vence(api):
-    pid = api.paciente()
-    codigos = []
-
-    def tenta():
-        codigos.append(api.agenda(pid, "2026-10-08T10:00", "avaliacao", "ana")[0])
-
-    ts = [threading.Thread(target=tenta) for _ in range(10)]
-    [t.start() for t in ts]
-    [t.join() for t in ts]
-    assert sorted(codigos) == [201] + [409] * 9
-
-
-def test_cancelar_libera(api):
-    pid = api.paciente()
-    _, a = api.agenda(pid, "2026-10-07T09:00", "avaliacao", "ana")
-    st, r = api.post(f"/api/agendamentos/{a['id']}/cancelar")
-    assert st == 200 and r["status"] == "cancelado"
-    assert ("2026-10-07T09:00", "ana") in horarios(api, "avaliacao", "2026-10-07")
-    assert api.agenda(pid, "2026-10-07T09:00", "avaliacao", "ana")[0] == 201
-
-
-def test_remarcar(api):
-    pid = api.paciente()
-    _, a = api.agenda(pid, "2026-10-07T09:00", "avaliacao", "ana")
-    _, b = api.agenda(pid, "2026-10-07T10:00", "avaliacao", "ana")
-    assert api.post(f"/api/agendamentos/{a['id']}/remarcar", {"inicio": "2026-10-07T10:00"})[0] == 409
-    assert api.post(f"/api/agendamentos/{a['id']}/remarcar", {"inicio": "2026-10-07T12:00"})[0] == 422
-    st, r = api.post(f"/api/agendamentos/{a['id']}/remarcar", {"inicio": "2026-10-08T15:00"})
-    assert st == 200 and r["id"] == a["id"] and r["inicio"] == "2026-10-08T15:00" and r["status"] == "agendado"
-    assert ("2026-10-07T09:00", "ana") in horarios(api, "avaliacao", "2026-10-07")
-
-
-def test_presenca(api):
-    pid = api.paciente()
-    _, a = api.agenda(pid, "2026-10-07T09:00", profissional="ana")
-    _, b = api.agenda(pid, "2026-10-07T10:00", profissional="ana")
-    assert api.post(f"/api/agendamentos/{a['id']}/presenca", {"compareceu": True})[1]["status"] == "realizado"
-    assert api.post(f"/api/agendamentos/{b['id']}/presenca", {"compareceu": False})[1]["status"] == "falta"
-    # falta continua ocupando o horário (ativo)
-    assert ("2026-10-07T10:00", "ana") not in horarios(api, "avaliacao", "2026-10-07")
-
-
-def test_telefone_normalizado_e_duplicado(api):
-    st, r = api.post("/api/pacientes", {"nome": "A", "telefone": "(41) 99999-0001"})
-    assert st == 201
-    st2, r2 = api.post("/api/pacientes", {"nome": "A", "telefone": "+55 41 99999 0001"})
-    assert st2 == 200 and r2["id"] == r["id"]
-    st3, r3 = api.post("/api/pacientes", {"nome": "B", "telefone": "41 3333-4444"})
-    assert st3 == 201 and r3["id"] != r["id"]
-    st, dados = api.get(f"/api/pacientes/{r3['id']}/dados")
-    assert dados["paciente"]["telefone"] == "+554133334444"
-    for ruim in ("123", "abc", "+55 41 9999"):
-        assert api.post("/api/pacientes", {"nome": "C", "telefone": ruim})[0] == 400, ruim
-{
-  "nome": "Clínica Sorriso Teste",
-  "conselho": "cfo",
-  "token": "segredo-teste",
-  "passo_min": 30,
-  "antecedencia_min_horas": 2,
-  "janela_dias": 14,
-  "confirmacao_horas": 48,
-  "retorno_aviso_dias": 7,
-  "feriados": ["2026-10-12"],
-  "horarios": {
-    "seg": [["08:00", "12:00"], ["14:00", "18:00"]],
-    "ter": [["08:00", "12:00"], ["14:00", "18:00"]],
-    "qua": [["08:00", "12:00"], ["14:00", "18:00"]],
-    "qui": [["08:00", "12:00"], ["14:00", "18:00"]],
-    "sex": [["08:00", "12:00"], ["14:00", "18:00"]],
-    "sab": [["08:00", "12:00"]],
-    "dom": []
-  },
-  "profissionais": [
-    {"id": "ana", "nome": "Dra. Ana", "servicos": ["avaliacao", "limpeza"]},
-    {"id": "bruno", "nome": "Dr. Bruno", "servicos": ["avaliacao", "canal"]}
-  ],
-  "servicos": [
-    {"id": "avaliacao", "nome": "Avaliação", "duracao_min": 30, "retorno_dias": null},
-    {"id": "limpeza", "nome": "Limpeza", "duracao_min": 60, "retorno_dias": 180},
-    {"id": "canal", "nome": "Tratamento de canal", "duracao_min": 90, "retorno_dias": null}
-  ],
-  "faq": [
-    {"id": "convenios", "perguntas": ["vocês aceitam convênio", "quais convênios atendem"], "resposta": "Atendemos Unimed Odonto, Amil Dental e particular."},
-    {"id": "endereco", "perguntas": ["qual o endereço da clínica", "onde fica a clínica"], "resposta": "Rua das Flores, 100, sala 5, Batel, Curitiba."},
-    {"id": "estacionamento", "perguntas": ["tem estacionamento"], "resposta": "Temos convênio com o estacionamento ao lado (1 hora grátis)."}
-  ]
-}
-#!/usr/bin/env bash
-# Camada "limite" do goal.md. Imprime LIMITES OK ou o primeiro problema (código ≠ 0).
-set -uo pipefail
-cd "$(git -C "$(dirname "$0")" rev-parse --show-toplevel)"
-D=longrun/2026-10-05-atendimento-v1
-falha() { echo "LIMITE VIOLADO: $*"; exit 1; }
-[ -f $D/hash-congelado.txt ] || falha "contrato não congelado (rode $D/congelar.sh)"
-source $D/hash-congelado.txt
-h=$(cat $(git ls-files tests pytest.ini docs/ESPECIFICACAO.md $D/verificar-limites.sh | sort) | sha256sum | cut -c1-16)
-[ "$h" = "$HASH" ] || falha "hash do contrato mudou ($h ≠ $HASH)"
-git diff --quiet -- tests pytest.ini docs/ESPECIFICACAO.md || falha "contrato alterado no working tree"
-n=$(python3 -m pytest --collect-only -q 2>/dev/null | grep -oE '^[0-9]+ tests? collected' | grep -oE '^[0-9]+')
-[ "$n" = "$TESTES" ] || falha "nº de testes coletados $n ≠ $TESTES"
-fora=$( { git diff --name-only "$BASE"; git ls-files --others --exclude-standard; } | sort -u \
-  | grep -vE "^($D/|atende$|src/|web/|exemplos/|README\.md$|VERSION$|Dockerfile$|docker-compose\.yml$|\.env\.exemplo$|\.dockerignore$|\.gitignore$|CLAUDE\.md$|FALHAS\.md$)" )
-[ -z "$fora" ] || falha "arquivos fora do escopo: $(echo $fora)"
-alvo=$(ls -d atende src web 2>/dev/null)
-[ -n "$alvo" ] || falha "não há implementação (atende/src/web)"
-grep -rnE '^\s*(import|from)\s+(requests|httpx|aiohttp|urllib3|flask|fastapi|django|openai|anthropic|groq)\b' $alvo && falha "dependência externa ou SDK de API"
-grep -rnE '(OPENAI|ANTHROPIC|GROQ|OPENROUTER)_?API_KEY|sk-[A-Za-z0-9]{20,}|[0-9]{8,10}:[A-Za-z0-9_-]{30,}|graph\.facebook|api\.telegram\.org' $alvo && falha "chave/credencial ou API externa no código"
-grep -rnP 'https?://(?!127\.0\.0\.1|localhost|www\.w3\.org)' $alvo && falha "URL externa no código"
-grep -rn '0\.0\.0\.0' $alvo && falha "bind em 0.0.0.0"
-echo "LIMITES OK (hash $HASH, $TESTES testes, escopo ok, sem API/rede)"
-
-codex
-O repositório ainda não tem implementação. Neste ciclo vou construir a base HTTP e SQLite, a autenticação e as regras de agenda, incluindo concorrência e persistência. Conversa, integrações e páginas ficarão para os próximos ciclos.
-
-exec
-/bin/bash -lc "mkdir -p src
-cat > atende <<'EOF'
-#"'!/usr/bin/env python3
-from src.server import main
-
-if __name__ == '"'__main__':
-    main()
-EOF
-chmod +x atende
-cat > src/core.py <<'EOF'
-\"\"\"Estado transacional e regras de agenda da clínica.\"\"\"
+"""Estado transacional e regras de agenda da clínica."""
 import json
 import os
 from pathlib import Path
@@ -970,9 +694,9 @@ def agora():
 
 
 def telefone(valor):
-    if not isinstance(valor, str) or re.search(r'["'^'"\\d+()\\s-]', valor):
+    if not isinstance(valor, str) or re.search(r'[^\d+()\s-]', valor):
         raise Erro(400, 'Telefone inválido')
-    digitos = re.sub(r'\\D', '', valor)
+    digitos = re.sub(r'\D', '', valor)
     if len(digitos) in (12, 13) and digitos.startswith('55'):
         digitos = digitos[2:]
     if len(digitos) not in (10, 11):
@@ -1006,17 +730,17 @@ class Clinica:
             CREATE INDEX IF NOT EXISTS agenda_profissional ON agendamentos(profissional,inicio,fim);
         ''')
         with self.db:
-            if not self.db.execute(\"SELECT 1 FROM meta WHERE chave='semeado'\").fetchone():
+            if not self.db.execute("SELECT 1 FROM meta WHERE chave='semeado'").fetchone():
                 for tipo in ('servicos', 'profissionais', 'faq'):
                     for item in self.cfg.get(tipo, []):
                         item = dict(item)
-                        if tipo "'!= '"'faq':
+                        if tipo != 'faq':
                             item.setdefault('ativo', True)
                         if tipo == 'profissionais':
                             item.setdefault('registro', None)
                             item.setdefault('horarios', None)
                         self.db.execute('INSERT INTO catalogo VALUES (?,?,?)', (tipo, item['id'], json.dumps(item)))
-                self.db.execute(\"INSERT INTO meta VALUES ('semeado','1')\")
+                self.db.execute("INSERT INTO meta VALUES ('semeado','1')")
 
     def catalogo(self, tipo):
         return [json.loads(r[0]) for r in self.db.execute('SELECT dados FROM catalogo WHERE tipo=? ORDER BY rowid', (tipo,))]
@@ -1045,7 +769,14 @@ class Clinica:
             raise Erro(400, 'Nome obrigatório')
         c = self.db.execute('INSERT INTO pacientes(nome,telefone,email,nascimento,consentimento_marketing) VALUES (?,?,?,?,?)',
                             (b['nome'], tel, b.get('email'), b.get('nascimento'), bool(b.get('consentimento_marketing', False))))
-        return 201, {'id': c.lastrowid}
+        ident = c.lastrowid
+        # A preferência de contato pode anteceder o cadastro pela recepção.
+        if self.db.execute("SELECT 1 FROM sqlite_master WHERE name='sessoes'").fetchone():
+            sessao = self.db.execute('SELECT dados FROM sessoes WHERE telefone=?', (tel,)).fetchone()
+            if sessao and json.loads(sessao[0]).get('nao_contatar'):
+                self.db.execute('UPDATE pacientes SET nao_contatar=1 WHERE id=?', (ident,))
+            self.db.execute('UPDATE historico SET paciente_id=? WHERE telefone=? AND paciente_id IS NULL', (ident, tel))
+        return 201, {'id': ident}
 
     def candidatos(self, servico, data, profissional=None):
         s = self.servico(servico)
@@ -1059,7 +790,7 @@ class Clinica:
             raise Erro(422, 'Duração e passo devem ser positivos')
         limite = agora() + timedelta(hours=self.cfg['antecedencia_min_horas'])
         for p in self.catalogo('profissionais'):
-            if not p['ativo'] or servico not in p['servicos'] or (profissional and profissional "'!= p['"'id']):
+            if not p['ativo'] or servico not in p['servicos'] or (profissional and profissional != p['id']):
                 continue
             grade = p.get('horarios') if p.get('horarios') is not None else self.cfg['horarios']
             for ini, fim in grade.get(('seg', 'ter', 'qua', 'qui', 'sex', 'sab', 'dom')[dia.weekday()], []):
@@ -1074,7 +805,7 @@ class Clinica:
     def livre(self, profissional, inicio, fim, ignorar=None):
         return not self.db.execute('''SELECT 1 FROM agendamentos WHERE profissional=?
             AND status IN ('agendado','confirmado','realizado','falta') AND inicio < ? AND fim > ?
-            AND (? IS NULL OR id "'!= ?) LIMIT 1'"''', (profissional, fim, inicio, ignorar, ignorar)).fetchone()
+            AND (? IS NULL OR id != ?) LIMIT 1''', (profissional, fim, inicio, ignorar, ignorar)).fetchone()
 
     def horarios(self, servico, data, profissional=None):
         duracao = self.servico(servico)['duracao_min']
@@ -1115,9 +846,7 @@ class Clinica:
         return [dict(r) for r in self.db.execute('''SELECT a.*,p.telefone FROM agendamentos a JOIN pacientes p ON p.id=a.paciente_id
             WHERE substr(inicio,1,10) BETWEEN ? AND ? AND (? IS NULL OR profissional=?) ORDER BY inicio,a.id''',
             (de, ate, q.get('profissional'), q.get('profissional')))]
-EOF
-cat > src/server.py <<'EOF'
-\"\"\"CLI e transporte HTTP; cada requisição de domínio é uma transação.\"\"\"
+"""CLI e transporte HTTP; cada requisição de domínio é uma transação."""
 import argparse
 import hmac
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
@@ -1127,6 +856,7 @@ import sys
 from urllib.parse import parse_qs, urlsplit
 
 from .core import Clinica, Erro, ROOT
+from . import conversa, gestao
 
 
 def rotear(c, metodo, rota, q, b):
@@ -1136,13 +866,40 @@ def rotear(c, metodo, rota, q, b):
         return 200, {'servicos': [s for s in c.catalogo('servicos') if s['ativo']]}
     if metodo == 'GET' and rota == '/api/horarios':
         return 200, {'horarios': c.horarios(q['servico'], q['data'], q.get('profissional'))}
+    if metodo == 'POST' and rota == '/api/mensagens':
+        return 200, {'respostas': conversa.conversar(c, b['telefone'], b['texto'])}
+    if metodo == 'GET' and rota == '/api/atendimento-humano':
+        return 200, {'fila': conversa.fila(c)}
+    if metodo == 'GET' and rota == '/api/saida':
+        return 200, {'mensagens': [dict(r) for r in c.db.execute('SELECT * FROM saida ORDER BY id')]}
+    if metodo == 'POST' and rota == '/api/tarefas/rodar':
+        return 200, conversa.rodar(c, b.get('agora'))
+    if metodo == 'POST' and rota == '/api/espera':
+        c.paciente(b['paciente_id'])
+        c.servico(b['servico'])
+        from datetime import datetime
+        datetime.strptime(b['data'], '%Y-%m-%d')
+        ident = c.db.execute('INSERT INTO espera(paciente_id,servico,data) VALUES (?,?,?)',
+                             (b['paciente_id'], b['servico'], b['data'])).lastrowid
+        return 201, {'id': ident}
+    m = re.fullmatch(r'/api/pacientes/(\d+)/dados', rota)
+    if metodo == 'GET' and m:
+        return 200, conversa.dados_paciente(c, int(m[1]))
+    if metodo == 'POST' and rota == '/api/campanhas':
+        return gestao.campanhas(c, b['texto'])
+    if metodo == 'GET' and rota == '/api/raiox':
+        return 200, gestao.raiox(c, q['mes'])
+    m = re.fullmatch(r'/api/pacientes/(\d+)', rota)
+    if metodo == 'DELETE' and m:
+        gestao.remover_paciente(c, int(m[1]))
+        return 204, None
     if metodo == 'POST' and rota == '/api/pacientes':
         return c.criar_paciente(b)
     if metodo == 'POST' and rota == '/api/agendamentos':
         return 201, c.agendar(b)
     if metodo == 'GET' and rota == '/api/agendamentos':
         return 200, {'agendamentos': c.listar_agenda(q)}
-    m = re.fullmatch(r'/api/agendamentos/(\\d+)/(cancelar|remarcar|presenca)', rota)
+    m = re.fullmatch(r'/api/agendamentos/(\d+)/(cancelar|remarcar|presenca)', rota)
     if metodo == 'POST' and m:
         ident, acao = int(m[1]), m[2]
         a = c.agendamento(ident)
@@ -1151,7 +908,10 @@ def rotear(c, metodo, rota, q, b):
         if acao == 'presenca' and not isinstance(b.get('compareceu'), bool):
             raise Erro(400, 'compareceu deve ser booleano')
         status = 'cancelado' if acao == 'cancelar' else ('realizado' if b['compareceu'] else 'falta')
-        c.db.execute('UPDATE agendamentos SET status=? WHERE id=?', (status, ident))
+        if acao == 'cancelar':
+            conversa.cancelar(c, ident)
+        else:
+            conversa.presenca(c, ident, b['compareceu'])
         return 200, {'status': status}
     raise Erro(404, 'Rota inexistente')
 
@@ -1163,10 +923,23 @@ def main():
     serve.add_argument('--porta', type=int, default=8080)
     serve.add_argument('--host', default='127.0.0.1')
     serve.add_argument('--dados', required=True)
+    raiox = sub.add_parser('raiox')
+    raiox.add_argument('--dados', required=True)
+    raiox.add_argument('--mes', required=True)
+    raiox.add_argument('--acompanhamento', required=True)
     args = parser.parse_args()
-    if args.host "'!= '"'127.0.0.1':
+    if args.comando == 'raiox':
+        clinica = Clinica(args.dados)
+        try:
+            conversa.iniciar(clinica)
+            gestao.exportar(clinica, args.mes, args.acompanhamento)
+        finally:
+            clinica.db.close()
+        return
+    if args.host != '127.0.0.1':
         parser.error('Neste ambiente o servidor só pode escutar em 127.0.0.1')
     clinica = Clinica(args.dados)
+    conversa.iniciar(clinica)
 
     class Handler(BaseHTTPRequestHandler):
         def processar(self):
@@ -1191,7 +964,7 @@ def main():
             except Exception as e:
                 print(f'Erro interno: {type(e).__name__}: {e}', file=sys.stderr)
                 status, resposta = 500, {'erro': 'Erro interno'}
-            conteudo = json.dumps(resposta, ensure_ascii=False).encode('utf-8')
+            conteudo = b'' if status == 204 else json.dumps(resposta, ensure_ascii=False).encode('utf-8')
             self.send_response(status)
             self.send_header('Content-Type', 'application/json; charset=utf-8')
             self.send_header('Content-Length', str(len(conteudo)))
@@ -1212,146 +985,1605 @@ def main():
     finally:
         servidor.server_close()
         clinica.db.close()
-EOF
-python3 -m pytest -q tests/ > longrun/2026-10-05-atendimento-v1/pytest-ciclo-1.log 2>&1
- tail -30 longrun/2026-10-05-atendimento-v1/pytest-ciclo-1.log" in /home/nmaldaner/projetos/atende-clinica
-exec
-/bin/bash -lc "bash longrun/2026-10-05-atendimento-v1/verificar-limites.sh; git status --short; date '+%Y-%m-%d %H:%M'" in /home/nmaldaner/projetos/atende-clinica
- succeeded in 134ms:
-LIMITES OK (hash ab5cccd19cc8242a, 93 testes, escopo ok, sem API/rede)
-?? atende
-?? longrun/2026-10-05-atendimento-v1/ciclo-1.log
-?? longrun/2026-10-05-atendimento-v1/loop.log
-?? longrun/2026-10-05-atendimento-v1/pytest-ciclo-1.log
-?? src/
-2026-10-05 00:29
 
 exec
-/bin/bash -lc 'tail -n 5 longrun/2026-10-05-atendimento-v1/pytest-ciclo-1.log; cat FALHAS.md; cat longrun/2026-10-05-atendimento-v1/decisions.md' in /home/nmaldaner/projetos/atende-clinica
+/bin/bash -lc "cat tests/test_cadastros.py; sed -n '65,130p' docs/ESPECIFICACAO.md; tail -n 8 longrun/2026-10-05-atendimento-v1/progress.md longrun/2026-10-05-atendimento-v1/failures.md; cat VERSION FALHAS.md" in /home/nmaldaner/projetos/atende-clinica
  succeeded in 0ms:
-..............F...FF..FFFFFFFF.FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF [ 77%]
-FFFFF# FALHAS
+"""Seções 14, 15 e 16: cadastros, gestão de agenda e banco de dados."""
+import subprocess
+
+from conftest import RAIZ, Servidor
+
+
+def horarios(api, servico, data, profissional=None):
+    rota = f"/api/horarios?servico={servico}&data={data}" + (f"&profissional={profissional}" if profissional else "")
+    st, r = api.get(rota, token=None)
+    assert st == 200, (st, r)
+    return [(h["inicio"], h["profissional"]) for h in r["horarios"]]
+
+
+def test_profissional_novo_com_horario_proprio(api):
+    st, r = api.post("/api/profissionais", {
+        "id": "carlos", "nome": "Dr. Carlos", "servicos": ["avaliacao"], "registro": "CRO-PR 12345",
+        "horarios": {"seg": [], "ter": [], "qua": [["13:00", "15:00"]], "qui": [], "sex": [], "sab": [], "dom": []}})
+    assert st == 201, r
+    h = [i for i, p in horarios(api, "avaliacao", "2026-10-07") if p == "carlos"]
+    assert h == ["2026-10-07T13:00", "2026-10-07T13:30", "2026-10-07T14:00", "2026-10-07T14:30"]
+    assert [i for i, p in horarios(api, "avaliacao", "2026-10-08") if p == "carlos"] == []
+    st, lista = api.get("/api/profissionais")
+    c = next(p for p in lista["profissionais"] if p["id"] == "carlos")
+    assert c["registro"] == "CRO-PR 12345" and c["ativo"] is True
+    assert next(p for p in lista["profissionais"] if p["id"] == "ana")["horarios"] is None
+
+
+def test_profissional_validacoes(api):
+    assert api.post("/api/profissionais", {"id": "ana", "nome": "X", "servicos": ["avaliacao"]})[0] == 409
+    assert api.post("/api/profissionais", {"id": "z", "nome": "Z", "servicos": ["xyz"]})[0] == 422
+    assert api.req("PUT", "/api/profissionais/naoexiste", {"nome": "Q"})[0] == 404
+
+
+def test_editar_e_desativar_profissional(api):
+    st, r = api.req("PUT", "/api/profissionais/bruno", {"servicos": ["avaliacao", "canal", "limpeza"]})
+    assert st == 200 and "limpeza" in r["servicos"]
+    assert {p for _, p in horarios(api, "limpeza", "2026-10-07")} == {"ana", "bruno"}
+    pid = api.paciente()
+    _, a = api.agenda(pid, "2026-10-08T09:00", "avaliacao", "bruno")
+    st, r = api.delete("/api/profissionais/bruno")
+    assert st == 200 and r["ativo"] is False
+    assert {p for _, p in horarios(api, "avaliacao", "2026-10-09")} == {"ana"}
+    assert api.agenda(pid, "2026-10-09T09:00", "avaliacao", "bruno")[0] == 422
+    st, lista = api.get("/api/agendamentos?data=2026-10-08")
+    assert [x["id"] for x in lista["agendamentos"]] == [a["id"]]
+
+
+def test_servicos_crud(api):
+    assert api.post("/api/servicos", {"id": "clareamento", "nome": "Clareamento", "duracao_min": 90, "retorno_dias": None})[0] == 201
+    assert api.post("/api/servicos", {"id": "limpeza", "nome": "X", "duracao_min": 30})[0] == 409
+    api.req("PUT", "/api/profissionais/ana", {"servicos": ["avaliacao", "limpeza", "clareamento"]})
+    assert ("2026-10-07T08:00", "ana") in horarios(api, "clareamento", "2026-10-07")
+    assert api.req("PUT", "/api/servicos/clareamento", {"duracao_min": 120})[0] == 200
+    assert ("2026-10-07T10:30", "ana") not in horarios(api, "clareamento", "2026-10-07")  # 10:30+120 > 12:00
+    assert ("2026-10-07T10:00", "ana") in horarios(api, "clareamento", "2026-10-07")
+    assert api.delete("/api/servicos/canal")[0] == 200
+    st, r = api.get("/api/servicos", token=None)
+    assert [s["id"] for s in r["servicos"]] == ["avaliacao", "limpeza", "clareamento"]
+
+
+def test_chat_usa_servicos_ativos(api):
+    api.delete("/api/servicos/canal")
+    api.paciente("Maria", "41988887777")
+    r = api.msg("41988887777", "quero agendar")
+    assert "1 - Avaliação" in r and "Tratamento de canal" not in r
+
+
+def test_pacientes_busca_e_edicao(api):
+    p1 = api.paciente("José Antônio Souza", "41999990001")
+    p2 = api.paciente("Maria Lima", "41999990002")
+    st, r = api.get("/api/pacientes?busca=antonio")
+    assert st == 200 and [p["id"] for p in r["pacientes"]] == [p1]
+    st, r = api.get("/api/pacientes?busca=990002")
+    assert [p["id"] for p in r["pacientes"]] == [p2]
+    assert len(api.get("/api/pacientes")[1]["pacientes"]) == 2
+    st, r = api.req("PUT", f"/api/pacientes/{p2}", {"email": "maria@exemplo.com", "nascimento": "1980-05-02",
+                                                   "consentimento_marketing": True})
+    assert st == 200 and r["email"] == "maria@exemplo.com" and r["consentimento_marketing"] is True
+    assert api.req("PUT", f"/api/pacientes/{p2}", {"telefone": "41999990001"})[0] == 409
+    assert api.req("PUT", f"/api/pacientes/{p2}", {"telefone": "12"})[0] == 400
+
+
+def test_faq_crud_vale_na_hora(api):
+    st, r = api.post("/api/faq", {"perguntas": ["atendem criança"], "resposta": "Sim, a partir de 3 anos."})
+    assert st == 201
+    assert api.msg("41988887777", "vocês atendem criança?") == "Sim, a partir de 3 anos."
+    assert api.delete(f"/api/faq/{r['id']}")[0] == 204
+    assert api.msg("41988887777", "vocês atendem criança?") != "Sim, a partir de 3 anos."
+    ids = [f["id"] for f in api.get("/api/faq")[1]["faq"]]
+    assert "convenios" in ids and r["id"] not in ids
+
+
+def test_bloqueio_tira_horarios_e_avisa_conflito(api):
+    pid = api.paciente()
+    _, a = api.agenda(pid, "2026-10-08T09:00", "avaliacao", "ana")
+    st, r = api.post("/api/bloqueios", {"profissional": "ana", "inicio": "2026-10-08T08:00",
+                                         "fim": "2026-10-09T00:00", "motivo": "congresso"})
+    assert st == 201 and r["conflitos"] == [a["id"]]
+    assert [p for _, p in horarios(api, "avaliacao", "2026-10-08")] and \
+        {p for _, p in horarios(api, "avaliacao", "2026-10-08")} == {"bruno"}
+    assert api.agenda(pid, "2026-10-08T15:00", "avaliacao", "ana")[0] == 422
+    st, lista = api.get("/api/bloqueios?profissional=ana")
+    assert [b["motivo"] for b in lista["bloqueios"]] == ["congresso"]
+    assert api.delete(f"/api/bloqueios/{r['id']}")[0] == 204
+    assert ("2026-10-08T15:00", "ana") in horarios(api, "avaliacao", "2026-10-08")
+
+
+def test_agenda_por_periodo_e_profissional(api):
+    pid = api.paciente()
+    api.agenda(pid, "2026-10-09T09:00", "avaliacao", "ana")
+    api.agenda(pid, "2026-10-07T09:00", "avaliacao", "bruno")
+    api.agenda(pid, "2026-10-08T09:00", "avaliacao", "ana")
+    api.agenda(pid, "2026-10-13T09:00", "avaliacao", "ana")
+    st, r = api.get("/api/agendamentos?de=2026-10-07&ate=2026-10-09")
+    assert [a["inicio"] for a in r["agendamentos"]] == ["2026-10-07T09:00", "2026-10-08T09:00", "2026-10-09T09:00"]
+    st, r = api.get("/api/agendamentos?de=2026-10-07&ate=2026-10-13&profissional=ana")
+    assert [a["inicio"][:10] for a in r["agendamentos"]] == ["2026-10-08", "2026-10-09", "2026-10-13"]
+
+
+def test_semente_so_na_primeira_vez(dados):
+    s = Servidor(dados)
+    api = s.subir()
+    api.post("/api/servicos", {"id": "raiox", "nome": "Raio-X", "duracao_min": 30})
+    s.parar()
+    s2 = Servidor(dados)
+    try:
+        api2 = s2.subir()
+        ids = [x["id"] for x in api2.get("/api/servicos", token=None)[1]["servicos"]]
+        assert ids == ["avaliacao", "limpeza", "canal", "raiox"]
+    finally:
+        s2.parar()
+
+
+def test_backup_e_restaurar(dados, tmp_path):
+    s = Servidor(dados)
+    api = s.subir()
+    pid = api.paciente("Guardada", "41999990009")
+    api.agenda(pid, "2026-10-07T09:00", "avaliacao", "ana")
+    arq = tmp_path / "copia.bak"
+    r = subprocess.run([str(RAIZ / "atende"), "backup", "--dados", str(dados), "--saida", str(arq)],
+                       cwd=RAIZ, capture_output=True, timeout=30)
+    assert r.returncode == 0 and arq.exists() and arq.stat().st_size > 0
+    api.delete(f"/api/pacientes/{pid}")
+    api.paciente("Depois do backup", "41999990010")
+    s.parar()
+    r = subprocess.run([str(RAIZ / "atende"), "restaurar", "--dados", str(dados), "--entrada", str(arq)],
+                       cwd=RAIZ, capture_output=True, timeout=30)
+    assert r.returncode == 0
+    s2 = Servidor(dados)
+    try:
+        api2 = s2.subir()
+        nomes = [p["nome"] for p in api2.get("/api/pacientes")[1]["pacientes"]]
+        assert nomes == ["Guardada"]
+        assert len(api2.get("/api/agendamentos?data=2026-10-07")[1]["agendamentos"]) == 1
+    finally:
+        s2.parar()
+| `GET /api/servicos` | — | 200 `{"servicos": [{id, nome, duracao_min}]}` |
+| `GET /api/horarios?servico=S&data=AAAA-MM-DD[&profissional=P]` | — | 200 `{"horarios": [{"inicio", "profissional"}]}` ordenado por `inicio`, depois `profissional`; serviço inexistente → 404 |
+| `POST /api/pacientes` [R] | `{nome, telefone, consentimento_marketing?: bool}` | 201 `{id}`; telefone já cadastrado → 200 com o mesmo `{id}`; telefone inválido → 400 |
+| `POST /api/agendamentos` [R] | `{paciente_id, servico, inicio, profissional?}` | 201 `{id, status: "agendado", inicio, fim, profissional}`; sem `profissional` = o primeiro livre por ordem de `id`; horário ocupado → 409; horário inválido (regra 3) → 422; paciente/serviço inexistente → 404 |
+| `GET /api/agendamentos?data=AAAA-MM-DD` [R] | — | 200 `{"agendamentos": [{id, paciente_id, telefone, servico, profissional, inicio, fim, status}]}` |
+| `POST /api/agendamentos/{id}/cancelar` [R] | — | 200 `{status: "cancelado"}`; dispara a lista de espera (seção 7) |
+| `POST /api/agendamentos/{id}/remarcar` [R] | `{inicio}` | 200 com o agendamento no novo horário (mesmo `id`, status `agendado`); mesmas regras de 409/422 |
+| `POST /api/agendamentos/{id}/presenca` [R] | `{compareceu: bool}` | 200 `{status: "realizado" \| "falta"}`; `realizado` + `retorno_dias` cria retorno (seção 8); pode ser marcada a qualquer momento (não depende do relógio) |
+| `POST /api/espera` [R] | `{paciente_id, servico, data}` | 201 `{id}` |
+| `POST /api/tarefas/rodar` [R] | `{agora?}` (padrão = relógio do processo) | 200 `{"enviadas": n}`; idempotente: rodar de novo no mesmo instante → `enviadas: 0` |
+| `GET /api/saida` [R] | — | 200 `{"mensagens": [{id, tipo, telefone, paciente_id, texto, agendamento_id}]}` em ordem de criação. `tipo` ∈ `confirmacao, espera, retorno, campanha` |
+| `POST /api/mensagens` | `{telefone, texto}` | 200 `{"respostas": [texto, ...]}` (seção 6) |
+| `GET /api/atendimento-humano` [R] | — | 200 `{"fila": [{telefone, motivo, prioridade}]}`; `prioridade` ∈ `normal, alta` |
+| `POST /api/campanhas` [R] | `{texto}` | 200 `{"enviadas": n}` ou 422 `{"violacoes": [codigos]}` (seção 9) |
+| `GET /api/pacientes/{id}/dados` [R] | — | 200 `{paciente, agendamentos, mensagens}` (LGPD art. 18, II) |
+| `DELETE /api/pacientes/{id}` [R] | — | 204; anonimiza (seção 11) |
+| `GET /api/raiox?mes=AAAA-MM` [R] | — | 200 (seção 10) |
+
+Telefone: aceita com ou sem `+55`, espaços, parênteses e hífen; normaliza para `+55DDNNNNNNNNN` (DDD + 8 ou 9 dígitos). Fora disso → inválido. Todas as respostas usam o telefone normalizado.
+
+## 6. Conversa (`POST /api/mensagens`)
+
+O texto é normalizado (minúsculas, sem acento, sem pontuação) antes de decidir. Ordem de decisão:
+
+1. **Emergência** — contém um destes: `dor no peito`, `falta de ar`, `desmaio`, `desmaiou`, `sangramento`, `sangrando`, `convulsao`, `suicidio`, `me matar`, `avc`, `infarto`. Resposta contém `192` e `pronto-socorro`; entra na fila humana com `prioridade: "alta"`. Não agenda nada.
+2. **Parar** — texto igual a `parar`, `sair` ou `pare`: paciente fica `nao_contatar`; resposta contém `não vai mais receber`. Nenhuma mensagem de saída (confirmação, retorno, campanha, espera) vai mais para esse telefone.
+3. **Humano** — contém `atendente`, `humano` ou `falar com alguem`: fila humana com `prioridade: "normal"`; resposta contém `atendente`.
+4. **Fluxo em andamento** (agendamento pelo chat, abaixo) consome a mensagem.
+5. **Resposta a pendência**: se a última mensagem de saída para o telefone foi `confirmacao` (sem resposta ainda): `1`/`sim`/`confirmo` → status `confirmado`, resposta contém `confirmad`; `2`/`cancelar`/`nao` → status `cancelado` (dispara espera), resposta contém `cancelad`. Se foi `espera` (sem resposta): `1`/`sim` → agenda o horário ofertado se ainda livre (resposta contém `agendad`), senão resposta contém `ocupado`.
+6. **Agendar** — contém `agendar`, `marcar` ou `consulta`: inicia o fluxo.
+7. **FAQ** — palavras significativas (≥ 3 letras, fora de artigos/preposições/pronomes comuns) de alguma pergunta do FAQ: se ≥ 60 % delas aparecem no texto, responde **exatamente** a `resposta` daquele item (só ela, uma mensagem). Mais de um item casa → o de maior %; empate → o primeiro do FAQ.
+8. **Não entendi** — resposta contém `não entendi` e oferece `atendente`. Na **segunda** seguida sem entender, entra na fila humana (`normal`) automaticamente.
+
+**Fluxo de agendamento pelo chat** (estado por telefone, persistido):
+- telefone sem paciente → pergunta o nome (resposta contém `nome`); a próxima mensagem vira o nome e o paciente é criado (`consentimento_marketing: false`).
+- lista os serviços numerados `1 - <nome>` na ordem do `clinica.json`;
+- escolhido o número, oferece os **3 primeiros** horários livres a partir de `agora + antecedencia_min_horas`, dentro de `janela_dias`, em todos os profissionais, ordem da seção 5; cada linha `N) DD/MM HH:MM com <nome do profissional>`;
+- escolhido o número, cria o agendamento; resposta contém `agendad`, `DD/MM` e `HH:MM`.
+- número inválido em qualquer passo → repete as opções. `cancelar` dentro do fluxo → sai do fluxo.
+- O bot **nunca** inventa preço, diagnóstico ou orientação de remédio: fora do FAQ cai na regra 8.
+
+## 7. Lista de espera
+
+Ao cancelar (pela API ou pela conversa), o primeiro pedido de espera ainda não atendido com o mesmo `servico` e a mesma `data` do horário liberado (ordem de criação), cujo paciente não esteja `nao_contatar`, recebe mensagem `tipo: "espera"` contendo `HH:MM` do horário e `1`. O pedido fica `ofertado` (não recebe outra oferta do mesmo horário).
+
+## 8. Confirmação e retorno (`POST /api/tarefas/rodar`)
+
+- **Confirmação:** todo agendamento `agendado` com `agora < inicio ≤ agora + confirmacao_horas` que ainda não recebeu confirmação → mensagem `tipo: "confirmacao"` com `agendamento_id`. Texto contém o nome do serviço, `DD/MM`, `HH:MM`, `1` (confirmar) e `2` (cancelar). **Não contém valor em R$.**
+- **Retorno:** presença `realizado` de serviço com `retorno_dias` cria um retorno com `data = data do atendimento + retorno_dias`. Quando `agora ≥ data − retorno_aviso_dias` e ainda não avisado → mensagem `tipo: "retorno"` com o nome do serviço. Uma vez só.
+- Paciente `nao_contatar` nunca recebe. Lembrete e retorno **não** dependem de `consentimento_marketing` (LGPD art. 11, II, f — tutela da saúde).
+
+## 9. Campanhas e trava de conselho
+
+`POST /api/campanhas {texto}` envia só para pacientes com `consentimento_marketing: true` e sem `nao_contatar` (LGPD art. 11, I — consentimento específico). Antes de enviar, valida o texto em minúsculas e sem acento (**pontuação mantida**, para `r$` e `100%`). O `422` lista **todos** os códigos violados. Qualquer violação → 422 e nada é enviado.
+
+| Código | Detecta | cfm | cfo | coffito | estetica |
+|---|---|---|---|---|---|
+| `promessa_resultado` | `garantido`, `garantia de resultado`, `100%`, `resultado garantido` | ✔ | ✔ | ✔ | ✔ |
+| `melhor_profissional` | `melhor medico`, `melhor dentista`, `melhor fisioterapeuta`, `melhor clinica` | ✔ | ✔ | ✔ | — |
+| `sorteio_brinde` | `sorteio`, `brinde`, `premio`, `premiacao` | ✔ | ✔ | — | — |
+| `antes_depois` | `antes e depois` | ✔ | ✔ | — | — |
+| `consorcio` | `consorcio` | ✔ | — | — | — |
+| `preco` | `r$`, `reais` | — | ✔ | ✔ | — |
+| `parcelamento` | `parcela`, `parcelamento`, `sem juros`, `10x` (qualquer `<n>x`) | — | ✔ | — | — |
+| `gratuito` | `gratis`, `gratuito`, `gratuita` | — | ✔ | ✔ | — |
+| `promocao` | `promocao`, `desconto`, `oferta` | — | — | ✔ | — |
+==> longrun/2026-10-05-atendimento-v1/progress.md <==
+# Progresso (só acrescentar)
+
+| data/hora | checkpoint | commit | critério atingido? | tokens in/cached/out | compactações |
+|---|---|---|---|---|---|
+| 2026-10-05 00:30 | CLI, HTTP/auth, SQLite, pacientes e agenda transacional; pytest 20 passed / 73 failed (20.98s); LIMITES OK | sem commit (loop externo) | parcial | não medido | 0 |
+| 2026-10-05 00:33 | Conversa persistente, histórico/GET LGPD, fila humana, confirmações/espera/retornos e saída simulada; pytest 43 passed / 50 failed (64.77s); LIMITES OK; versão 0.2.0 | sem commit (loop externo) | parcial, +23 testes | não medido | 0 |
+| 2026-10-05 00:39 | Campanhas, DELETE LGPD, Raio-X HTTP/CLI e opt-out/histórico anterior ao cadastro API; pytest 63 passed / 30 failed (66.26s); LIMITES OK; versão 0.3.0 | sem commit (loop externo) | parcial, +20 testes | não medido | 0 |
+
+==> longrun/2026-10-05-atendimento-v1/failures.md <==
+| data | o que quebrou | tentativa | resultado | prompt \| infra |
+|---|---|---|---|---|
+| 2026-10-05 00:30 | 73 testes falham por funcionalidades ainda ausentes (inclusive LGPD no teste de telefone) → implementada base/agenda → 20 passed, restante registrado no plano; sem conflito com spec identificado | base executável + suíte inteira | checkpoint parcial | infra |
+| 2026-10-05 00:30 | `tail -20` com vários arquivos rejeitado → usado `tail -n 20` → leitura concluída | opção explícita -n | corrigido | prompt |
+| 2026-10-05 00:33 | tail abreviado e caminhos inferidos inexistentes → tail -n e nomes conferidos em rg --files → leituras corrigidas, lição em CLAUDE.md | leitura explícita | corrigido | prompt |
+| 2026-10-05 00:33 | 50 testes ainda falham por páginas, cadastros, campanhas, DELETE LGPD/Raio-X, integrações e Docker ausentes → implementada conversa/lembretes → 43 passed / 50 failed, nenhuma regressão observada ou contradição identificada | próximo escopo documentado | parcial | infra |
+| 2026-10-05 00:39 | Leitura inicial repetiu tail abreviado e buscou diretórios de contexto ausentes → tail -n e arquivos existentes → leitura concluída; lições já constam em CLAUDE.md | corrigir comando de leitura | corrigido | prompt |
+| 2026-10-05 00:39 | 30 testes falham por páginas/cadastros/bloqueios/backup/integrações/Docker ausentes → campanhas/LGPD/Raio-X implementados → 63 passed / 30 failed, sem regressão ou conflito de contrato identificado | próximo escopo registrado no plano | parcial | infra |
+0.3.0
+# FALHAS
 
 | data | o que quebrou | menor correção | prompt \| infra |
 |---|---|---|---|
-# Decisões (só acrescentar)
-
-| data | decisão | motivo | alternativa descartada |
-|---|---|---|---|
+| 2026-10-05 | opt-out e histórico de desconhecido não migravam ao cadastrar pela API | associar histórico e ler preferência da sessão em criar_paciente; verificação local passou | infra |
+| 2026-10-05 | leitura usou nomes de arquivos inexistentes e repetiu tail abreviado | conferir caminhos com rg --files e usar tail -n | prompt |
+| 2026-10-05 | tail com opção antiga e múltiplos arquivos recusou leitura | usar `tail -n 20` | prompt |
 
 codex
-A base e a agenda já estão implementadas; a suíte completa está em execução. O verificador de limites retornou `LIMITES OK`. As falhas observadas até agora incluem funcionalidades ainda não implementadas; vou conferir o resultado final antes de registrar o checkpoint.
+A base já passa em 63 testes. Neste ciclo vou completar cadastros, bloqueios de agenda e backup/restauração; as integrações ficam para o próximo passo. Os bloqueios devem impedir novas reservas sem cancelar consultas existentes, e o backup precisa funcionar com o servidor ligado.
 
- succeeded in 21107ms:
+exec
+/bin/bash -lc "cat > src/cadastros.py <<'PY'
+\"\"\"Cadastros e bloqueios, executados na transação da requisição.\"\"\"
+from datetime import datetime
+import json
+import re
+import unicodedata
+import uuid
+
+from .core import Erro, telefone
+
+
+def normalizar(texto):
+    return ''.join(c for c in unicodedata.normalize('NFD', texto.lower()) if not unicodedata.combining(c))
+
+
+def validar_paciente(b):
+    if 'nome' in b and (not isinstance(b['nome'], str) or not b['nome'].strip()):
+        raise Erro(400, 'Nome obrigatório')
+    if b.get('nascimento') is not None:
+        datetime.strptime(b['nascimento'], '%Y-%m-%d')
+    for campo in ('consentimento_marketing', 'nao_contatar'):
+        if campo in b and not isinstance(b[campo], bool):
+            raise Erro(400, 'Preferência deve ser booleana')
+
+
+def pacientes(c, busca):
+    termo = normalizar(busca.strip())
+    digitos = re.sub(r'\\D', '', busca)
+    return [c.paciente(r['id']) for r in c.db.execute('SELECT id,nome,telefone FROM pacientes ORDER BY id')
+            if not termo or termo in normalizar(r['nome']) or (digitos and digitos in (r['telefone'] or ''))]
+
+
+def editar_paciente(c, ident, b):
+    p = c.paciente(ident)
+    validar_paciente(b)
+    campos = ('nome', 'telefone', 'email', 'nascimento', 'consentimento_marketing', 'nao_contatar')
+    valores = {k: b[k] for k in campos if k in b}
+    if 'telefone' in valores:
+        valores['telefone'] = telefone(valores['telefone'])
+        if c.db.execute('SELECT 1 FROM pacientes WHERE telefone=? AND id"'!=?'"', (valores['telefone'], ident)).fetchone():
+            raise Erro(409, 'Telefone já cadastrado')
+    for campo, valor in valores.items():
+        c.db.execute(f'UPDATE pacientes SET {campo}=? WHERE id=?', (valor, ident))
+    return c.paciente(ident)
+
+
+def validar_horarios(grade):
+    if grade is None:
+        return
+    if not isinstance(grade, dict) or set(grade) - set(('seg', 'ter', 'qua', 'qui', 'sex', 'sab', 'dom')):
+        raise Erro(422, 'Horários inválidos')
+    for janelas in grade.values():
+        if not isinstance(janelas, list):
+            raise Erro(422, 'Horários inválidos')
+        for janela in janelas:
+            if not isinstance(janela, list) or len(janela) "'!= 2:
+                raise Erro(422, '"'Janela inválida')
+            inicio, fim = [datetime.strptime(h, '%H:%M') for h in janela]
+            if fim <= inicio:
+                raise Erro(422, 'Janela inválida')
+
+
+def salvar_catalogo(c, tipo, b, ident=None):
+    if ident is not None:
+        atual = next((x for x in c.catalogo(tipo) if x['id'] == ident), None)
+        if atual is None:
+            raise Erro(404, 'Registro inexistente')
+        item = {**atual, **b, 'id': ident}
+    else:
+        item = dict(b)
+        if tipo == 'faq':
+            item['id'] = uuid.uuid4().hex
+        if not isinstance(item.get('id'), str) or not item['id'].strip():
+            raise Erro(400, 'ID obrigatório')
+        if any(x['id'] == item['id'] for x in c.catalogo(tipo)):
+            raise Erro(409, 'ID já cadastrado')
+        if tipo "'!= '"'faq':
+            item.setdefault('ativo', True)
+    if tipo == 'faq':
+        if not isinstance(item.get('perguntas'), list) or not item['perguntas'] or not all(isinstance(p, str) and p.strip() for p in item['perguntas']) or not isinstance(item.get('resposta'), str) or not item['resposta'].strip():
+            raise Erro(400, 'Perguntas e resposta obrigatórias')
+    else:
+        if not isinstance(item.get('nome'), str) or not item['nome'].strip():
+            raise Erro(400, 'Nome obrigatório')
+        if not isinstance(item['ativo'], bool):
+            raise Erro(400, 'Ativo deve ser booleano')
+        if tipo == 'servicos':
+            if type(item.get('duracao_min')) is not int or item['duracao_min'] <= 0:
+                raise Erro(422, 'Duração deve ser positiva')
+            item.setdefault('retorno_dias', None)
+            if item['retorno_dias'] is not None and (type(item['retorno_dias']) is not int or item['retorno_dias'] < 0):
+                raise Erro(422, 'Retorno inválido')
+        else:
+            servicos = {s['id'] for s in c.catalogo('servicos')}
+            if not isinstance(item.get('servicos'), list) or any(s not in servicos for s in item['servicos']):
+                raise Erro(422, 'Serviço inexistente')
+            item.setdefault('registro', None)
+            item.setdefault('horarios', None)
+            validar_horarios(item['horarios'])
+    if ident is None:
+        c.db.execute('INSERT INTO catalogo VALUES (?,?,?)', (tipo, item['id'], json.dumps(item)))
+    else:
+        c.db.execute('UPDATE catalogo SET dados=? WHERE tipo=? AND id=?', (json.dumps(item), tipo, ident))
+    return item
+
+
+def bloquear(c, b):
+    if not any(p['id'] == b['profissional'] for p in c.catalogo('profissionais')):
+        raise Erro(404, 'Profissional inexistente')
+    inicio, fim = [datetime.strptime(b[k], '%Y-%m-%dT%H:%M') for k in ('inicio', 'fim')]
+    if inicio >= fim:
+        raise Erro(422, 'Intervalo inválido')
+    ident = c.db.execute('INSERT INTO bloqueios(profissional,inicio,fim,motivo) VALUES (?,?,?,?)',
+                         (b['profissional'], b['inicio'], b['fim'], b.get('motivo', ''))).lastrowid
+    conflitos = [r[0] for r in c.db.execute(\"\"\"SELECT id FROM agendamentos WHERE profissional=?
+        AND inicio < ? AND fim > ? AND status IN ('agendado','confirmado','realizado','falta') ORDER BY id\"\"\",
+        (b['profissional'], b['fim'], b['inicio']))]
+    return {'id': ident, 'conflitos': conflitos}
+PY
+cat > src/backup.py <<'PY'
+\"\"\"Arquivo portátil com configuração e snapshot consistente do SQLite.\"\"\"
+import json
+import os
+from pathlib import Path
+import sqlite3
+import tempfile
+import zipfile
+
+
+def copiar(dados, saida):
+    dados, saida = Path(dados), Path(saida)
+    if saida.resolve() in ((dados / 'estado.sqlite3').resolve(), (dados / 'clinica.json').resolve()):
+        raise ValueError('O backup não pode sobrescrever o estado')
+    with tempfile.TemporaryDirectory(dir=saida.parent) as tmp:
+        snapshot = Path(tmp) / 'estado.sqlite3'
+        origem = sqlite3.connect((dados / 'estado.sqlite3').resolve().as_uri() + '?mode=ro', uri=True)
+        destino = sqlite3.connect(snapshot)
+        try:
+            origem.backup(destino)
+        finally:
+            destino.close()
+            origem.close()
+        arquivo = Path(tmp) / 'backup.zip'
+        with zipfile.ZipFile(arquivo, 'w', zipfile.ZIP_DEFLATED) as z:
+            z.write(snapshot, 'estado.sqlite3')
+            z.write(dados / 'clinica.json', 'clinica.json')
+        os.replace(arquivo, saida)
+
+
+def restaurar(dados, entrada):
+    dados = Path(dados)
+    dados.mkdir(parents=True, exist_ok=True)
+    with tempfile.TemporaryDirectory(dir=dados) as tmp:
+        with zipfile.ZipFile(entrada) as z:
+            config = z.read('clinica.json')
+            json.loads(config)
+            banco = Path(tmp) / 'estado.sqlite3'
+            banco.write_bytes(z.read('estado.sqlite3'))
+        db = sqlite3.connect(banco)
+        try:
+            if db.execute('PRAGMA integrity_check').fetchone()[0] "'!= '"'ok':
+                raise ValueError('Backup inválido')
+            db.execute('SELECT chave FROM meta LIMIT 1')
+        finally:
+            db.close()
+        cfg = Path(tmp) / 'clinica.json'
+        cfg.write_bytes(config)
+        # Restauração exige servidor parado, conforme contrato.
+        for sufixo in ('-wal', '-shm', '-journal'):
+            (dados / ('estado.sqlite3' + sufixo)).unlink(missing_ok=True)
+        os.replace(banco, dados / 'estado.sqlite3')
+        os.replace(cfg, dados / 'clinica.json')
+PY" in /home/nmaldaner/projetos/atende-clinica
+ succeeded in 0ms:
+apply patch
+patch: completed
+/home/nmaldaner/projetos/atende-clinica/src/core.py
+/home/nmaldaner/projetos/atende-clinica/src/server.py
+diff --git a/src/core.py b/src/core.py
+index 7013abda99d3fe0eb881c32e303058e93790ca2a..074f9002d632e3bf4989375ddf5d03db2310f856
+--- a/src/core.py
++++ b/src/core.py
+@@ -55,6 +55,9 @@
+                 servico TEXT NOT NULL, profissional TEXT NOT NULL, inicio TEXT NOT NULL,
+                 fim TEXT NOT NULL, status TEXT NOT NULL);
+             CREATE INDEX IF NOT EXISTS agenda_profissional ON agendamentos(profissional,inicio,fim);
++            CREATE TABLE IF NOT EXISTS bloqueios (
++                id INTEGER PRIMARY KEY, profissional TEXT NOT NULL,
++                inicio TEXT NOT NULL, fim TEXT NOT NULL, motivo TEXT NOT NULL);
+         ''')
+         with self.db:
+             if not self.db.execute("SELECT 1 FROM meta WHERE chave='semeado'").fetchone():
+@@ -88,6 +91,8 @@
+         return p
+ 
+     def criar_paciente(self, b):
++        from .cadastros import validar_paciente
++        validar_paciente(b)
+         tel = telefone(b.get('telefone'))
+         r = self.db.execute('SELECT id FROM pacientes WHERE telefone=?', (tel,)).fetchone()
+         if r:
+@@ -124,7 +129,9 @@
+                 t = datetime.fromisoformat(data + 'T' + ini)
+                 final = datetime.fromisoformat(data + 'T' + fim)
+                 while t + duracao <= final:
+-                    if t >= limite:
++                    bloqueado = self.db.execute('SELECT 1 FROM bloqueios WHERE profissional=? AND inicio < ? AND fim > ?',
++                        (p['id'], (t + duracao).isoformat(timespec='minutes'), t.isoformat(timespec='minutes'))).fetchone()
++                    if t >= limite and not bloqueado:
+                         resultado.append({'inicio': t.isoformat(timespec='minutes'), 'profissional': p['id']})
+                     t += passo
+         return sorted(resultado, key=lambda h: (h['inicio'], h['profissional']))
+diff --git a/src/server.py b/src/server.py
+index 873daf4c39ca40763f4b1ca8560f95bb9ea57d4f..463c574568416f1762e231f250c70fa0cc2c39f0
+--- a/src/server.py
++++ b/src/server.py
+@@ -8,10 +8,42 @@
+ from urllib.parse import parse_qs, urlsplit
+ 
+ from .core import Clinica, Erro, ROOT
+-from . import conversa, gestao
++from . import conversa, gestao, cadastros, backup
+ 
+ 
+ def rotear(c, metodo, rota, q, b):
++    if metodo == 'GET' and rota == '/api/pacientes':
++        return 200, {'pacientes': cadastros.pacientes(c, q.get('busca', ''))}
++    m = re.fullmatch(r'/api/pacientes/(\d+)', rota)
++    if metodo == 'PUT' and m:
++        return 200, cadastros.editar_paciente(c, int(m[1]), b)
++    m = re.fullmatch(r'/api/(profissionais|servicos|faq)(?:/([^/]+))?', rota)
++    if m:
++        tipo, ident = m.groups()
++        if metodo == 'GET' and ident is None and tipo != 'servicos':
++            return 200, {tipo: c.catalogo(tipo)}
++        if metodo == 'POST' and ident is None:
++            item = cadastros.salvar_catalogo(c, tipo, b)
++            return 201, {'id': item['id']} if tipo == 'faq' else item
++        if metodo == 'PUT' and ident is not None and tipo != 'faq':
++            return 200, cadastros.salvar_catalogo(c, tipo, b, ident)
++        if metodo == 'DELETE' and ident is not None:
++            if tipo == 'faq':
++                c.db.execute('DELETE FROM catalogo WHERE tipo=? AND id=?', (tipo, ident))
++                return 204, None
++            cadastros.salvar_catalogo(c, tipo, {'ativo': False}, ident)
++            return 200, {'ativo': False}
++    if rota == '/api/bloqueios':
++        if metodo == 'POST':
++            return 201, cadastros.bloquear(c, b)
++        if metodo == 'GET':
++            return 200, {'bloqueios': [dict(r) for r in c.db.execute(
++                'SELECT * FROM bloqueios WHERE (? IS NULL OR profissional=?) ORDER BY inicio,id',
++                (q.get('profissional'), q.get('profissional')))]}
++    m = re.fullmatch(r'/api/bloqueios/(\d+)', rota)
++    if metodo == 'DELETE' and m:
++        c.db.execute('DELETE FROM bloqueios WHERE id=?', (int(m[1]),))
++        return 204, None
+     if metodo == 'GET' and rota == '/api/saude':
+         return 200, {'ok': True, 'versao': (ROOT / 'VERSION').read_text().strip()}
+     if metodo == 'GET' and rota == '/api/servicos':
+@@ -79,7 +111,20 @@
+     raiox.add_argument('--dados', required=True)
+     raiox.add_argument('--mes', required=True)
+     raiox.add_argument('--acompanhamento', required=True)
++    for comando, arquivo in (('backup', '--saida'), ('restaurar', '--entrada')):
++        p = sub.add_parser(comando)
++        p.add_argument('--dados', required=True)
++        p.add_argument(arquivo, required=True)
+     args = parser.parse_args()
++    if args.comando in ('backup', 'restaurar'):
++        try:
++            if args.comando == 'backup':
++                backup.copiar(args.dados, args.saida)
++            else:
++                backup.restaurar(args.dados, args.entrada)
++        except Exception as e:
++            parser.exit(1, f'Falha no {args.comando}: {e}\n')
++        return
+     if args.comando == 'raiox':
+         clinica = Clinica(args.dados)
+         try:
+
+hook: PostToolUse
+hook: PostToolUse Completed
+exec
+/bin/bash -lc 'python3 -m pytest -q tests/ > longrun/2026-10-05-atendimento-v1/pytest-ciclo-4.log 2>&1; tail -n 30 longrun/2026-10-05-atendimento-v1/pytest-ciclo-4.log' in /home/nmaldaner/projetos/atende-clinica
+diff --git a/src/core.py b/src/core.py
+index 7013abda99d3fe0eb881c32e303058e93790ca2a..074f9002d632e3bf4989375ddf5d03db2310f856
+--- a/src/core.py
++++ b/src/core.py
+@@ -55,6 +55,9 @@
+                 servico TEXT NOT NULL, profissional TEXT NOT NULL, inicio TEXT NOT NULL,
+                 fim TEXT NOT NULL, status TEXT NOT NULL);
+             CREATE INDEX IF NOT EXISTS agenda_profissional ON agendamentos(profissional,inicio,fim);
++            CREATE TABLE IF NOT EXISTS bloqueios (
++                id INTEGER PRIMARY KEY, profissional TEXT NOT NULL,
++                inicio TEXT NOT NULL, fim TEXT NOT NULL, motivo TEXT NOT NULL);
+         ''')
+         with self.db:
+             if not self.db.execute("SELECT 1 FROM meta WHERE chave='semeado'").fetchone():
+@@ -88,6 +91,8 @@
+         return p
+ 
+     def criar_paciente(self, b):
++        from .cadastros import validar_paciente
++        validar_paciente(b)
+         tel = telefone(b.get('telefone'))
+         r = self.db.execute('SELECT id FROM pacientes WHERE telefone=?', (tel,)).fetchone()
+         if r:
+@@ -124,7 +129,9 @@
+                 t = datetime.fromisoformat(data + 'T' + ini)
+                 final = datetime.fromisoformat(data + 'T' + fim)
+                 while t + duracao <= final:
+-                    if t >= limite:
++                    bloqueado = self.db.execute('SELECT 1 FROM bloqueios WHERE profissional=? AND inicio < ? AND fim > ?',
++                        (p['id'], (t + duracao).isoformat(timespec='minutes'), t.isoformat(timespec='minutes'))).fetchone()
++                    if t >= limite and not bloqueado:
+                         resultado.append({'inicio': t.isoformat(timespec='minutes'), 'profissional': p['id']})
+                     t += passo
+         return sorted(resultado, key=lambda h: (h['inicio'], h['profissional']))
+diff --git a/src/server.py b/src/server.py
+index 873daf4c39ca40763f4b1ca8560f95bb9ea57d4f..463c574568416f1762e231f250c70fa0cc2c39f0
+--- a/src/server.py
++++ b/src/server.py
+@@ -8,10 +8,42 @@
+ from urllib.parse import parse_qs, urlsplit
+ 
+ from .core import Clinica, Erro, ROOT
+-from . import conversa, gestao
++from . import conversa, gestao, cadastros, backup
+ 
+ 
+ def rotear(c, metodo, rota, q, b):
++    if metodo == 'GET' and rota == '/api/pacientes':
++        return 200, {'pacientes': cadastros.pacientes(c, q.get('busca', ''))}
++    m = re.fullmatch(r'/api/pacientes/(\d+)', rota)
++    if metodo == 'PUT' and m:
++        return 200, cadastros.editar_paciente(c, int(m[1]), b)
++    m = re.fullmatch(r'/api/(profissionais|servicos|faq)(?:/([^/]+))?', rota)
++    if m:
++        tipo, ident = m.groups()
++        if metodo == 'GET' and ident is None and tipo != 'servicos':
++            return 200, {tipo: c.catalogo(tipo)}
++        if metodo == 'POST' and ident is None:
++            item = cadastros.salvar_catalogo(c, tipo, b)
++            return 201, {'id': item['id']} if tipo == 'faq' else item
++        if metodo == 'PUT' and ident is not None and tipo != 'faq':
++            return 200, cadastros.salvar_catalogo(c, tipo, b, ident)
++        if metodo == 'DELETE' and ident is not None:
++            if tipo == 'faq':
++                c.db.execute('DELETE FROM catalogo WHERE tipo=? AND id=?', (tipo, ident))
++                return 204, None
++            cadastros.salvar_catalogo(c, tipo, {'ativo': False}, ident)
++            return 200, {'ativo': False}
++    if rota == '/api/bloqueios':
++        if metodo == 'POST':
++            return 201, cadastros.bloquear(c, b)
++        if metodo == 'GET':
++            return 200, {'bloqueios': [dict(r) for r in c.db.execute(
++                'SELECT * FROM bloqueios WHERE (? IS NULL OR profissional=?) ORDER BY inicio,id',
++                (q.get('profissional'), q.get('profissional')))]}
++    m = re.fullmatch(r'/api/bloqueios/(\d+)', rota)
++    if metodo == 'DELETE' and m:
++        c.db.execute('DELETE FROM bloqueios WHERE id=?', (int(m[1]),))
++        return 204, None
+     if metodo == 'GET' and rota == '/api/saude':
+         return 200, {'ok': True, 'versao': (ROOT / 'VERSION').read_text().strip()}
+     if metodo == 'GET' and rota == '/api/servicos':
+@@ -79,7 +111,20 @@
+     raiox.add_argument('--dados', required=True)
+     raiox.add_argument('--mes', required=True)
+     raiox.add_argument('--acompanhamento', required=True)
++    for comando, arquivo in (('backup', '--saida'), ('restaurar', '--entrada')):
++        p = sub.add_parser(comando)
++        p.add_argument('--dados', required=True)
++        p.add_argument(arquivo, required=True)
+     args = parser.parse_args()
++    if args.comando in ('backup', 'restaurar'):
++        try:
++            if args.comando == 'backup':
++                backup.copiar(args.dados, args.saida)
++            else:
++                backup.restaurar(args.dados, args.entrada)
++        except Exception as e:
++            parser.exit(1, f'Falha no {args.comando}: {e}\n')
++        return
+     if args.comando == 'raiox':
+         clinica = Clinica(args.dados)
+         try:
+
+exec
+/bin/bash -lc "sed -n '125,150p' docs/ESPECIFICACAO.md; cat longrun/2026-10-05-atendimento-v1/verificar-limites.sh; cat exemplos/clinica.json; git diff --stat" in /home/nmaldaner/projetos/atende-clinica
+ succeeded in 0ms:
+| `antes_depois` | `antes e depois` | ✔ | ✔ | — | — |
+| `consorcio` | `consorcio` | ✔ | — | — | — |
+| `preco` | `r$`, `reais` | — | ✔ | ✔ | — |
+| `parcelamento` | `parcela`, `parcelamento`, `sem juros`, `10x` (qualquer `<n>x`) | — | ✔ | — | — |
+| `gratuito` | `gratis`, `gratuito`, `gratuita` | — | ✔ | ✔ | — |
+| `promocao` | `promocao`, `desconto`, `oferta` | — | — | ✔ | — |
+
+Bases: CFM 2.336/2023 arts. 9º e 11; CFO 118/2012 art. 44 + 196/2019 + 271/2025; COFFITO 424/2013 arts. 39–40. Fonte e leitura em `raio-x-margem/docs/setores/servicos-pesquisa-2026-10.md`.
+
+## 10. Exportação para o Raio-X (Painel de Recuperação)
+
+`GET /api/raiox?mes=AAAA-MM` → `{"pacote": "clinica", "mes": "AAAA-MM", "valores": {...}}`, com números arredondados a 1 casa:
+
+- `atendimentos_mes` = agendamentos `realizado` no mês (inteiro);
+- `falta_pct` = `falta ÷ (realizado + falta) × 100` (0 se não houver);
+- `ocupacao_pct` = minutos de agendamentos ativos no mês ÷ minutos disponíveis no mês (todas as janelas de todos os profissionais, menos feriados) × 100;
+- `clientes_novos_mes` = pacientes cujo **primeiro** `realizado` cai no mês;
+- `retorno_atual_pct` = dos retornos com `data` no mês, % cujo paciente tem agendamento `realizado` do mesmo serviço entre `data − 30 dias` e `data + 30 dias` (0 se não houver retornos).
+
+`./atende raiox --dados DIR --mes M --acompanhamento ARQ`: lê `ARQ` (formato do `raio-x-margem/app/painel-motor.js`: `{tipo: "acompanhamento", pacote, cliente, base: {data, valores}, meses: [{mes, valores, obs}]}`), insere ou substitui o mês `M` com `valores` = os da rota acima **mesclados** sobre os valores do mês anterior (ou da base) e `obs: "atende-clinica"`, e grava de volta. Campos que o sistema não mede (ex.: `ticket_medio`, `glosa_pct`) ficam como estavam. Sai com código 0.
+
+## 11. LGPD
+
+- `GET /api/pacientes/{id}/dados` devolve tudo o que há do paciente: `paciente` `{id, nome, telefone, consentimento_marketing, nao_contatar}`, `agendamentos` (mesmo formato da listagem) e `mensagens` = recebidas e enviadas, cada uma `{direcao: "entrada" | "saida", texto, quando}`.
+- `DELETE /api/pacientes/{id}`: nome vira `removido`, telefone vira `null`, agendamentos `agendado`/`confirmado` viram `cancelado` (os `realizado`/`falta` ficam), textos de mensagens dele viram `""`. Depois disso, mensagens ao telefone antigo são tratadas como de telefone desconhecido. Números agregados do `/api/raiox` continuam contando os atendimentos passados.
+
+#!/usr/bin/env bash
+# Camada "limite" do goal.md. Imprime LIMITES OK ou o primeiro problema (código ≠ 0).
+set -uo pipefail
+cd "$(git -C "$(dirname "$0")" rev-parse --show-toplevel)"
+D=longrun/2026-10-05-atendimento-v1
+falha() { echo "LIMITE VIOLADO: $*"; exit 1; }
+[ -f $D/hash-congelado.txt ] || falha "contrato não congelado (rode $D/congelar.sh)"
+source $D/hash-congelado.txt
+h=$(cat $(git ls-files tests pytest.ini docs/ESPECIFICACAO.md $D/verificar-limites.sh | sort) | sha256sum | cut -c1-16)
+[ "$h" = "$HASH" ] || falha "hash do contrato mudou ($h ≠ $HASH)"
+git diff --quiet -- tests pytest.ini docs/ESPECIFICACAO.md || falha "contrato alterado no working tree"
+n=$(python3 -m pytest --collect-only -q 2>/dev/null | grep -oE '^[0-9]+ tests? collected' | grep -oE '^[0-9]+')
+[ "$n" = "$TESTES" ] || falha "nº de testes coletados $n ≠ $TESTES"
+fora=$( { git diff --name-only "$BASE"; git ls-files --others --exclude-standard; } | sort -u \
+  | grep -vE "^($D/|atende$|src/|web/|exemplos/|README\.md$|VERSION$|Dockerfile$|docker-compose\.yml$|\.env\.exemplo$|\.dockerignore$|\.gitignore$|CLAUDE\.md$|FALHAS\.md$)" )
+[ -z "$fora" ] || falha "arquivos fora do escopo: $(echo $fora)"
+alvo=$(ls -d atende src web 2>/dev/null)
+[ -n "$alvo" ] || falha "não há implementação (atende/src/web)"
+grep -rnE '^\s*(import|from)\s+(requests|httpx|aiohttp|urllib3|flask|fastapi|django|openai|anthropic|groq)\b' $alvo && falha "dependência externa ou SDK de API"
+grep -rnE '(OPENAI|ANTHROPIC|GROQ|OPENROUTER)_?API_KEY|sk-[A-Za-z0-9]{20,}|[0-9]{8,10}:[A-Za-z0-9_-]{30,}|graph\.facebook|api\.telegram\.org' $alvo && falha "chave/credencial ou API externa no código"
+grep -rnP 'https?://(?!127\.0\.0\.1|localhost|www\.w3\.org)' $alvo && falha "URL externa no código"
+grep -rn '0\.0\.0\.0' $alvo && falha "bind em 0.0.0.0"
+echo "LIMITES OK (hash $HASH, $TESTES testes, escopo ok, sem API/rede)"
+{
+  "nome": "Clínica Sorriso Teste",
+  "conselho": "cfo",
+  "token": "segredo-teste",
+  "passo_min": 30,
+  "antecedencia_min_horas": 2,
+  "janela_dias": 14,
+  "confirmacao_horas": 48,
+  "retorno_aviso_dias": 7,
+  "feriados": ["2026-10-12"],
+  "horarios": {
+    "seg": [["08:00", "12:00"], ["14:00", "18:00"]],
+    "ter": [["08:00", "12:00"], ["14:00", "18:00"]],
+    "qua": [["08:00", "12:00"], ["14:00", "18:00"]],
+    "qui": [["08:00", "12:00"], ["14:00", "18:00"]],
+    "sex": [["08:00", "12:00"], ["14:00", "18:00"]],
+    "sab": [["08:00", "12:00"]],
+    "dom": []
+  },
+  "profissionais": [
+    {"id": "ana", "nome": "Dra. Ana", "servicos": ["avaliacao", "limpeza"]},
+    {"id": "bruno", "nome": "Dr. Bruno", "servicos": ["avaliacao", "canal"]}
+  ],
+  "servicos": [
+    {"id": "avaliacao", "nome": "Avaliação", "duracao_min": 30, "retorno_dias": null},
+    {"id": "limpeza", "nome": "Limpeza", "duracao_min": 60, "retorno_dias": 180},
+    {"id": "canal", "nome": "Tratamento de canal", "duracao_min": 90, "retorno_dias": null}
+  ],
+  "faq": [
+    {"id": "convenios", "perguntas": ["vocês aceitam convênio", "quais convênios atendem"], "resposta": "Atendemos Unimed Odonto, Amil Dental e particular."},
+    {"id": "endereco", "perguntas": ["qual o endereço da clínica", "onde fica a clínica"], "resposta": "Rua das Flores, 100, sala 5, Batel, Curitiba."},
+    {"id": "estacionamento", "perguntas": ["tem estacionamento"], "resposta": "Temos convênio com o estacionamento ao lado (1 hora grátis)."}
+  ]
+}
+ longrun/2026-10-05-atendimento-v1/ciclo-1.log | 1269 +++++++++++++++----------
+ longrun/2026-10-05-atendimento-v1/loop.log    |    2 +
+ src/core.py                                   |    9 +-
+ src/server.py                                 |   47 +-
+ 4 files changed, 829 insertions(+), 498 deletions(-)
+
+exec
+/bin/bash -lc "python3 - <<'PY'
+from pathlib import Path
+from tempfile import TemporaryDirectory
+from src.core import Clinica, Erro
+from src import cadastros, backup, conversa
+with TemporaryDirectory() as tmp:
+    dados = Path(tmp) / 'dados'
+    c = Clinica(dados)
+    conversa.iniciar(c)
+    with c.db:
+        _, p = c.criar_paciente({'nome': 'Pessoa de revisão', 'telefone': '11976543210'})
+        s = c.catalogo('servicos')[0]['id']
+        prof = next(p['id'] for p in c.catalogo('profissionais') if s in p['servicos'])
+        cadastros.bloquear(c, {'profissional': prof, 'inicio': '2030-01-01T08:15', 'fim': '2030-01-01T09:15', 'motivo': 'teste'})
+        cadastros.salvar_catalogo(c, 'faq', {'perguntas': ['Revisão local'], 'resposta': 'Persistida'})
+    arq = Path(tmp) / 'estado.bak'
+    backup.copiar(dados, arq)
+    with c.db:
+        c.db.execute('DELETE FROM bloqueios')
+        c.db.execute(\"DELETE FROM catalogo WHERE tipo='faq'\")
+    c.db.close()
+    original = (dados / 'clinica.json').read_bytes()
+    (dados / 'clinica.json').write_text('{}')
+    backup.restaurar(dados, arq)
+    assert (dados / 'clinica.json').read_bytes() == original
+    c = Clinica(dados)
+    assert c.db.execute('SELECT COUNT(*) FROM bloqueios').fetchone()[0] == 1
+    assert any(f['resposta'] == 'Persistida' for f in c.catalogo('faq'))
+    assert c.paciente(p['id'])['nome'] == 'Pessoa de revisão'
+    # Arquivo inválido é rejeitado antes de tocar no estado restaurado.
+    ruim = Path(tmp) / 'ruim.bak'
+    ruim.write_text('não é backup')
+    antes = (dados / 'estado.sqlite3').read_bytes()
+    try:
+        backup.restaurar(dados, ruim)
+        raise AssertionError('aceitou backup inválido')
+    except __import__('zipfile').BadZipFile:
+        pass
+    assert (dados / 'estado.sqlite3').read_bytes() == antes
+    c.db.close()
+print('BACKUP LOCAL OK: configuração, cadastro, FAQ, bloqueio e rejeição sem alteração')
+PY" in /home/nmaldaner/projetos/atende-clinica
+ succeeded in 47ms:
+BACKUP LOCAL OK: configuração, cadastro, FAQ, bloqueio e rejeição sem alteração
+
+diff --git a/src/core.py b/src/core.py
+index 7013abda99d3fe0eb881c32e303058e93790ca2a..074f9002d632e3bf4989375ddf5d03db2310f856
+--- a/src/core.py
++++ b/src/core.py
+@@ -55,6 +55,9 @@
+                 servico TEXT NOT NULL, profissional TEXT NOT NULL, inicio TEXT NOT NULL,
+                 fim TEXT NOT NULL, status TEXT NOT NULL);
+             CREATE INDEX IF NOT EXISTS agenda_profissional ON agendamentos(profissional,inicio,fim);
++            CREATE TABLE IF NOT EXISTS bloqueios (
++                id INTEGER PRIMARY KEY, profissional TEXT NOT NULL,
++                inicio TEXT NOT NULL, fim TEXT NOT NULL, motivo TEXT NOT NULL);
+         ''')
+         with self.db:
+             if not self.db.execute("SELECT 1 FROM meta WHERE chave='semeado'").fetchone():
+@@ -88,6 +91,8 @@
+         return p
+ 
+     def criar_paciente(self, b):
++        from .cadastros import validar_paciente
++        validar_paciente(b)
+         tel = telefone(b.get('telefone'))
+         r = self.db.execute('SELECT id FROM pacientes WHERE telefone=?', (tel,)).fetchone()
+         if r:
+@@ -124,7 +129,9 @@
+                 t = datetime.fromisoformat(data + 'T' + ini)
+                 final = datetime.fromisoformat(data + 'T' + fim)
+                 while t + duracao <= final:
+-                    if t >= limite:
++                    bloqueado = self.db.execute('SELECT 1 FROM bloqueios WHERE profissional=? AND inicio < ? AND fim > ?',
++                        (p['id'], (t + duracao).isoformat(timespec='minutes'), t.isoformat(timespec='minutes'))).fetchone()
++                    if t >= limite and not bloqueado:
+                         resultado.append({'inicio': t.isoformat(timespec='minutes'), 'profissional': p['id']})
+                     t += passo
+         return sorted(resultado, key=lambda h: (h['inicio'], h['profissional']))
+diff --git a/src/server.py b/src/server.py
+index 873daf4c39ca40763f4b1ca8560f95bb9ea57d4f..463c574568416f1762e231f250c70fa0cc2c39f0
+--- a/src/server.py
++++ b/src/server.py
+@@ -8,10 +8,42 @@
+ from urllib.parse import parse_qs, urlsplit
+ 
+ from .core import Clinica, Erro, ROOT
+-from . import conversa, gestao
++from . import conversa, gestao, cadastros, backup
+ 
+ 
+ def rotear(c, metodo, rota, q, b):
++    if metodo == 'GET' and rota == '/api/pacientes':
++        return 200, {'pacientes': cadastros.pacientes(c, q.get('busca', ''))}
++    m = re.fullmatch(r'/api/pacientes/(\d+)', rota)
++    if metodo == 'PUT' and m:
++        return 200, cadastros.editar_paciente(c, int(m[1]), b)
++    m = re.fullmatch(r'/api/(profissionais|servicos|faq)(?:/([^/]+))?', rota)
++    if m:
++        tipo, ident = m.groups()
++        if metodo == 'GET' and ident is None and tipo != 'servicos':
++            return 200, {tipo: c.catalogo(tipo)}
++        if metodo == 'POST' and ident is None:
++            item = cadastros.salvar_catalogo(c, tipo, b)
++            return 201, {'id': item['id']} if tipo == 'faq' else item
++        if metodo == 'PUT' and ident is not None and tipo != 'faq':
++            return 200, cadastros.salvar_catalogo(c, tipo, b, ident)
++        if metodo == 'DELETE' and ident is not None:
++            if tipo == 'faq':
++                c.db.execute('DELETE FROM catalogo WHERE tipo=? AND id=?', (tipo, ident))
++                return 204, None
++            cadastros.salvar_catalogo(c, tipo, {'ativo': False}, ident)
++            return 200, {'ativo': False}
++    if rota == '/api/bloqueios':
++        if metodo == 'POST':
++            return 201, cadastros.bloquear(c, b)
++        if metodo == 'GET':
++            return 200, {'bloqueios': [dict(r) for r in c.db.execute(
++                'SELECT * FROM bloqueios WHERE (? IS NULL OR profissional=?) ORDER BY inicio,id',
++                (q.get('profissional'), q.get('profissional')))]}
++    m = re.fullmatch(r'/api/bloqueios/(\d+)', rota)
++    if metodo == 'DELETE' and m:
++        c.db.execute('DELETE FROM bloqueios WHERE id=?', (int(m[1]),))
++        return 204, None
+     if metodo == 'GET' and rota == '/api/saude':
+         return 200, {'ok': True, 'versao': (ROOT / 'VERSION').read_text().strip()}
+     if metodo == 'GET' and rota == '/api/servicos':
+@@ -79,7 +111,20 @@
+     raiox.add_argument('--dados', required=True)
+     raiox.add_argument('--mes', required=True)
+     raiox.add_argument('--acompanhamento', required=True)
++    for comando, arquivo in (('backup', '--saida'), ('restaurar', '--entrada')):
++        p = sub.add_parser(comando)
++        p.add_argument('--dados', required=True)
++        p.add_argument(arquivo, required=True)
+     args = parser.parse_args()
++    if args.comando in ('backup', 'restaurar'):
++        try:
++            if args.comando == 'backup':
++                backup.copiar(args.dados, args.saida)
++            else:
++                backup.restaurar(args.dados, args.entrada)
++        except Exception as e:
++            parser.exit(1, f'Falha no {args.comando}: {e}\n')
++        return
+     if args.comando == 'raiox':
+         clinica = Clinica(args.dados)
+         try:
+
+exec
+/bin/bash -lc "date '+%Y-%m-%d %H:%M'; rg -n '0\\.3\\.0|VERSION|__version__' src atende --glob '*.py'; git status --short" in /home/nmaldaner/projetos/atende-clinica
+ succeeded in 0ms:
+2026-10-05 00:50
+src/server.py:48:        return 200, {'ok': True, 'versao': (ROOT / 'VERSION').read_text().strip()}
+ M longrun/2026-10-05-atendimento-v1/ciclo-1.log
+ M longrun/2026-10-05-atendimento-v1/loop.log
+ M src/core.py
+ M src/server.py
+?? longrun/2026-10-05-atendimento-v1/pytest-ciclo-4.log
+?? src/backup.py
+?? src/cadastros.py
+
+diff --git a/src/core.py b/src/core.py
+index 7013abda99d3fe0eb881c32e303058e93790ca2a..074f9002d632e3bf4989375ddf5d03db2310f856
+--- a/src/core.py
++++ b/src/core.py
+@@ -55,6 +55,9 @@
+                 servico TEXT NOT NULL, profissional TEXT NOT NULL, inicio TEXT NOT NULL,
+                 fim TEXT NOT NULL, status TEXT NOT NULL);
+             CREATE INDEX IF NOT EXISTS agenda_profissional ON agendamentos(profissional,inicio,fim);
++            CREATE TABLE IF NOT EXISTS bloqueios (
++                id INTEGER PRIMARY KEY, profissional TEXT NOT NULL,
++                inicio TEXT NOT NULL, fim TEXT NOT NULL, motivo TEXT NOT NULL);
+         ''')
+         with self.db:
+             if not self.db.execute("SELECT 1 FROM meta WHERE chave='semeado'").fetchone():
+@@ -88,6 +91,8 @@
+         return p
+ 
+     def criar_paciente(self, b):
++        from .cadastros import validar_paciente
++        validar_paciente(b)
+         tel = telefone(b.get('telefone'))
+         r = self.db.execute('SELECT id FROM pacientes WHERE telefone=?', (tel,)).fetchone()
+         if r:
+@@ -124,7 +129,9 @@
+                 t = datetime.fromisoformat(data + 'T' + ini)
+                 final = datetime.fromisoformat(data + 'T' + fim)
+                 while t + duracao <= final:
+-                    if t >= limite:
++                    bloqueado = self.db.execute('SELECT 1 FROM bloqueios WHERE profissional=? AND inicio < ? AND fim > ?',
++                        (p['id'], (t + duracao).isoformat(timespec='minutes'), t.isoformat(timespec='minutes'))).fetchone()
++                    if t >= limite and not bloqueado:
+                         resultado.append({'inicio': t.isoformat(timespec='minutes'), 'profissional': p['id']})
+                     t += passo
+         return sorted(resultado, key=lambda h: (h['inicio'], h['profissional']))
+diff --git a/src/server.py b/src/server.py
+index 873daf4c39ca40763f4b1ca8560f95bb9ea57d4f..463c574568416f1762e231f250c70fa0cc2c39f0
+--- a/src/server.py
++++ b/src/server.py
+@@ -8,10 +8,42 @@
+ from urllib.parse import parse_qs, urlsplit
+ 
+ from .core import Clinica, Erro, ROOT
+-from . import conversa, gestao
++from . import conversa, gestao, cadastros, backup
+ 
+ 
+ def rotear(c, metodo, rota, q, b):
++    if metodo == 'GET' and rota == '/api/pacientes':
++        return 200, {'pacientes': cadastros.pacientes(c, q.get('busca', ''))}
++    m = re.fullmatch(r'/api/pacientes/(\d+)', rota)
++    if metodo == 'PUT' and m:
++        return 200, cadastros.editar_paciente(c, int(m[1]), b)
++    m = re.fullmatch(r'/api/(profissionais|servicos|faq)(?:/([^/]+))?', rota)
++    if m:
++        tipo, ident = m.groups()
++        if metodo == 'GET' and ident is None and tipo != 'servicos':
++            return 200, {tipo: c.catalogo(tipo)}
++        if metodo == 'POST' and ident is None:
++            item = cadastros.salvar_catalogo(c, tipo, b)
++            return 201, {'id': item['id']} if tipo == 'faq' else item
++        if metodo == 'PUT' and ident is not None and tipo != 'faq':
++            return 200, cadastros.salvar_catalogo(c, tipo, b, ident)
++        if metodo == 'DELETE' and ident is not None:
++            if tipo == 'faq':
++                c.db.execute('DELETE FROM catalogo WHERE tipo=? AND id=?', (tipo, ident))
++                return 204, None
++            cadastros.salvar_catalogo(c, tipo, {'ativo': False}, ident)
++            return 200, {'ativo': False}
++    if rota == '/api/bloqueios':
++        if metodo == 'POST':
++            return 201, cadastros.bloquear(c, b)
++        if metodo == 'GET':
++            return 200, {'bloqueios': [dict(r) for r in c.db.execute(
++                'SELECT * FROM bloqueios WHERE (? IS NULL OR profissional=?) ORDER BY inicio,id',
++                (q.get('profissional'), q.get('profissional')))]}
++    m = re.fullmatch(r'/api/bloqueios/(\d+)', rota)
++    if metodo == 'DELETE' and m:
++        c.db.execute('DELETE FROM bloqueios WHERE id=?', (int(m[1]),))
++        return 204, None
+     if metodo == 'GET' and rota == '/api/saude':
+         return 200, {'ok': True, 'versao': (ROOT / 'VERSION').read_text().strip()}
+     if metodo == 'GET' and rota == '/api/servicos':
+@@ -79,7 +111,20 @@
+     raiox.add_argument('--dados', required=True)
+     raiox.add_argument('--mes', required=True)
+     raiox.add_argument('--acompanhamento', required=True)
++    for comando, arquivo in (('backup', '--saida'), ('restaurar', '--entrada')):
++        p = sub.add_parser(comando)
++        p.add_argument('--dados', required=True)
++        p.add_argument(arquivo, required=True)
+     args = parser.parse_args()
++    if args.comando in ('backup', 'restaurar'):
++        try:
++            if args.comando == 'backup':
++                backup.copiar(args.dados, args.saida)
++            else:
++                backup.restaurar(args.dados, args.entrada)
++        except Exception as e:
++            parser.exit(1, f'Falha no {args.comando}: {e}\n')
++        return
+     if args.comando == 'raiox':
+         clinica = Clinica(args.dados)
+         try:
+
+exec
+/bin/bash -lc "printf '0.4.0\\n' > VERSION
+bash longrun/2026-10-05-atendimento-v1/verificar-limites.sh" in /home/nmaldaner/projetos/atende-clinica
+ succeeded in 116ms:
+LIMITES OK (hash ab5cccd19cc8242a, 93 testes, escopo ok, sem API/rede)
+
+diff --git a/src/core.py b/src/core.py
+index 7013abda99d3fe0eb881c32e303058e93790ca2a..074f9002d632e3bf4989375ddf5d03db2310f856
+--- a/src/core.py
++++ b/src/core.py
+@@ -55,6 +55,9 @@
+                 servico TEXT NOT NULL, profissional TEXT NOT NULL, inicio TEXT NOT NULL,
+                 fim TEXT NOT NULL, status TEXT NOT NULL);
+             CREATE INDEX IF NOT EXISTS agenda_profissional ON agendamentos(profissional,inicio,fim);
++            CREATE TABLE IF NOT EXISTS bloqueios (
++                id INTEGER PRIMARY KEY, profissional TEXT NOT NULL,
++                inicio TEXT NOT NULL, fim TEXT NOT NULL, motivo TEXT NOT NULL);
+         ''')
+         with self.db:
+             if not self.db.execute("SELECT 1 FROM meta WHERE chave='semeado'").fetchone():
+@@ -88,6 +91,8 @@
+         return p
+ 
+     def criar_paciente(self, b):
++        from .cadastros import validar_paciente
++        validar_paciente(b)
+         tel = telefone(b.get('telefone'))
+         r = self.db.execute('SELECT id FROM pacientes WHERE telefone=?', (tel,)).fetchone()
+         if r:
+@@ -124,7 +129,9 @@
+                 t = datetime.fromisoformat(data + 'T' + ini)
+                 final = datetime.fromisoformat(data + 'T' + fim)
+                 while t + duracao <= final:
+-                    if t >= limite:
++                    bloqueado = self.db.execute('SELECT 1 FROM bloqueios WHERE profissional=? AND inicio < ? AND fim > ?',
++                        (p['id'], (t + duracao).isoformat(timespec='minutes'), t.isoformat(timespec='minutes'))).fetchone()
++                    if t >= limite and not bloqueado:
+                         resultado.append({'inicio': t.isoformat(timespec='minutes'), 'profissional': p['id']})
+                     t += passo
+         return sorted(resultado, key=lambda h: (h['inicio'], h['profissional']))
+diff --git a/src/server.py b/src/server.py
+index 873daf4c39ca40763f4b1ca8560f95bb9ea57d4f..463c574568416f1762e231f250c70fa0cc2c39f0
+--- a/src/server.py
++++ b/src/server.py
+@@ -8,10 +8,42 @@
+ from urllib.parse import parse_qs, urlsplit
+ 
+ from .core import Clinica, Erro, ROOT
+-from . import conversa, gestao
++from . import conversa, gestao, cadastros, backup
+ 
+ 
+ def rotear(c, metodo, rota, q, b):
++    if metodo == 'GET' and rota == '/api/pacientes':
++        return 200, {'pacientes': cadastros.pacientes(c, q.get('busca', ''))}
++    m = re.fullmatch(r'/api/pacientes/(\d+)', rota)
++    if metodo == 'PUT' and m:
++        return 200, cadastros.editar_paciente(c, int(m[1]), b)
++    m = re.fullmatch(r'/api/(profissionais|servicos|faq)(?:/([^/]+))?', rota)
++    if m:
++        tipo, ident = m.groups()
++        if metodo == 'GET' and ident is None and tipo != 'servicos':
++            return 200, {tipo: c.catalogo(tipo)}
++        if metodo == 'POST' and ident is None:
++            item = cadastros.salvar_catalogo(c, tipo, b)
++            return 201, {'id': item['id']} if tipo == 'faq' else item
++        if metodo == 'PUT' and ident is not None and tipo != 'faq':
++            return 200, cadastros.salvar_catalogo(c, tipo, b, ident)
++        if metodo == 'DELETE' and ident is not None:
++            if tipo == 'faq':
++                c.db.execute('DELETE FROM catalogo WHERE tipo=? AND id=?', (tipo, ident))
++                return 204, None
++            cadastros.salvar_catalogo(c, tipo, {'ativo': False}, ident)
++            return 200, {'ativo': False}
++    if rota == '/api/bloqueios':
++        if metodo == 'POST':
++            return 201, cadastros.bloquear(c, b)
++        if metodo == 'GET':
++            return 200, {'bloqueios': [dict(r) for r in c.db.execute(
++                'SELECT * FROM bloqueios WHERE (? IS NULL OR profissional=?) ORDER BY inicio,id',
++                (q.get('profissional'), q.get('profissional')))]}
++    m = re.fullmatch(r'/api/bloqueios/(\d+)', rota)
++    if metodo == 'DELETE' and m:
++        c.db.execute('DELETE FROM bloqueios WHERE id=?', (int(m[1]),))
++        return 204, None
+     if metodo == 'GET' and rota == '/api/saude':
+         return 200, {'ok': True, 'versao': (ROOT / 'VERSION').read_text().strip()}
+     if metodo == 'GET' and rota == '/api/servicos':
+@@ -79,7 +111,20 @@
+     raiox.add_argument('--dados', required=True)
+     raiox.add_argument('--mes', required=True)
+     raiox.add_argument('--acompanhamento', required=True)
++    for comando, arquivo in (('backup', '--saida'), ('restaurar', '--entrada')):
++        p = sub.add_parser(comando)
++        p.add_argument('--dados', required=True)
++        p.add_argument(arquivo, required=True)
+     args = parser.parse_args()
++    if args.comando in ('backup', 'restaurar'):
++        try:
++            if args.comando == 'backup':
++                backup.copiar(args.dados, args.saida)
++            else:
++                backup.restaurar(args.dados, args.entrada)
++        except Exception as e:
++            parser.exit(1, f'Falha no {args.comando}: {e}\n')
++        return
+     if args.comando == 'raiox':
+         clinica = Clinica(args.dados)
+         try:
+
+ succeeded in 65938ms:
+        api_int.post("/api/tarefas/rodar", {})
+        assert "cancelad" in norm(api_int.msg(TEL, "2"))
+>       assert esperar(lambda: any(p["json"]["text"].startswith("Cancelado:") and "07/10 09:00" in p["json"]["text"]
+                                   for p in externo.telegram()))
+E       assert False
+E        +  where False = esperar(<function test_cancelamento_pelo_chat_avisa_equipe.<locals>.<lambda> at 0xedcc952d27a0>)
+
+tests/test_integracoes.py:212: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_basico.py::test_paginas - assert (404 == 200)
+FAILED tests/test_docker.py::test_dockerfile - AssertionError: falta Dockerfile
+FAILED tests/test_docker.py::test_compose - AssertionError: falta docker-comp...
+FAILED tests/test_docker.py::test_env_exemplo_tem_todas_as_variaveis_sem_segredo_real
+FAILED tests/test_docker.py::test_readme_explica_deploy - AssertionError: ass...
 FAILED tests/test_integracoes.py::test_webhook_evolution_segredo_errado - ass...
 FAILED tests/test_integracoes.py::test_whatsapp_responde_pela_evolution - ass...
 FAILED tests/test_integracoes.py::test_whatsapp_ignora_o_que_nao_e_do_paciente
 FAILED tests/test_integracoes.py::test_whatsapp_sem_texto - assert 401 == 200
 FAILED tests/test_integracoes.py::test_whatsapp_agenda_e_avisa_equipe - asser...
-FAILED tests/test_integracoes.py::test_saida_pela_evolution_com_reenvio - Key...
-FAILED tests/test_integracoes.py::test_sem_evolution_status_simulado - Assert...
-FAILED tests/test_integracoes.py::test_abertura_vai_ao_grupo - AssertionError...
-FAILED tests/test_integracoes.py::test_emergencia_marca_alta - AssertionError...
+FAILED tests/test_integracoes.py::test_saida_pela_evolution_com_reenvio - Ass...
+FAILED tests/test_integracoes.py::test_abertura_vai_ao_grupo - assert False
+FAILED tests/test_integracoes.py::test_emergencia_marca_alta - assert False
 FAILED tests/test_integracoes.py::test_atendimento_aberto_silencia_bot_e_repassa
 FAILED tests/test_integracoes.py::test_equipe_responde_em_cima_da_mensagem - ...
-FAILED tests/test_integracoes.py::test_webhook_telegram_protegido - Assertion...
-FAILED tests/test_integracoes.py::test_comandos_responder_encerrar_fila - Ass...
+FAILED tests/test_integracoes.py::test_webhook_telegram_protegido - assert False
+FAILED tests/test_integracoes.py::test_comandos_responder_encerrar_fila - ass...
 FAILED tests/test_integracoes.py::test_comando_agenda - assert False
-FAILED tests/test_integracoes.py::test_recepcao_responde_e_encerra - Assertio...
+FAILED tests/test_integracoes.py::test_recepcao_responde_e_encerra - assert F...
 FAILED tests/test_integracoes.py::test_cancelamento_pelo_chat_avisa_equipe - ...
-FAILED tests/test_lembretes.py::test_confirmacao_dentro_de_48h_uma_vez - Asse...
-FAILED tests/test_lembretes.py::test_responder_1_confirma - AssertionError: (...
-FAILED tests/test_lembretes.py::test_responder_2_cancela - AssertionError: (4...
-FAILED tests/test_lembretes.py::test_lista_de_espera_oferece_e_agenda - asser...
-FAILED tests/test_lembretes.py::test_espera_horario_ja_ocupado - AssertionErr...
-FAILED tests/test_lembretes.py::test_espera_de_outro_dia_nao_recebe - Asserti...
-FAILED tests/test_lembretes.py::test_cancelar_pela_conversa_dispara_espera - ...
-FAILED tests/test_lembretes.py::test_retorno_programado - AssertionError: (40...
-FAILED tests/test_lembretes.py::test_servico_sem_retorno_nao_gera_aviso - Ass...
-FAILED tests/test_lembretes.py::test_confirmacao_sobrevive_a_reinicio - Asser...
-FAILED tests/test_lgpd_raiox.py::test_dados_e_exclusao - AssertionError: (404...
-FAILED tests/test_lgpd_raiox.py::test_raiox_numeros_do_mes - assert (404 == 200)
-FAILED tests/test_lgpd_raiox.py::test_cli_grava_mes_no_acompanhamento_do_painel
-73 failed, 20 passed in 20.98s
-
-exec
-/bin/bash -lc "cat > longrun/2026-10-05-atendimento-v1/state.md <<'EOF'
-# Estado — atualizado 2026-10-05 00:30
-
-## Funciona
-- "'`./atende serve --porta 0 --dados DIR`: primeira linha PORTA, bind em 127.0.0.1, configuração copiada do exemplo quando ausente, saúde com VERSION e autenticação X-Token.
-- SQLite em DIR/estado.sqlite3; profissionais/serviços/FAQ semeados uma única vez, configuração operacional relida no início.
-- Agenda: grade, duração, antecedência, feriados, seleção automática de profissional, conflitos, concorrência (um vencedor), listagem por data/período, cancelamento, remarcação e status de presença.
-- Paciente: criação, normalização e deduplicação de telefone. Reinício conserva pacientes, agenda e ocupação.
-- Suíte completa observada: **20 passed / 73 failed**, sem errors, em 20.98s. Log: `pytest-ciclo-1.log` nesta pasta.
-- Verificador: **LIMITES OK**, contrato intacto e 93 testes coletados.
-
-## Falta
-- Conversa inteira, fila humana e histórico de mensagens persistido.
-- Lembretes, espera e retorno (cancelamento/presença atuais só alteram o status; ainda faltam seus efeitos nessas filas).
-- Campanhas, LGPD (inclusive GET dos dados do paciente, necessário ao teste de telefone) e Raio-X HTTP/CLI.
-- CRUD dos cadastros, bloqueios, backup/restauração. Horários personalizados já são considerados pelo motor, mas ainda não editáveis por API.
-- Evolution/Telegram, Docker/README e páginas em web/.
-- Rotas não implementadas devolvem 404; nenhum stub simula sucesso. Teste de rotas públicas ainda falha em /api/mensagens; teste de páginas ainda falha.
-- Nenhum conflito teste/spec identificado neste ciclo. Restrição de bind local prevalece durante o loop; requisito Docker deve ser conciliado no ciclo da entrega sem abrir listener externo.
-
-## Como retomar
-1. Ler goal.md → state.md → plan.md → canal.md → fins de progress.md/failures.md. Especificação inteira e tests/conftest.py já lidos no primeiro ciclo.
-2. Ler `src/core.py`, `src/server.py`, `tests/test_conversa.py` e testes de lembretes para desenhar histórico/pendências sem refazer a agenda.
-3. Implementar conversa e persistência de estado por telefone, seguindo a ordem do contrato. Usar a mesma transação/lock nas chamadas internas.
-4. Executar `python3 -m pytest -q tests/ > longrun/2026-10-05-atendimento-v1/pytest-ciclo-2.log 2>&1` e `tail -30 longrun/2026-10-05-atendimento-v1/pytest-ciclo-2.log`.
-5. Executar `bash longrun/2026-10-05-atendimento-v1/verificar-limites.sh`, atualizar registros. Não fazer commit.
-EOF
-cat > longrun/2026-10-05-atendimento-v1/plan.md <<'"'EOF'
-# Plano
-
-## Estratégia atual
-Python 3 stdlib, ThreadingHTTPServer, SQLite; lock reentrante e transação por requisição serializam validação e gravação. Separar novos motores em módulos de src/ conforme cresçam. Não editar arquivos protegidos nem fazer chamadas externas.
-
-## Próximos 3 passos
-1. Conversa: normalização, emergência, opt-out, fila humana, fluxo de agendamento, FAQ e fallback; persistir sessões/histórico. Preservar prioridade da emergência e silêncio durante atendimento humano aberto.
-2. Mensagens de saída/pendências, confirmação, espera e retorno, com idempotência e efeitos em cancelar/presença. Validar a suíte inteira e registrar falhas restantes.
-3. Campanhas e LGPD, depois Raio-X. Seguir com cadastros/bloqueios/backup → Evolution/Telegram (só falsos locais) → Docker/README → páginas.
-EOF
-cat >> longrun/2026-10-05-atendimento-v1/progress.md <<'EOF'
-| 2026-10-05 00:30 | CLI, HTTP/auth, SQLite, pacientes e agenda transacional; pytest 20 passed / 73 failed (20.98s); LIMITES OK | sem commit (loop externo) | parcial | não medido | 0 |
-EOF
-cat >> longrun/2026-10-05-atendimento-v1/failures.md <<'EOF'
-| 2026-10-05 00:30 | 73 testes falham por funcionalidades ainda ausentes (inclusive LGPD no teste de telefone) → implementada base/agenda → 20 passed, restante registrado no plano; sem conflito com spec identificado | base executável + suíte inteira | checkpoint parcial | infra |
-| 2026-10-05 00:30 | "'`tail -20` com vários arquivos rejeitado → usado `tail -n 20` → leitura concluída | opção explícita -n | corrigido | prompt |
-EOF
-cat >> longrun/2026-10-05-atendimento-v1/decisions.md <<'"'EOF'
-| 2026-10-05 00:30 | SQLite com RLock reentrante e transação envolvendo cada requisição de domínio | checagem de disponibilidade e escrita atômicas; concorrência comprovada pelo teste de 10 pedidos | validar fora da transação |
-| 2026-10-05 00:30 | Catálogo JSON em tabela SQLite com marcador de semeadura único; pacientes/agendamentos relacionais | preserva ordem da configuração e futuros CRUDs, sem repovoar itens apagados | reler os cadastros do JSON a cada boot |
-EOF
-cat >> longrun/2026-10-05-atendimento-v1/canal.md <<'EOF'
-- 2026-10-05 00:30 · fato · Primeira leitura integral de docs/ESPECIFICACAO.md e tests/conftest.py concluída. A fixture remove variáveis de integração herdadas; só api_int fornece servidores falsos locais.
-- 2026-10-05 00:30 · armadilha · test_telefone_normalizado_e_duplicado também exige GET /api/pacientes/{id}/dados (LGPD); sua falha atual não indica erro na normalização.
-- 2026-10-05 00:30 · fato · src/core.py contém domínio/SQLite; src/server.py concentra CLI/transporte/roteamento. Lock e transação externos envolvem todas as operações de cada requisição; Erro causa rollback.
-- 2026-10-05 00:30 · armadilha · HTTP localhost via servidor falso é permitido para integrações; não configurar variáveis reais. Estado de presença/cancelamento ainda precisa criar retornos/disparar espera.
-EOF
-cat >> FALHAS.md <<'EOF'
-| 2026-10-05 | tail com opção antiga e múltiplos arquivos recusou leitura | usar "'`tail -n 20` | prompt |
-EOF
-cat >> CLAUDE.md <<'"'EOF'
-- Ao ler o fim de vários arquivos, usar "'`tail -n 20`, evitando a sintaxe antiga `tail -20`.
-EOF
-bash longrun/2026-10-05-atendimento-v1/verificar-limites.sh' in /home/nmaldaner/projetos/atende-clinica
- succeeded in 117ms:
-LIMITES OK (hash ab5cccd19cc8242a, 93 testes, escopo ok, sem API/rede)
+20 failed, 73 passed in 65.80s (0:01:05)
 
 codex
-Ciclo encerrado: base HTTP, autenticação, SQLite persistente, pacientes e agenda implementados, incluindo proteção contra agendamentos simultâneos.
+Os cadastros, bloqueios e comandos de backup estão implementados. Uma verificação local confirmou a restauração de configuração, paciente, FAQ e bloqueio, além da rejeição de backup inválido sem alterar o banco. O verificador já retornou `LIMITES OK`; a suíte completa ainda está executando.
 
-Validação: **20 passed / 73 failed**; **LIMITES OK**. As funcionalidades restantes estão registradas; o sistema ainda não está concluído.
+exec
+/bin/bash -lc 'git diff --check; tail -n 8 longrun/2026-10-05-atendimento-v1/decisions.md' in /home/nmaldaner/projetos/atende-clinica
+ succeeded in 0ms:
+longrun/2026-10-05-atendimento-v1/ciclo-1.log:1439: trailing whitespace.
++ 
+longrun/2026-10-05-atendimento-v1/ciclo-1.log:1463: trailing whitespace.
++ 
+longrun/2026-10-05-atendimento-v1/ciclo-1.log:1467: trailing whitespace.
++ 
+longrun/2026-10-05-atendimento-v1/ciclo-1.log:1468: trailing whitespace.
++ 
+longrun/2026-10-05-atendimento-v1/ciclo-1.log:1547: trailing whitespace.
++ 
+longrun/2026-10-05-atendimento-v1/ciclo-1.log:1571: trailing whitespace.
++ 
+longrun/2026-10-05-atendimento-v1/ciclo-1.log:1575: trailing whitespace.
++ 
+longrun/2026-10-05-atendimento-v1/ciclo-1.log:1576: trailing whitespace.
++ 
+longrun/2026-10-05-atendimento-v1/ciclo-1.log:1789: trailing whitespace.
++ 
+longrun/2026-10-05-atendimento-v1/ciclo-1.log:1813: trailing whitespace.
++ 
+longrun/2026-10-05-atendimento-v1/ciclo-1.log:1817: trailing whitespace.
++ 
+longrun/2026-10-05-atendimento-v1/ciclo-1.log:1818: trailing whitespace.
++ 
+longrun/2026-10-05-atendimento-v1/ciclo-1.log:1906: trailing whitespace.
++ 
+longrun/2026-10-05-atendimento-v1/ciclo-1.log:1930: trailing whitespace.
++ 
+longrun/2026-10-05-atendimento-v1/ciclo-1.log:1934: trailing whitespace.
++ 
+longrun/2026-10-05-atendimento-v1/ciclo-1.log:1935: trailing whitespace.
++ 
+longrun/2026-10-05-atendimento-v1/ciclo-1.log:2016: trailing whitespace.
++ 
+longrun/2026-10-05-atendimento-v1/ciclo-1.log:2040: trailing whitespace.
++ 
+longrun/2026-10-05-atendimento-v1/ciclo-1.log:2044: trailing whitespace.
++ 
+longrun/2026-10-05-atendimento-v1/ciclo-1.log:2045: trailing whitespace.
++ 
+longrun/2026-10-05-atendimento-v1/ciclo-1.log:2138: new blank line at EOF.
+|---|---|---|---|
+| 2026-10-05 00:30 | SQLite com RLock reentrante e transação envolvendo cada requisição de domínio | checagem de disponibilidade e escrita atômicas; concorrência comprovada pelo teste de 10 pedidos | validar fora da transação |
+| 2026-10-05 00:30 | Catálogo JSON em tabela SQLite com marcador de semeadura único; pacientes/agendamentos relacionais | preserva ordem da configuração e futuros CRUDs, sem repovoar itens apagados | reler os cadastros do JSON a cada boot |
+| 2026-10-05 00:33 | Sessões JSON por telefone; histórico separado da caixa de saída, vinculado ao paciente ao cadastrar pelo chat | preservar mensagens de desconhecidos e dar continuidade após reinício; saída só contém notificações contratadas | guardar conversa em memória ou misturar respostas do chat na caixa de saída |
+| 2026-10-05 00:33 | Cancelamento comum entre API e chat; retorno único por agendamento; oferta de espera guarda o horário original | efeitos consistentes e idempotentes, aceite revalida disponibilidade na mesma transação | reservar vaga apenas porque foi ofertada |
+| 2026-10-05 00:39 | Campanhas validam todas as regras antes de criar saída; pontuação preservada após remover acentos | detectar r$ e 100% e impedir envio parcial | reutilizar normalizador de conversa que remove pontuação |
+| 2026-10-05 00:39 | LGPD desvincula contato antes de cancelar agenda, apaga identificadores/textos de sessão/fila/saída e conserva registros quantitativos | impedir ofertas ao excluído sem perder agregados nem manter telefone reconhecido | apagar paciente e quebrar referências da agenda |
+| 2026-10-05 00:39 | Raio-X usa calendário e horários de cada profissional; exportação mescla mês anterior cronológico/base e substitui JSON atomicamente | números independem do fixture; preservar campos não medidos e evitar arquivo parcial | constantes do mês ou gravação direta do JSON |
 
-Estado, plano e registros atualizados. Próximo passo: conversa e fila humana. Nenhum commit realizado.
+diff --git a/src/core.py b/src/core.py
+index 7013abda99d3fe0eb881c32e303058e93790ca2a..074f9002d632e3bf4989375ddf5d03db2310f856
+--- a/src/core.py
++++ b/src/core.py
+@@ -55,6 +55,9 @@
+                 servico TEXT NOT NULL, profissional TEXT NOT NULL, inicio TEXT NOT NULL,
+                 fim TEXT NOT NULL, status TEXT NOT NULL);
+             CREATE INDEX IF NOT EXISTS agenda_profissional ON agendamentos(profissional,inicio,fim);
++            CREATE TABLE IF NOT EXISTS bloqueios (
++                id INTEGER PRIMARY KEY, profissional TEXT NOT NULL,
++                inicio TEXT NOT NULL, fim TEXT NOT NULL, motivo TEXT NOT NULL);
+         ''')
+         with self.db:
+             if not self.db.execute("SELECT 1 FROM meta WHERE chave='semeado'").fetchone():
+@@ -88,6 +91,8 @@
+         return p
+ 
+     def criar_paciente(self, b):
++        from .cadastros import validar_paciente
++        validar_paciente(b)
+         tel = telefone(b.get('telefone'))
+         r = self.db.execute('SELECT id FROM pacientes WHERE telefone=?', (tel,)).fetchone()
+         if r:
+@@ -124,7 +129,9 @@
+                 t = datetime.fromisoformat(data + 'T' + ini)
+                 final = datetime.fromisoformat(data + 'T' + fim)
+                 while t + duracao <= final:
+-                    if t >= limite:
++                    bloqueado = self.db.execute('SELECT 1 FROM bloqueios WHERE profissional=? AND inicio < ? AND fim > ?',
++                        (p['id'], (t + duracao).isoformat(timespec='minutes'), t.isoformat(timespec='minutes'))).fetchone()
++                    if t >= limite and not bloqueado:
+                         resultado.append({'inicio': t.isoformat(timespec='minutes'), 'profissional': p['id']})
+                     t += passo
+         return sorted(resultado, key=lambda h: (h['inicio'], h['profissional']))
+diff --git a/src/server.py b/src/server.py
+index 873daf4c39ca40763f4b1ca8560f95bb9ea57d4f..463c574568416f1762e231f250c70fa0cc2c39f0
+--- a/src/server.py
++++ b/src/server.py
+@@ -8,10 +8,42 @@
+ from urllib.parse import parse_qs, urlsplit
+ 
+ from .core import Clinica, Erro, ROOT
+-from . import conversa, gestao
++from . import conversa, gestao, cadastros, backup
+ 
+ 
+ def rotear(c, metodo, rota, q, b):
++    if metodo == 'GET' and rota == '/api/pacientes':
++        return 200, {'pacientes': cadastros.pacientes(c, q.get('busca', ''))}
++    m = re.fullmatch(r'/api/pacientes/(\d+)', rota)
++    if metodo == 'PUT' and m:
++        return 200, cadastros.editar_paciente(c, int(m[1]), b)
++    m = re.fullmatch(r'/api/(profissionais|servicos|faq)(?:/([^/]+))?', rota)
++    if m:
++        tipo, ident = m.groups()
++        if metodo == 'GET' and ident is None and tipo != 'servicos':
++            return 200, {tipo: c.catalogo(tipo)}
++        if metodo == 'POST' and ident is None:
++            item = cadastros.salvar_catalogo(c, tipo, b)
++            return 201, {'id': item['id']} if tipo == 'faq' else item
++        if metodo == 'PUT' and ident is not None and tipo != 'faq':
++            return 200, cadastros.salvar_catalogo(c, tipo, b, ident)
++        if metodo == 'DELETE' and ident is not None:
++            if tipo == 'faq':
++                c.db.execute('DELETE FROM catalogo WHERE tipo=? AND id=?', (tipo, ident))
++                return 204, None
++            cadastros.salvar_catalogo(c, tipo, {'ativo': False}, ident)
++            return 200, {'ativo': False}
++    if rota == '/api/bloqueios':
++        if metodo == 'POST':
++            return 201, cadastros.bloquear(c, b)
++        if metodo == 'GET':
++            return 200, {'bloqueios': [dict(r) for r in c.db.execute(
++                'SELECT * FROM bloqueios WHERE (? IS NULL OR profissional=?) ORDER BY inicio,id',
++                (q.get('profissional'), q.get('profissional')))]}
++    m = re.fullmatch(r'/api/bloqueios/(\d+)', rota)
++    if metodo == 'DELETE' and m:
++        c.db.execute('DELETE FROM bloqueios WHERE id=?', (int(m[1]),))
++        return 204, None
+     if metodo == 'GET' and rota == '/api/saude':
+         return 200, {'ok': True, 'versao': (ROOT / 'VERSION').read_text().strip()}
+     if metodo == 'GET' and rota == '/api/servicos':
+@@ -79,7 +111,20 @@
+     raiox.add_argument('--dados', required=True)
+     raiox.add_argument('--mes', required=True)
+     raiox.add_argument('--acompanhamento', required=True)
++    for comando, arquivo in (('backup', '--saida'), ('restaurar', '--entrada')):
++        p = sub.add_parser(comando)
++        p.add_argument('--dados', required=True)
++        p.add_argument(arquivo, required=True)
+     args = parser.parse_args()
++    if args.comando in ('backup', 'restaurar'):
++        try:
++            if args.comando == 'backup':
++                backup.copiar(args.dados, args.saida)
++            else:
++                backup.restaurar(args.dados, args.entrada)
++        except Exception as e:
++            parser.exit(1, f'Falha no {args.comando}: {e}\n')
++        return
+     if args.comando == 'raiox':
+         clinica = Clinica(args.dados)
+         try:
+
+codex
+A suíte terminou com **73 passed / 20 failed**, ganho de 10 testes sem regressões observadas. As falhas restantes são de integrações, páginas e entrega Docker/README. Vou registrar esse checkpoint e deixar Evolution/Telegram como próxima ação.
+
+exec
+/bin/bash -lc "python3 - <<'PY'
+from pathlib import Path
+from datetime import datetime
+p = Path('longrun/2026-10-05-atendimento-v1')
+agora = datetime.now().strftime('%Y-%m-%d %H:%M')
+(p/'state.md').write_text(f'''# Estado — atualizado {agora}
+
+## Funciona
+- CLI serve com PORTA, bind 127.0.0.1, auth X-Token, SQLite persistente, configuração e catálogo semeado uma vez; agenda transacional e normalização de telefones.
+- Conversa persistente: emergência, opt-out, FAQ, fallback, fila humana, agendamento, confirmação, espera FIFO e retorno. Atendimento aberto silencia o bot, exceto emergência.
+- Campanhas com regras dos quatro conselhos, lista completa de violações, consentimento e opt-out. LGPD exporta histórico e anonimiza contato, histórico/saída/sessão/fila, preservando agregados.
+- Raio-X HTTP/CLI calcula indicadores do banco/calendário, mescla mês anterior/base, preserva campos não medidos e grava JSON atomicamente.
+- Cadastros completos em src/cadastros.py: profissionais (registro/horários próprios), serviços e desativação; pacientes com busca sem acento/caixa e edição validada; FAQ com efeito imediato. Edições persistem sem ressemear o catálogo.
+- Bloqueios persistentes: retiram horários sobrepostos, novas reservas recebem 422, informam conflitos ativos sem cancelar consultas existentes; exclusão libera a grade. Listagem por período/profissional passa.
+- CLI backup/restaurar em src/backup.py: snapshot SQLite consistente com servidor ligado, ZIP com banco e clinica.json; restauração validada com servidor parado. Verificação local adicional passou para configuração, paciente, FAQ, bloqueio e rejeição de arquivo inválido sem alteração do banco.
+- Versão 0.4.0. Suíte completa: **73 passed / 20 failed**, sem errors, em 65.80s; pytest-ciclo-4.log. Ganho de 10 testes, sem regressão observada; todos os testes de cadastros passam.
+- Verificador: **LIMITES OK**, 93 testes e contrato intacto. Nenhuma rede externa, API real ou commit neste ciclo.
+
+## Falta
+- Evolution e Telegram: webhooks, envio/reenvio, responder/encerrar pela recepção, notificações à equipe. Ainda nenhuma chamada de integração implementada.
+- Docker, compose, .env.exemplo, README e páginas web.
+- Revisar bordas da conversa: preferências de desconhecido ao limpar sessão por emergência; respostas a confirmações depois de alteração do agendamento; opções antigas de catálogo durante um fluxo.
+- Nenhum conflito teste/spec identificado neste ciclo. Restrição de bind local prevalece durante o loop; conciliar Docker ao implementar entrega.
+
+## Como retomar
+1. Ler goal → state → plan → canal e fins de progress/failures. Especificação inteira e conftest foram lidos neste ciclo.
+2. Ler src/server.py, src/conversa.py e tests/test_integracoes.py. HTTP envolve operações em lock/transação; conversa.iniciar cria tabelas adicionais e é chamado em serve e raiox.
+3. Implementar Evolution e Telegram exclusivamente com variáveis da spec e servidores falsos locais dos testes; sem URLs externas no código nem credenciais reais.
+4. Rodar suíte inteira para arquivo e ler só tail -n 30, executar verificar-limites.sh, atualizar registros. Não fazer commit. Só marcar concluído quando os dois portões passarem.
+''')
+(p/'plan.md').write_text('''# Plano
+
+## Estratégia atual
+Python 3 stdlib, HTTP local, SQLite com lock/transação por requisição. Catálogo/agenda em core.py, CRUD/bloqueios em cadastros.py, backup em backup.py, conversa/notificações em conversa.py, campanhas/LGPD/Raio-X em gestao.py. Contrato e testes intactos.
+
+## Próximos 3 passos
+1. Evolution: webhook com segredo e deduplicação persistente, conversa compartilhada, saída com status e reenvio de pendentes. Somente variáveis contratadas e servidor falso local. Revisar bordas de conversa anotadas no state.
+2. Telegram: abertura/repasse, respostas vinculadas ao atendimento, comandos, notificações e responder/encerrar pela recepção. Testar exclusivamente no falso local; garantir silêncio do bot com atendimento aberto.
+3. Docker/compose/.env.exemplo/README e páginas web completas. Rodar suíte e limites; atualizar registros sem commit e sem marcar concluído antes dos dois portões passarem.
+''')
+def append(nome, texto):
+    with (p/nome).open('a') as f:
+        f.write(texto + '\\n')
+append('progress.md', f'| {agora} | CRUD de cadastros, bloqueios e backup/restauração; pytest 73 passed / 20 failed (65.80s); LIMITES OK; validação extra de backup passou; versão 0.4.0 | sem commit (loop externo) | parcial, +10 testes | não medido | 0 |')
+append('failures.md', f'| {agora} | tail abreviado repetido na leitura inicial → corrigido para tail -n → leitura concluída; lição existente em CLAUDE.md | sintaxe explícita | corrigido | prompt |')
+append('failures.md', f'| {agora} | 20 testes falham por integrações/páginas/Docker/README ausentes → implementados cadastros/bloqueios/backup → 73 passed / 20 failed, sem regressão ou conflito identificado | próximo escopo no plano | parcial | infra |')
+append('failures.md', f'| {agora} | git diff --check global sinalizou whitespace no ciclo-1.log gerado pelo loop → verificação restrita aos arquivos editados → sem problema no código; log preservado | não editar saída do loop | log externo preservado | infra |')
+append('decisions.md', f'| {agora} | Bloqueios entram no cálculo de candidatos com intervalos semiabertos; cadastros mantêm ordem de inserção e desativação lógica | reserva em bloqueio retorna 422 e agenda histórica permanece | tratar bloqueio como agendamento ocupado (409) |')
+append('decisions.md', f'| {agora} | Backup ZIP inclui clinica.json e snapshot feito por sqlite3.Connection.backup; arquivo final substituído com os.replace | cópia consistente com servidor ligado; restauração valida antes de substituir e exige servidor parado | copiar SQLite diretamente durante escrita ou extrair caminhos arbitrários de ZIP |')
+append('canal.md', f'- {agora} · fato · src/cadastros.py implementa CRUD/busca/bloqueios; src/backup.py usa ZIP com estado.sqlite3 e clinica.json. Backup não instancia Clinica nem ressemeia o banco; abre origem SQLite em modo somente leitura.')
+append('canal.md', f'- {agora} · armadilha · Bloqueios devem sair de candidatos, não apenas livre: reserva bloqueada é inválida (422), enquanto sobreposição com consulta válida é ocupada (409). Intervalos usam inicio < fim_consulta e fim > inicio_consulta.')
+append('canal.md', f'- {agora} · fato · Suíte 73 passed / 20 failed (65.80s), +10 testes; faltam integrações, páginas e Docker/README. LIMITES OK; teste local de backup validou também configuração/FAQ/bloqueio e arquivo inválido.')
+f = Path('FALHAS.md')
+t = f.read_text()
+linha = '| 2026-10-05 | cadastros, bloqueios e backup ausentes causavam 10 falhas de aceitação | adicionar rotas CRUD, filtro de bloqueios e snapshot SQLite; suíte passou de 63 para 73 testes aprovados | infra |\\n'
+t = t.replace('|---|---|---|---|\\n', '|---|---|---|---|\\n' + linha, 1)
+f.write_text(t)
+PY
+git diff --check -- src VERSION FALHAS.md longrun/2026-10-05-atendimento-v1/state.md longrun/2026-10-05-atendimento-v1/plan.md longrun/2026-10-05-atendimento-v1/progress.md longrun/2026-10-05-atendimento-v1/failures.md longrun/2026-10-05-atendimento-v1/decisions.md longrun/2026-10-05-atendimento-v1/canal.md
+bash longrun/2026-10-05-atendimento-v1/verificar-limites.sh" in /home/nmaldaner/projetos/atende-clinica
+ succeeded in 151ms:
+LIMITES OK (hash ab5cccd19cc8242a, 93 testes, escopo ok, sem API/rede)
+
+diff --git a/src/core.py b/src/core.py
+index 7013abda99d3fe0eb881c32e303058e93790ca2a..074f9002d632e3bf4989375ddf5d03db2310f856
+--- a/src/core.py
++++ b/src/core.py
+@@ -55,6 +55,9 @@
+                 servico TEXT NOT NULL, profissional TEXT NOT NULL, inicio TEXT NOT NULL,
+                 fim TEXT NOT NULL, status TEXT NOT NULL);
+             CREATE INDEX IF NOT EXISTS agenda_profissional ON agendamentos(profissional,inicio,fim);
++            CREATE TABLE IF NOT EXISTS bloqueios (
++                id INTEGER PRIMARY KEY, profissional TEXT NOT NULL,
++                inicio TEXT NOT NULL, fim TEXT NOT NULL, motivo TEXT NOT NULL);
+         ''')
+         with self.db:
+             if not self.db.execute("SELECT 1 FROM meta WHERE chave='semeado'").fetchone():
+@@ -88,6 +91,8 @@
+         return p
+ 
+     def criar_paciente(self, b):
++        from .cadastros import validar_paciente
++        validar_paciente(b)
+         tel = telefone(b.get('telefone'))
+         r = self.db.execute('SELECT id FROM pacientes WHERE telefone=?', (tel,)).fetchone()
+         if r:
+@@ -124,7 +129,9 @@
+                 t = datetime.fromisoformat(data + 'T' + ini)
+                 final = datetime.fromisoformat(data + 'T' + fim)
+                 while t + duracao <= final:
+-                    if t >= limite:
++                    bloqueado = self.db.execute('SELECT 1 FROM bloqueios WHERE profissional=? AND inicio < ? AND fim > ?',
++                        (p['id'], (t + duracao).isoformat(timespec='minutes'), t.isoformat(timespec='minutes'))).fetchone()
++                    if t >= limite and not bloqueado:
+                         resultado.append({'inicio': t.isoformat(timespec='minutes'), 'profissional': p['id']})
+                     t += passo
+         return sorted(resultado, key=lambda h: (h['inicio'], h['profissional']))
+diff --git a/src/server.py b/src/server.py
+index 873daf4c39ca40763f4b1ca8560f95bb9ea57d4f..463c574568416f1762e231f250c70fa0cc2c39f0
+--- a/src/server.py
++++ b/src/server.py
+@@ -8,10 +8,42 @@
+ from urllib.parse import parse_qs, urlsplit
+ 
+ from .core import Clinica, Erro, ROOT
+-from . import conversa, gestao
++from . import conversa, gestao, cadastros, backup
+ 
+ 
+ def rotear(c, metodo, rota, q, b):
++    if metodo == 'GET' and rota == '/api/pacientes':
++        return 200, {'pacientes': cadastros.pacientes(c, q.get('busca', ''))}
++    m = re.fullmatch(r'/api/pacientes/(\d+)', rota)
++    if metodo == 'PUT' and m:
++        return 200, cadastros.editar_paciente(c, int(m[1]), b)
++    m = re.fullmatch(r'/api/(profissionais|servicos|faq)(?:/([^/]+))?', rota)
++    if m:
++        tipo, ident = m.groups()
++        if metodo == 'GET' and ident is None and tipo != 'servicos':
++            return 200, {tipo: c.catalogo(tipo)}
++        if metodo == 'POST' and ident is None:
++            item = cadastros.salvar_catalogo(c, tipo, b)
++            return 201, {'id': item['id']} if tipo == 'faq' else item
++        if metodo == 'PUT' and ident is not None and tipo != 'faq':
++            return 200, cadastros.salvar_catalogo(c, tipo, b, ident)
++        if metodo == 'DELETE' and ident is not None:
++            if tipo == 'faq':
++                c.db.execute('DELETE FROM catalogo WHERE tipo=? AND id=?', (tipo, ident))
++                return 204, None
++            cadastros.salvar_catalogo(c, tipo, {'ativo': False}, ident)
++            return 200, {'ativo': False}
++    if rota == '/api/bloqueios':
++        if metodo == 'POST':
++            return 201, cadastros.bloquear(c, b)
++        if metodo == 'GET':
++            return 200, {'bloqueios': [dict(r) for r in c.db.execute(
++                'SELECT * FROM bloqueios WHERE (? IS NULL OR profissional=?) ORDER BY inicio,id',
++                (q.get('profissional'), q.get('profissional')))]}
++    m = re.fullmatch(r'/api/bloqueios/(\d+)', rota)
++    if metodo == 'DELETE' and m:
++        c.db.execute('DELETE FROM bloqueios WHERE id=?', (int(m[1]),))
++        return 204, None
+     if metodo == 'GET' and rota == '/api/saude':
+         return 200, {'ok': True, 'versao': (ROOT / 'VERSION').read_text().strip()}
+     if metodo == 'GET' and rota == '/api/servicos':
+@@ -79,7 +111,20 @@
+     raiox.add_argument('--dados', required=True)
+     raiox.add_argument('--mes', required=True)
+     raiox.add_argument('--acompanhamento', required=True)
++    for comando, arquivo in (('backup', '--saida'), ('restaurar', '--entrada')):
++        p = sub.add_parser(comando)
++        p.add_argument('--dados', required=True)
++        p.add_argument(arquivo, required=True)
+     args = parser.parse_args()
++    if args.comando in ('backup', 'restaurar'):
++        try:
++            if args.comando == 'backup':
++                backup.copiar(args.dados, args.saida)
++            else:
++                backup.restaurar(args.dados, args.entrada)
++        except Exception as e:
++            parser.exit(1, f'Falha no {args.comando}: {e}\n')
++        return
+     if args.comando == 'raiox':
+         clinica = Clinica(args.dados)
+         try:
+
+codex
+Ciclo registrado: cadastros, bloqueios e backup/restauração implementados na versão `0.4.0`.
+
+- Pytest: **73 passed / 20 failed** — avanço de 10 testes.
+- Verificador: **LIMITES OK**.
+- Registros da execução atualizados; nenhum commit.
+
+Próximo passo: Evolution e Telegram com servidores falsos locais. Ainda faltam integrações, páginas e Docker/README.
+diff --git a/src/core.py b/src/core.py
+index 7013abda99d3fe0eb881c32e303058e93790ca2a..074f9002d632e3bf4989375ddf5d03db2310f856
+--- a/src/core.py
++++ b/src/core.py
+@@ -55,6 +55,9 @@
+                 servico TEXT NOT NULL, profissional TEXT NOT NULL, inicio TEXT NOT NULL,
+                 fim TEXT NOT NULL, status TEXT NOT NULL);
+             CREATE INDEX IF NOT EXISTS agenda_profissional ON agendamentos(profissional,inicio,fim);
++            CREATE TABLE IF NOT EXISTS bloqueios (
++                id INTEGER PRIMARY KEY, profissional TEXT NOT NULL,
++                inicio TEXT NOT NULL, fim TEXT NOT NULL, motivo TEXT NOT NULL);
+         ''')
+         with self.db:
+             if not self.db.execute("SELECT 1 FROM meta WHERE chave='semeado'").fetchone():
+@@ -88,6 +91,8 @@
+         return p
+ 
+     def criar_paciente(self, b):
++        from .cadastros import validar_paciente
++        validar_paciente(b)
+         tel = telefone(b.get('telefone'))
+         r = self.db.execute('SELECT id FROM pacientes WHERE telefone=?', (tel,)).fetchone()
+         if r:
+@@ -124,7 +129,9 @@
+                 t = datetime.fromisoformat(data + 'T' + ini)
+                 final = datetime.fromisoformat(data + 'T' + fim)
+                 while t + duracao <= final:
+-                    if t >= limite:
++                    bloqueado = self.db.execute('SELECT 1 FROM bloqueios WHERE profissional=? AND inicio < ? AND fim > ?',
++                        (p['id'], (t + duracao).isoformat(timespec='minutes'), t.isoformat(timespec='minutes'))).fetchone()
++                    if t >= limite and not bloqueado:
+                         resultado.append({'inicio': t.isoformat(timespec='minutes'), 'profissional': p['id']})
+                     t += passo
+         return sorted(resultado, key=lambda h: (h['inicio'], h['profissional']))
+diff --git a/src/server.py b/src/server.py
+index 873daf4c39ca40763f4b1ca8560f95bb9ea57d4f..463c574568416f1762e231f250c70fa0cc2c39f0
+--- a/src/server.py
++++ b/src/server.py
+@@ -8,10 +8,42 @@
+ from urllib.parse import parse_qs, urlsplit
+ 
+ from .core import Clinica, Erro, ROOT
+-from . import conversa, gestao
++from . import conversa, gestao, cadastros, backup
+ 
+ 
+ def rotear(c, metodo, rota, q, b):
++    if metodo == 'GET' and rota == '/api/pacientes':
++        return 200, {'pacientes': cadastros.pacientes(c, q.get('busca', ''))}
++    m = re.fullmatch(r'/api/pacientes/(\d+)', rota)
++    if metodo == 'PUT' and m:
++        return 200, cadastros.editar_paciente(c, int(m[1]), b)
++    m = re.fullmatch(r'/api/(profissionais|servicos|faq)(?:/([^/]+))?', rota)
++    if m:
++        tipo, ident = m.groups()
++        if metodo == 'GET' and ident is None and tipo != 'servicos':
++            return 200, {tipo: c.catalogo(tipo)}
++        if metodo == 'POST' and ident is None:
++            item = cadastros.salvar_catalogo(c, tipo, b)
++            return 201, {'id': item['id']} if tipo == 'faq' else item
++        if metodo == 'PUT' and ident is not None and tipo != 'faq':
++            return 200, cadastros.salvar_catalogo(c, tipo, b, ident)
++        if metodo == 'DELETE' and ident is not None:
++            if tipo == 'faq':
++                c.db.execute('DELETE FROM catalogo WHERE tipo=? AND id=?', (tipo, ident))
++                return 204, None
++            cadastros.salvar_catalogo(c, tipo, {'ativo': False}, ident)
++            return 200, {'ativo': False}
++    if rota == '/api/bloqueios':
++        if metodo == 'POST':
++            return 201, cadastros.bloquear(c, b)
++        if metodo == 'GET':
++            return 200, {'bloqueios': [dict(r) for r in c.db.execute(
++                'SELECT * FROM bloqueios WHERE (? IS NULL OR profissional=?) ORDER BY inicio,id',
++                (q.get('profissional'), q.get('profissional')))]}
++    m = re.fullmatch(r'/api/bloqueios/(\d+)', rota)
++    if metodo == 'DELETE' and m:
++        c.db.execute('DELETE FROM bloqueios WHERE id=?', (int(m[1]),))
++        return 204, None
+     if metodo == 'GET' and rota == '/api/saude':
+         return 200, {'ok': True, 'versao': (ROOT / 'VERSION').read_text().strip()}
+     if metodo == 'GET' and rota == '/api/servicos':
+@@ -79,7 +111,20 @@
+     raiox.add_argument('--dados', required=True)
+     raiox.add_argument('--mes', required=True)
+     raiox.add_argument('--acompanhamento', required=True)
++    for comando, arquivo in (('backup', '--saida'), ('restaurar', '--entrada')):
++        p = sub.add_parser(comando)
++        p.add_argument('--dados', required=True)
++        p.add_argument(arquivo, required=True)
+     args = parser.parse_args()
++    if args.comando in ('backup', 'restaurar'):
++        try:
++            if args.comando == 'backup':
++                backup.copiar(args.dados, args.saida)
++            else:
++                backup.restaurar(args.dados, args.entrada)
++        except Exception as e:
++            parser.exit(1, f'Falha no {args.comando}: {e}\n')
++        return
+     if args.comando == 'raiox':
+         clinica = Clinica(args.dados)
+         try:
+
 hook: Stop
 hook: Stop Completed
 tokens used
-46,239
-Ciclo encerrado: base HTTP, autenticação, SQLite persistente, pacientes e agenda implementados, incluindo proteção contra agendamentos simultâneos.
+56,084
+Ciclo registrado: cadastros, bloqueios e backup/restauração implementados na versão `0.4.0`.
 
-Validação: **20 passed / 73 failed**; **LIMITES OK**. As funcionalidades restantes estão registradas; o sistema ainda não está concluído.
+- Pytest: **73 passed / 20 failed** — avanço de 10 testes.
+- Verificador: **LIMITES OK**.
+- Registros da execução atualizados; nenhum commit.
 
-Estado, plano e registros atualizados. Próximo passo: conversa e fila humana. Nenhum commit realizado.
+Próximo passo: Evolution e Telegram com servidores falsos locais. Ainda faltam integrações, páginas e Docker/README.

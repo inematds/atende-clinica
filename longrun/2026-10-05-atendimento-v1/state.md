@@ -1,18 +1,17 @@
-# Estado — atualizado 2026-10-05 00:39
+# Estado — atualizado 2026-10-05 00:52
 
 ## Funciona
-- CLI serve com PORTA, bind 127.0.0.1, auth X-Token, SQLite persistente, configuração e catálogo semeado uma vez; agenda transacional, normalização e cadastro de pacientes.
-- Conversa persistente: emergência, opt-out, FAQ, fallback, fila humana, fluxo de agendamento, confirmação, espera FIFO e retorno. Atendimento aberto silencia o bot, exceto emergência.
-- Campanhas em src/gestao.py: regras dos quatro conselhos, lista completa de violações antes de enviar, consentimento e opt-out. Os 17 testes de campanhas passaram.
-- LGPD: GET com histórico; DELETE anonimiza paciente/histórico/saída, limpa sessão e fila humana, desativa contato, cancela agendados/confirmados e conserva realizados/faltas e agregados. Telefone antigo volta a ser desconhecido.
-- Raio-X HTTP e CLI: indicadores mensais calculados do banco/calendário, mesclagem sobre mês anterior/base, preservação de campos não medidos, substituição idempotente e gravação atômica do JSON.
-- Cadastro pela API agora associa histórico anterior e respeita opt-out anterior ao cadastro. HTTP 204 sem corpo.
-- Versão 0.3.0. Suíte completa: **63 passed / 30 failed**, sem errors, em 66.26s; pytest-ciclo-3.log. Ganho de 20 testes; nenhuma regressão observada.
-- Verificação local adicional passou: opt-out antes de cadastro API; anonimização da saída, histórico, sessão e fila humana; Raio-X mescla mês anterior, ignora futuro, conserva campos e não duplica mês.
-- Verificador: **LIMITES OK**, 93 testes e contrato intacto.
+- CLI serve com PORTA, bind 127.0.0.1, auth X-Token, SQLite persistente, configuração e catálogo semeado uma vez; agenda transacional e normalização de telefones.
+- Conversa persistente: emergência, opt-out, FAQ, fallback, fila humana, agendamento, confirmação, espera FIFO e retorno. Atendimento aberto silencia o bot, exceto emergência.
+- Campanhas com regras dos quatro conselhos, lista completa de violações, consentimento e opt-out. LGPD exporta histórico e anonimiza contato, histórico/saída/sessão/fila, preservando agregados.
+- Raio-X HTTP/CLI calcula indicadores do banco/calendário, mescla mês anterior/base, preserva campos não medidos e grava JSON atomicamente.
+- Cadastros completos em src/cadastros.py: profissionais (registro/horários próprios), serviços e desativação; pacientes com busca sem acento/caixa e edição validada; FAQ com efeito imediato. Edições persistem sem ressemear o catálogo.
+- Bloqueios persistentes: retiram horários sobrepostos, novas reservas recebem 422, informam conflitos ativos sem cancelar consultas existentes; exclusão libera a grade. Listagem por período/profissional passa.
+- CLI backup/restaurar em src/backup.py: snapshot SQLite consistente com servidor ligado, ZIP com banco e clinica.json; restauração validada com servidor parado. Verificação local adicional passou para configuração, paciente, FAQ, bloqueio e rejeição de arquivo inválido sem alteração do banco.
+- Versão 0.4.0. Suíte completa: **73 passed / 20 failed**, sem errors, em 65.80s; pytest-ciclo-4.log. Ganho de 10 testes, sem regressão observada; todos os testes de cadastros passam.
+- Verificador: **LIMITES OK**, 93 testes e contrato intacto. Nenhuma rede externa, API real ou commit neste ciclo.
 
 ## Falta
-- CRUD de pacientes/profissionais/serviços/FAQ, bloqueios, backup/restauração (listagem de agenda por período e horários próprios já têm base implementada).
 - Evolution e Telegram: webhooks, envio/reenvio, responder/encerrar pela recepção, notificações à equipe. Ainda nenhuma chamada de integração implementada.
 - Docker, compose, .env.exemplo, README e páginas web.
 - Revisar bordas da conversa: preferências de desconhecido ao limpar sessão por emergência; respostas a confirmações depois de alteração do agendamento; opções antigas de catálogo durante um fluxo.
@@ -20,6 +19,6 @@
 
 ## Como retomar
 1. Ler goal → state → plan → canal e fins de progress/failures. Especificação inteira e conftest foram lidos neste ciclo.
-2. Ler src/core.py, src/server.py, src/conversa.py e src/gestao.py. HTTP envolve operações em lock/transação; conversa.iniciar cria tabelas adicionais e já é chamado em serve e raiox.
-3. Implementar cadastros, bloqueios e backup/restauração consultando tests/test_cadastros.py sem alterar testes. Depois integrações exclusivamente com falsos locais.
-4. Rodar suíte inteira para arquivo, ler só tail -n 30, executar verificar-limites.sh e atualizar registros. Não fazer commit. Só marcar concluído quando os dois portões passarem.
+2. Ler src/server.py, src/conversa.py e tests/test_integracoes.py. HTTP envolve operações em lock/transação; conversa.iniciar cria tabelas adicionais e é chamado em serve e raiox.
+3. Implementar Evolution e Telegram exclusivamente com variáveis da spec e servidores falsos locais dos testes; sem URLs externas no código nem credenciais reais.
+4. Rodar suíte inteira para arquivo e ler só tail -n 30, executar verificar-limites.sh, atualizar registros. Não fazer commit. Só marcar concluído quando os dois portões passarem.
