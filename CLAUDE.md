@@ -17,3 +17,4 @@ When I correct you, or you catch yourself making a mistake: before continuing, a
 
 ## Lessons
 - Ao ler o fim de vários arquivos, usar `tail -n 20`, evitando a sintaxe antiga `tail -20`.
+- Confirmar nomes de arquivos com `rg --files` antes de tentar lê-los; para vários arquivos, usar sempre `tail -n N`.

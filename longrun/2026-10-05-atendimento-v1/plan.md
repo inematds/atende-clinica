@@ -1,9 +1,9 @@
 # Plano
 
 ## Estratégia atual
-Python 3 stdlib, ThreadingHTTPServer, SQLite; lock reentrante e transação por requisição serializam validação e gravação. Separar novos motores em módulos de src/ conforme cresçam. Não editar arquivos protegidos nem fazer chamadas externas.
+Python 3 stdlib, HTTP local, SQLite com lock reentrante/transação por requisição. Conversa e notificações no módulo src/conversa.py; catálogo e agenda em src/core.py. Nenhuma chamada externa e nenhum arquivo protegido alterado.
 
 ## Próximos 3 passos
-1. Conversa: normalização, emergência, opt-out, fila humana, fluxo de agendamento, FAQ e fallback; persistir sessões/histórico. Preservar prioridade da emergência e silêncio durante atendimento humano aberto.
-2. Mensagens de saída/pendências, confirmação, espera e retorno, com idempotência e efeitos em cancelar/presença. Validar a suíte inteira e registrar falhas restantes.
-3. Campanhas e LGPD, depois Raio-X. Seguir com cadastros/bloqueios/backup → Evolution/Telegram (só falsos locais) → Docker/README → páginas.
+1. Campanhas (todas as violações por conselho, opt-in/opt-out) e LGPD DELETE: anonimizar histórico, saída e sessões, cancelar agenda futura e manter agregados; fechar os casos de borda de opt-out/pendências descritos no state.
+2. Raio-X HTTP/CLI com métricas mensais e mesclagem do acompanhamento. Em seguida CRUDs, bloqueios e backup/restauração.
+3. Evolution/Telegram exclusivamente com falsos locais, depois Docker/README e páginas. Validar suíte e limites a cada ciclo, sem marcar concluído antes dos dois portões passarem.

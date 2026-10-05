@@ -8,6 +8,7 @@ import sys
 from urllib.parse import parse_qs, urlsplit
 
 from .core import Clinica, Erro, ROOT
+from . import conversa
 
 
 def rotear(c, metodo, rota, q, b):
@@ -17,6 +18,25 @@ def rotear(c, metodo, rota, q, b):
         return 200, {'servicos': [s for s in c.catalogo('servicos') if s['ativo']]}
     if metodo == 'GET' and rota == '/api/horarios':
         return 200, {'horarios': c.horarios(q['servico'], q['data'], q.get('profissional'))}
+    if metodo == 'POST' and rota == '/api/mensagens':
+        return 200, {'respostas': conversa.conversar(c, b['telefone'], b['texto'])}
+    if metodo == 'GET' and rota == '/api/atendimento-humano':
+        return 200, {'fila': conversa.fila(c)}
+    if metodo == 'GET' and rota == '/api/saida':
+        return 200, {'mensagens': [dict(r) for r in c.db.execute('SELECT * FROM saida ORDER BY id')]}
+    if metodo == 'POST' and rota == '/api/tarefas/rodar':
+        return 200, conversa.rodar(c, b.get('agora'))
+    if metodo == 'POST' and rota == '/api/espera':
+        c.paciente(b['paciente_id'])
+        c.servico(b['servico'])
+        from datetime import datetime
+        datetime.strptime(b['data'], '%Y-%m-%d')
+        ident = c.db.execute('INSERT INTO espera(paciente_id,servico,data) VALUES (?,?,?)',
+                             (b['paciente_id'], b['servico'], b['data'])).lastrowid
+        return 201, {'id': ident}
+    m = re.fullmatch(r'/api/pacientes/(\d+)/dados', rota)
+    if metodo == 'GET' and m:
+        return 200, conversa.dados_paciente(c, int(m[1]))
     if metodo == 'POST' and rota == '/api/pacientes':
         return c.criar_paciente(b)
     if metodo == 'POST' and rota == '/api/agendamentos':
@@ -32,7 +52,10 @@ def rotear(c, metodo, rota, q, b):
         if acao == 'presenca' and not isinstance(b.get('compareceu'), bool):
             raise Erro(400, 'compareceu deve ser booleano')
         status = 'cancelado' if acao == 'cancelar' else ('realizado' if b['compareceu'] else 'falta')
-        c.db.execute('UPDATE agendamentos SET status=? WHERE id=?', (status, ident))
+        if acao == 'cancelar':
+            conversa.cancelar(c, ident)
+        else:
+            conversa.presenca(c, ident, b['compareceu'])
         return 200, {'status': status}
     raise Erro(404, 'Rota inexistente')
 
@@ -48,6 +71,7 @@ def main():
     if args.host != '127.0.0.1':
         parser.error('Neste ambiente o servidor só pode escutar em 127.0.0.1')
     clinica = Clinica(args.dados)
+    conversa.iniciar(clinica)
 
     class Handler(BaseHTTPRequestHandler):
         def processar(self):

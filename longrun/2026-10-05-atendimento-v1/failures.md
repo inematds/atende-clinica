@@ -4,3 +4,5 @@
 |---|---|---|---|---|
 | 2026-10-05 00:30 | 73 testes falham por funcionalidades ainda ausentes (inclusive LGPD no teste de telefone) → implementada base/agenda → 20 passed, restante registrado no plano; sem conflito com spec identificado | base executável + suíte inteira | checkpoint parcial | infra |
 | 2026-10-05 00:30 | `tail -20` com vários arquivos rejeitado → usado `tail -n 20` → leitura concluída | opção explícita -n | corrigido | prompt |
+| 2026-10-05 00:33 | tail abreviado e caminhos inferidos inexistentes → tail -n e nomes conferidos em rg --files → leituras corrigidas, lição em CLAUDE.md | leitura explícita | corrigido | prompt |
+| 2026-10-05 00:33 | 50 testes ainda falham por páginas, cadastros, campanhas, DELETE LGPD/Raio-X, integrações e Docker ausentes → implementada conversa/lembretes → 43 passed / 50 failed, nenhuma regressão observada ou contradição identificada | próximo escopo documentado | parcial | infra |
