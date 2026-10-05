@@ -8,7 +8,7 @@ import sys
 from urllib.parse import parse_qs, urlsplit
 
 from .core import Clinica, Erro, ROOT
-from . import conversa
+from . import conversa, gestao
 
 
 def rotear(c, metodo, rota, q, b):
@@ -37,6 +37,14 @@ def rotear(c, metodo, rota, q, b):
     m = re.fullmatch(r'/api/pacientes/(\d+)/dados', rota)
     if metodo == 'GET' and m:
         return 200, conversa.dados_paciente(c, int(m[1]))
+    if metodo == 'POST' and rota == '/api/campanhas':
+        return gestao.campanhas(c, b['texto'])
+    if metodo == 'GET' and rota == '/api/raiox':
+        return 200, gestao.raiox(c, q['mes'])
+    m = re.fullmatch(r'/api/pacientes/(\d+)', rota)
+    if metodo == 'DELETE' and m:
+        gestao.remover_paciente(c, int(m[1]))
+        return 204, None
     if metodo == 'POST' and rota == '/api/pacientes':
         return c.criar_paciente(b)
     if metodo == 'POST' and rota == '/api/agendamentos':
@@ -67,7 +75,19 @@ def main():
     serve.add_argument('--porta', type=int, default=8080)
     serve.add_argument('--host', default='127.0.0.1')
     serve.add_argument('--dados', required=True)
+    raiox = sub.add_parser('raiox')
+    raiox.add_argument('--dados', required=True)
+    raiox.add_argument('--mes', required=True)
+    raiox.add_argument('--acompanhamento', required=True)
     args = parser.parse_args()
+    if args.comando == 'raiox':
+        clinica = Clinica(args.dados)
+        try:
+            conversa.iniciar(clinica)
+            gestao.exportar(clinica, args.mes, args.acompanhamento)
+        finally:
+            clinica.db.close()
+        return
     if args.host != '127.0.0.1':
         parser.error('Neste ambiente o servidor só pode escutar em 127.0.0.1')
     clinica = Clinica(args.dados)
@@ -96,7 +116,7 @@ def main():
             except Exception as e:
                 print(f'Erro interno: {type(e).__name__}: {e}', file=sys.stderr)
                 status, resposta = 500, {'erro': 'Erro interno'}
-            conteudo = json.dumps(resposta, ensure_ascii=False).encode('utf-8')
+            conteudo = b'' if status == 204 else json.dumps(resposta, ensure_ascii=False).encode('utf-8')
             self.send_response(status)
             self.send_header('Content-Type', 'application/json; charset=utf-8')
             self.send_header('Content-Length', str(len(conteudo)))

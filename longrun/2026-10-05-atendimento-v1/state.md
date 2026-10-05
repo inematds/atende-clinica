@@ -1,24 +1,25 @@
-# Estado — atualizado 2026-10-05 00:33
+# Estado — atualizado 2026-10-05 00:39
 
 ## Funciona
-- Base: CLI serve com PORTA, bind 127.0.0.1, auth X-Token, SQLite, configuração e catálogo semeado uma vez; agenda transacional e persistente, normalização e cadastro de pacientes.
-- Conversa em src/conversa.py: emergência, opt-out, encaminhamento humano, FAQ por percentual, fallback consecutivo e fluxo de agendamento (nome, serviço, 3 horários), opções inválidas e cancelamento. Sessões e histórico persistem; cadastro pelo chat associa o histórico anterior ao paciente.
-- Atendimento aberto silencia o bot, exceto emergência; emergência eleva prioridade. Fila GET já inclui id/status/nome, mas responder/encerrar e Telegram ainda faltam.
-- Confirmação idempotente e respostas, oferta FIFO de espera disparada por cancelamento API/chat, aceite com nova validação de disponibilidade; retornos criados na presença e avisados uma vez. Saída simulada e GET dos dados do paciente funcionam.
-- Versão 0.2.0. Suíte inteira: **43 passed / 50 failed**, sem errors, em 64.77s; log pytest-ciclo-2.log. Ganho de 23 testes sobre o ciclo anterior; todos os testes de conversa e lembretes passaram.
-- Verificação local adicional: sessão retomada após fechar/reabrir SQLite, histórico anterior ao cadastro associado, silêncio humano e emergência prioritária passaram.
+- CLI serve com PORTA, bind 127.0.0.1, auth X-Token, SQLite persistente, configuração e catálogo semeado uma vez; agenda transacional, normalização e cadastro de pacientes.
+- Conversa persistente: emergência, opt-out, FAQ, fallback, fila humana, fluxo de agendamento, confirmação, espera FIFO e retorno. Atendimento aberto silencia o bot, exceto emergência.
+- Campanhas em src/gestao.py: regras dos quatro conselhos, lista completa de violações antes de enviar, consentimento e opt-out. Os 17 testes de campanhas passaram.
+- LGPD: GET com histórico; DELETE anonimiza paciente/histórico/saída, limpa sessão e fila humana, desativa contato, cancela agendados/confirmados e conserva realizados/faltas e agregados. Telefone antigo volta a ser desconhecido.
+- Raio-X HTTP e CLI: indicadores mensais calculados do banco/calendário, mesclagem sobre mês anterior/base, preservação de campos não medidos, substituição idempotente e gravação atômica do JSON.
+- Cadastro pela API agora associa histórico anterior e respeita opt-out anterior ao cadastro. HTTP 204 sem corpo.
+- Versão 0.3.0. Suíte completa: **63 passed / 30 failed**, sem errors, em 66.26s; pytest-ciclo-3.log. Ganho de 20 testes; nenhuma regressão observada.
+- Verificação local adicional passou: opt-out antes de cadastro API; anonimização da saída, histórico, sessão e fila humana; Raio-X mescla mês anterior, ignora futuro, conserva campos e não duplica mês.
 - Verificador: **LIMITES OK**, 93 testes e contrato intacto.
 
 ## Falta
-- Campanhas com trava por conselho e consentimento; LGPD DELETE/anonimização; Raio-X HTTP/CLI.
-- CRUD de pacientes/profissionais/serviços/FAQ, bloqueios, backup/restauração.
-- Evolution e Telegram, inclusive respostas humanas/encerramento, notificações e reenvio de pendentes. Nenhuma chamada de rede de integração foi implementada neste ciclo.
+- CRUD de pacientes/profissionais/serviços/FAQ, bloqueios, backup/restauração (listagem de agenda por período e horários próprios já têm base implementada).
+- Evolution e Telegram: webhooks, envio/reenvio, responder/encerrar pela recepção, notificações à equipe. Ainda nenhuma chamada de integração implementada.
 - Docker, compose, .env.exemplo, README e páginas web.
-- Rever casos de borda: opt-out de desconhecido cadastrado depois pela API (preferência atualmente em sessão); resposta a confirmação de agendamento alterado após envio; reinício de fluxo com opções antigas de catálogo.
+- Revisar bordas da conversa: preferências de desconhecido ao limpar sessão por emergência; respostas a confirmações depois de alteração do agendamento; opções antigas de catálogo durante um fluxo.
 - Nenhum conflito teste/spec identificado neste ciclo. Restrição de bind local prevalece durante o loop; conciliar Docker ao implementar entrega.
 
 ## Como retomar
-1. Ler goal → state → plan → canal e fins de progress/failures. Especificação inteira e conftest lidos neste ciclo.
-2. Ler src/core.py, src/conversa.py e src/server.py. conversa.iniciar cria novas tabelas após Clinica; operações HTTP continuam sob lock/transação únicos.
-3. Implementar campanhas e LGPD DELETE; em seguida Raio-X. Consultar tests/test_campanhas.py e tests/test_lgpd_raiox.py sem alterá-los.
-4. Rodar suíte completa, ler só tail -n 30 do log, executar verificar-limites.sh e atualizar registros. Não fazer commit.
+1. Ler goal → state → plan → canal e fins de progress/failures. Especificação inteira e conftest foram lidos neste ciclo.
+2. Ler src/core.py, src/server.py, src/conversa.py e src/gestao.py. HTTP envolve operações em lock/transação; conversa.iniciar cria tabelas adicionais e já é chamado em serve e raiox.
+3. Implementar cadastros, bloqueios e backup/restauração consultando tests/test_cadastros.py sem alterar testes. Depois integrações exclusivamente com falsos locais.
+4. Rodar suíte inteira para arquivo, ler só tail -n 30, executar verificar-limites.sh e atualizar registros. Não fazer commit. Só marcar concluído quando os dois portões passarem.

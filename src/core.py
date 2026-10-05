@@ -96,7 +96,14 @@ class Clinica:
             raise Erro(400, 'Nome obrigatório')
         c = self.db.execute('INSERT INTO pacientes(nome,telefone,email,nascimento,consentimento_marketing) VALUES (?,?,?,?,?)',
                             (b['nome'], tel, b.get('email'), b.get('nascimento'), bool(b.get('consentimento_marketing', False))))
-        return 201, {'id': c.lastrowid}
+        ident = c.lastrowid
+        # A preferência de contato pode anteceder o cadastro pela recepção.
+        if self.db.execute("SELECT 1 FROM sqlite_master WHERE name='sessoes'").fetchone():
+            sessao = self.db.execute('SELECT dados FROM sessoes WHERE telefone=?', (tel,)).fetchone()
+            if sessao and json.loads(sessao[0]).get('nao_contatar'):
+                self.db.execute('UPDATE pacientes SET nao_contatar=1 WHERE id=?', (ident,))
+            self.db.execute('UPDATE historico SET paciente_id=? WHERE telefone=? AND paciente_id IS NULL', (ident, tel))
+        return 201, {'id': ident}
 
     def candidatos(self, servico, data, profissional=None):
         s = self.servico(servico)
