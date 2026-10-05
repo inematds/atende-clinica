@@ -16,3 +16,4 @@ Sistema de atendimento ao paciente para clínicas: agenda, confirmação, lista 
 When I correct you, or you catch yourself making a mistake: before continuing, add the lesson as a one-line rule under ## Lessons, so it never happens again.
 
 ## Lessons
+- Ao ler o fim de vários arquivos, usar `tail -n 20`, evitando a sintaxe antiga `tail -20`.

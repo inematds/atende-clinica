@@ -1,9 +1,9 @@
-# Plano (reescrever, não acumular)
+# Plano
 
 ## Estratégia atual
-Python 3 só stdlib: `atende` (CLI) → `src/` (servidor ThreadingHTTPServer, SQLite com lock para a concorrência, motor de agenda, motor de conversa, tarefas, trava de conselho, raiox) → `web/` (chat e recepção, HTML+JS sem CDN). Integrações (Evolution, Telegram) atrás de um módulo `canais` com fila de envio; Docker só arquivos. Implementar na ordem dos arquivos de teste, rodando a suíte a cada passo.
+Python 3 stdlib, ThreadingHTTPServer, SQLite; lock reentrante e transação por requisição serializam validação e gravação. Separar novos motores em módulos de src/ conforme cresçam. Não editar arquivos protegidos nem fazer chamadas externas.
 
-## Próximos passos
-1. `./atende serve --porta 0 --dados DIR` com PORTA=, clinica.json padrão, /api/saude, /api/servicos, auth X-Token, páginas mínimas → test_basico.
-2. Grade de horários, pacientes (telefone), agendar/cancelar/remarcar/presença com 409/422 e lock → test_agenda.
-3. Conversa (emergência, parar, humano, fluxo, pendências, FAQ, não entendi) → test_conversa; depois lembretes, campanhas, LGPD/raiox.
+## Próximos 3 passos
+1. Conversa: normalização, emergência, opt-out, fila humana, fluxo de agendamento, FAQ e fallback; persistir sessões/histórico. Preservar prioridade da emergência e silêncio durante atendimento humano aberto.
+2. Mensagens de saída/pendências, confirmação, espera e retorno, com idempotência e efeitos em cancelar/presença. Validar a suíte inteira e registrar falhas restantes.
+3. Campanhas e LGPD, depois Raio-X. Seguir com cadastros/bloqueios/backup → Evolution/Telegram (só falsos locais) → Docker/README → páginas.
